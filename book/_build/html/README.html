@@ -1,0 +1,601 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>SQL Lab &#8212; SQL Lab</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Setting up the Postgres Connection" href="setup.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">SQL Lab</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1 current active">
+                <a class="reference internal" href="#">
+                    SQL Lab
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="setup.html">
+   Setting up the Postgres Connection
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="loading_dvdrental.html">
+   Loading a sample Database
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="meta-commands.html">
+   Metacommands
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FREADME.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/README.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setting-up-the-virtual-environment">
+   Setting up the virtual environment
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#installing-postgresql">
+   Installing PostgreSQL
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#create-a-db-cluster">
+     Create a DB cluster
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#starting-the-service">
+     Starting the Service
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-a-superuser">
+     Creating a Superuser
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-a-database">
+     Creating a Database
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#testing-new-user-and-database">
+     Testing new User and Database
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#installing-jupyter-lab">
+   Installing Jupyter Lab
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#launching-the-lab">
+   Launching the Lab
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>SQL Lab</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setting-up-the-virtual-environment">
+   Setting up the virtual environment
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#installing-postgresql">
+   Installing PostgreSQL
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#create-a-db-cluster">
+     Create a DB cluster
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#starting-the-service">
+     Starting the Service
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-a-superuser">
+     Creating a Superuser
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-a-database">
+     Creating a Database
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#testing-new-user-and-database">
+     Testing new User and Database
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#installing-jupyter-lab">
+   Installing Jupyter Lab
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#launching-the-lab">
+   Launching the Lab
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="sql-lab">
+<h1>SQL Lab<a class="headerlink" href="#sql-lab" title="Permalink to this heading">#</a></h1>
+<p>This is a setup for learning SQL with the help of Jupyter notebooks. The idea is to be able of executing SQL queries from the notebook against PostgreSQL, all running within a <a class="reference external" href="https://conda.io/projects/conda/en/latest/index.html">Conda</a> virtual environment.</p>
+<blockquote>
+<div><p>The <strong>original idea</strong> was to run the MySQL service from within a Docker container, but couldn’t make it work.</p>
+</div></blockquote>
+<p>These notes assume the Conda package is installed in our system.</p>
+<section id="setting-up-the-virtual-environment">
+<h2>Setting up the virtual environment<a class="headerlink" href="#setting-up-the-virtual-environment" title="Permalink to this heading">#</a></h2>
+<p>To create a virtual environment using Anaconda we run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">create</span> <span class="o">--</span><span class="n">name</span> <span class="n">sql</span><span class="o">-</span><span class="n">lab</span>
+</pre></div>
+</div>
+<p>Let’s also create a folder to put the files (our database cluster and jupyter notebooks) we’ll be using on this environment:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">sql</span><span class="o">-</span><span class="n">lab</span>
+</pre></div>
+</div>
+</section>
+<section id="installing-postgresql">
+<h2>Installing PostgreSQL<a class="headerlink" href="#installing-postgresql" title="Permalink to this heading">#</a></h2>
+<p>Since we want to install <a class="reference external" href="https://www.postgresql.org">PostgreSQL</a> in the <strong>virtual environment</strong>, first thing we want to do is <strong>enable</strong> it:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">activate</span> <span class="n">sql</span><span class="o">-</span><span class="n">lab</span>
+<span class="n">conda</span> <span class="n">install</span> <span class="n">postgresql</span>
+</pre></div>
+</div>
+<section id="create-a-db-cluster">
+<h3>Create a DB cluster<a class="headerlink" href="#create-a-db-cluster" title="Permalink to this heading">#</a></h3>
+<p>Now we have to <a class="reference external" href="https://www.postgresql.org/docs/15/app-initdb.html">create a database cluster</a>, which will generate a folder containing the data, so let’s do that from within our <code class="docutils literal notranslate"><span class="pre">sql-lab</span></code> folder:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">sql</span><span class="o">-</span><span class="n">lab</span>
+<span class="n">initdb</span> <span class="o">-</span><span class="n">D</span> <span class="n">bob_data</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>A database cluster is a collection of databases that are managed by a single server instance.</p>
+</div></blockquote>
+</section>
+<section id="starting-the-service">
+<h3>Starting the Service<a class="headerlink" href="#starting-the-service" title="Permalink to this heading">#</a></h3>
+<p>Now we can start the <code class="docutils literal notranslate"><span class="pre">postgres</span></code> service (note that we have to use the <a class="reference external" href="https://www.postgresql.org/docs/15/app-pg-ctl.html">pg_ctl</a> with the <code class="docutils literal notranslate"><span class="pre">-D</span></code> option, passing the location of the cluster):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pg_ctl</span> <span class="o">-</span><span class="n">D</span> <span class="n">bob_data</span> <span class="o">-</span><span class="n">l</span> <span class="n">logfile</span> <span class="n">start</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>The <code class="docutils literal notranslate"><span class="pre">-l</span> <span class="pre">logfile</span></code> is, as you may have imagined, to log any incidence of the service into the <code class="docutils literal notranslate"><span class="pre">logfile</span></code> file.</p>
+</div></blockquote>
+</section>
+<section id="creating-a-superuser">
+<h3>Creating a Superuser<a class="headerlink" href="#creating-a-superuser" title="Permalink to this heading">#</a></h3>
+<p>To create users we use the <a class="reference external" href="https://www.postgresql.org/docs/15/app-createuser.html">createuser</a> command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">createuser</span> <span class="o">--</span><span class="n">encrypted</span> <span class="o">-</span><span class="n">sP</span> <span class="n">bob</span>
+</pre></div>
+</div>
+<p>In the command above we’re using the options:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--encrypted</span></code> is obsolete but still accepted for backward compatibility.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-s</span></code>, short for <code class="docutils literal notranslate"><span class="pre">--superuser</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-P</span></code>, short for <code class="docutils literal notranslate"><span class="pre">--pwprompt</span></code>, so that we’ll be prompted for a password for the new user.</p></li>
+</ul>
+</section>
+<section id="creating-a-database">
+<h3>Creating a Database<a class="headerlink" href="#creating-a-database" title="Permalink to this heading">#</a></h3>
+<p>To create a database we must use the <a class="reference external" href="https://www.postgresql.org/docs/15/app-createdb.html">createdb</a> command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">createdb</span> <span class="o">--</span><span class="n">owner</span><span class="o">=</span><span class="n">bob</span> <span class="n">bobDB</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">--owner</span></code> option specifies the database user who will own the new database.</p></li>
+<li><p>Note that we must give the <strong>database name</strong> as the last argument, in this case <code class="docutils literal notranslate"><span class="pre">bobDB</span></code>.</p></li>
+</ul>
+</section>
+<section id="testing-new-user-and-database">
+<h3>Testing new User and Database<a class="headerlink" href="#testing-new-user-and-database" title="Permalink to this heading">#</a></h3>
+<p>In order to test the new user and database, we can use the <a class="reference external" href="https://www.postgresql.org/docs/current/app-psql.html">psql</a> command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">psql</span> <span class="o">--</span><span class="n">username</span><span class="o">=</span><span class="n">bob</span> <span class="o">--</span><span class="n">db</span><span class="o">=</span><span class="n">bobDBpsql</span> <span class="o">--</span><span class="n">username</span><span class="o">=</span><span class="n">bob</span> <span class="o">--</span><span class="n">db</span><span class="o">=</span><span class="n">bobDB</span>
+<span class="n">psql</span> <span class="p">(</span><span class="mf">12.9</span><span class="p">)</span>
+<span class="n">Type</span> <span class="s2">&quot;help&quot;</span> <span class="k">for</span> <span class="n">help</span><span class="o">.</span>
+
+<span class="n">bobDB</span><span class="o">=</span><span class="c1"># </span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>You can run commands in Jupyter Book cells by prepending them with <code class="docutils literal notranslate"><span class="pre">!</span></code>. If you do it from the Jupyter Lab terminal, make sure you activate the conda virtual environment: <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">db-lab</span></code>.</p>
+</div></blockquote>
+</section>
+</section>
+<section id="installing-jupyter-lab">
+<h2>Installing Jupyter Lab<a class="headerlink" href="#installing-jupyter-lab" title="Permalink to this heading">#</a></h2>
+<p>For the Jupyter Lab with PostgreSQL set up, we’ll be needing [Jupyter Lab][<a class="reference external" href="https://jupyter.org/">https://jupyter.org/</a>] itself, and several dependencies. All the packages below should be installed in the Conda virtual environment, so make sure is activated.</p>
+<ul class="simple">
+<li><p>[jupyterlab][<a class="reference external" href="https://anaconda.org/conda-forge/jupyterlab">https://anaconda.org/conda-forge/jupyterlab</a>].</p></li>
+<li><p>[theme-darcula][<a class="reference external" href="https://anaconda.org/conda-forge/theme-darcula">https://anaconda.org/conda-forge/theme-darcula</a>], a cool theme for jupyter lab.</p></li>
+<li><p>[jupyter-book][<a class="reference external" href="https://anaconda.org/conda-forge/jupyter-book">https://anaconda.org/conda-forge/jupyter-book</a>], in case we want to publish our work.</p></li>
+<li><p>[ipython-sql][<a class="reference external" href="https://anaconda.org/conda-forge/ipython-sql">https://anaconda.org/conda-forge/ipython-sql</a>] to get SQL magic functions (<code class="docutils literal notranslate"><span class="pre">%sql</span></code>).</p></li>
+<li><p>[pgspecial][<a class="reference external" href="https://anaconda.org/conda-forge/pgspecial">https://anaconda.org/conda-forge/pgspecial</a>] so we can run Postgres <strong>metacommands</strong> (<code class="docutils literal notranslate"><span class="pre">\dt</span></code>).</p></li>
+<li><p>[sqlalchemy][<a class="reference external" href="https://anaconda.org/conda-forge/sqlalchemy">https://anaconda.org/conda-forge/sqlalchemy</a>] to create the connection to the database.</p></li>
+</ul>
+<p>Just follow the instructions in the links above to install the packages.</p>
+</section>
+<section id="launching-the-lab">
+<h2>Launching the Lab<a class="headerlink" href="#launching-the-lab" title="Permalink to this heading">#</a></h2>
+<p>Once everything is installed, we can run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jupyter</span> <span class="n">lab</span>
+</pre></div>
+</div>
+<p>That will start a local server, where we can reach the Jupyter lab interface. In the next section, we’ll go over how to create a connection to the database.</p>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='right-next' id="next-link" href="setup.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Setting up the Postgres Connection</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Bob<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
