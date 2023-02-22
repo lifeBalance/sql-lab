@@ -8,7 +8,7 @@
 
 
 import sqlalchemy
-engine = sqlalchemy.create_engine('postgresql://bob:1234@localhost:5432/bobDB')
+engine = sqlalchemy.create_engine('postgresql://bob:1234@localhost:5432/postgres')
 engine.connect()
 # engine.execution_options(isolation_level="AUTOCOMMIT")
 
@@ -52,11 +52,7 @@ get_ipython().run_line_magic('sql', '\\du')
 # In[6]:
 
 
-get_ipython().system('psql --username=bob --db=bobDB')
+get_ipython().system('psql --username=bob --db=postgres -h localhost')
 
 
-# In[ ]:
-
-
-
-
+# Since the password prompt is something that comes up quite often, it's more practical to get used to run these commands on the **J of the times

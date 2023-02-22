@@ -1,0 +1,580 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Installing PostgreSQL &#8212; SQL Lab</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">SQL Lab</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="README.html">
+                    SQL Lab
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="setup.html">
+   Setting up the Postgres Connection
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="loading_dvdrental.html">
+   Loading a sample Database
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="meta-commands.html">
+   Metacommands
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Finstall_pg.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/install_pg.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#login-into-postgres">
+   Login into Postgres
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-a-new-user">
+   Create a New User
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#edit-the-pg-hba-conf-file">
+   Edit the
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     pg_hba.conf
+    </span>
+   </code>
+   File
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#creating-a-superuser">
+   Creating a Superuser
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#creating-a-database">
+   Creating a Database
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#testing-new-user-and-database">
+   Testing new User and Database
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Installing PostgreSQL</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#login-into-postgres">
+   Login into Postgres
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-a-new-user">
+   Create a New User
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#edit-the-pg-hba-conf-file">
+   Edit the
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     pg_hba.conf
+    </span>
+   </code>
+   File
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#creating-a-superuser">
+   Creating a Superuser
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#creating-a-database">
+   Creating a Database
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#testing-new-user-and-database">
+   Testing new User and Database
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="installing-postgresql">
+<h1>Installing PostgreSQL<a class="headerlink" href="#installing-postgresql" title="Permalink to this heading">#</a></h1>
+<p>One of the things I tried when working on this setup, was to install <a class="reference external" href="https://www.postgresql.org">PostgreSQL</a> in the <strong>system</strong>, which in my case was <strong>Fedora 37</strong>. I followed instructions from <a class="reference external" href="https://developer.fedoraproject.org/tech/database/postgresql/about.html">here</a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">dnf</span> <span class="n">install</span> <span class="n">postgresql</span> <span class="n">postgresql</span><span class="o">-</span><span class="n">server</span>
+</pre></div>
+</div>
+<p>Next, initialize <a class="reference external" href="https://www.pgadmin.org/">the cluster</a>, which will generate a folder containing the data:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">postgresql</span><span class="o">-</span><span class="n">setup</span> <span class="o">--</span><span class="n">initdb</span> <span class="o">--</span><span class="n">unit</span> <span class="n">postgresql</span>
+<span class="o">*</span> <span class="n">Initializing</span> <span class="n">database</span> <span class="ow">in</span> <span class="s1">&#39;/var/lib/pgsql/data&#39;</span>
+<span class="o">*</span> <span class="n">Initialized</span><span class="p">,</span> <span class="n">logs</span> <span class="n">are</span> <span class="ow">in</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">pgsql</span><span class="o">/</span><span class="n">initdb_postgresql</span><span class="o">.</span><span class="n">log</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>A <strong>database cluster</strong> is a collection of databases that are managed by a <strong>single server</strong> instance.</p>
+</div></blockquote>
+<p>Then, start the service:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">systemctl</span> <span class="n">start</span> <span class="n">postgresql</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>To check the status of the service at any point in time, we’d do <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">status</span> <span class="pre">postgresql</span></code>.</p>
+</div></blockquote>
+<section id="login-into-postgres">
+<h2>Login into Postgres<a class="headerlink" href="#login-into-postgres" title="Permalink to this heading">#</a></h2>
+<p>The Postgres installation process creates a new user named <code class="docutils literal notranslate"><span class="pre">postgres</span></code>. But if we try to log in using this user:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">psql</span> <span class="o">-</span><span class="n">U</span> <span class="n">postgres</span>
+<span class="n">psql</span><span class="p">:</span> <span class="n">error</span><span class="p">:</span> <span class="n">connection</span> <span class="n">to</span> <span class="n">server</span> <span class="n">on</span> <span class="n">socket</span> <span class="s2">&quot;/var/run/postgresql/.s.PGSQL.5432&quot;</span> <span class="n">failed</span><span class="p">:</span> <span class="n">FATAL</span><span class="p">:</span>  <span class="n">Peer</span> <span class="n">authentication</span> <span class="n">failed</span> <span class="k">for</span> <span class="n">user</span> <span class="s2">&quot;postgres&quot;</span>
+</pre></div>
+</div>
+<p>That error happens because the <code class="docutils literal notranslate"><span class="pre">postgres</span></code> user doesn’t have a password. In order to create one, we can substitute our current user for <code class="docutils literal notranslate"><span class="pre">postgres</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">su</span> <span class="n">postgres</span>
+</pre></div>
+</div>
+<p>Note that we can log into Postgres without using a password:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">psql</span> <span class="o">-</span><span class="n">U</span> <span class="n">postgres</span>
+<span class="n">postgres</span><span class="o">=</span><span class="c1"># \q</span>
+</pre></div>
+</div>
+</section>
+<section id="create-a-new-user">
+<h2>Create a New User<a class="headerlink" href="#create-a-new-user" title="Permalink to this heading">#</a></h2>
+<p>To add a new user we have to substitute our current user for <code class="docutils literal notranslate"><span class="pre">postgres</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">su</span> <span class="n">postgres</span>
+</pre></div>
+</div>
+<p>And use the <a class="reference external" href="https://www.postgresql.org/docs/15/app-createuser.html">createuser</a> command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ createuser bob -P
+Enter password for new role: 
+Enter it again:
+</pre></div>
+</div>
+</section>
+<section id="edit-the-pg-hba-conf-file">
+<h2>Edit the <code class="docutils literal notranslate"><span class="pre">pg_hba.conf</span></code> File<a class="headerlink" href="#edit-the-pg-hba-conf-file" title="Permalink to this heading">#</a></h2>
+<p>Now we have to edit the [pg_hba.conf][<a class="reference external" href="https://www.postgresql.org/docs/15/auth-pg-hba-conf.html">https://www.postgresql.org/docs/15/auth-pg-hba-conf.html</a>] file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">nvim</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">pgsql</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">pg_hba</span><span class="o">.</span><span class="n">conf</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>You can locate this file in the same directory where the database cluster was generated.</p>
+</div></blockquote>
+<p>And add the following line:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># TYPE  DATABASE        USER            ADDRESS                 METHOD</span>
+<span class="n">local</span>   <span class="nb">all</span>             <span class="n">bob</span>                                     <span class="n">md5</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>Make sure you change <code class="docutils literal notranslate"><span class="pre">peer</span></code> by <code class="docutils literal notranslate"><span class="pre">md5</span></code>. Peer authentication means that the connection is only allowed if the name of the database user is the same as the name of the operating system user.</p>
+</div></blockquote>
+<p>Now we can finally log in with using <code class="docutils literal notranslate"><span class="pre">bob</span></code> and his password.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">psql</span> <span class="o">-</span><span class="n">U</span> <span class="n">bob</span> <span class="o">-</span><span class="n">d</span> <span class="n">postgres</span>
+<span class="n">Password</span> <span class="k">for</span> <span class="n">user</span> <span class="n">bob</span><span class="p">:</span> 
+<span class="n">psql</span> <span class="p">(</span><span class="mf">14.3</span><span class="p">)</span>
+<span class="n">Type</span> <span class="s2">&quot;help&quot;</span> <span class="k">for</span> <span class="n">help</span><span class="o">.</span>
+
+<span class="n">postgres</span><span class="o">=&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="creating-a-superuser">
+<h2>Creating a Superuser<a class="headerlink" href="#creating-a-superuser" title="Permalink to this heading">#</a></h2>
+<p>To create users we use the <a class="reference external" href="https://www.postgresql.org/docs/15/app-createuser.html">createuser</a> command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">createuser</span> <span class="o">--</span><span class="n">encrypted</span> <span class="o">-</span><span class="n">sP</span> <span class="n">bob</span>
+</pre></div>
+</div>
+<p>In the command above we’re using the options:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--encrypted</span></code> is obsolete but still accepted for backward compatibility.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-s</span></code>, short for <code class="docutils literal notranslate"><span class="pre">--superuser</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-P</span></code>, short for <code class="docutils literal notranslate"><span class="pre">--pwprompt</span></code>, so that we’ll be prompted for a password for the new user.</p></li>
+</ul>
+</section>
+<section id="creating-a-database">
+<h2>Creating a Database<a class="headerlink" href="#creating-a-database" title="Permalink to this heading">#</a></h2>
+<p>To create a database we must use the <a class="reference external" href="https://www.postgresql.org/docs/15/app-createdb.html">createdb</a> command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">createdb</span> <span class="o">--</span><span class="n">owner</span><span class="o">=</span><span class="n">bob</span> <span class="n">bobDB</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">--owner</span></code> option specifies the database user who will own the new database.</p></li>
+<li><p>Note that we must give the <strong>database name</strong> as the last argument, in this case <code class="docutils literal notranslate"><span class="pre">bobDB</span></code>.</p></li>
+</ul>
+</section>
+<section id="testing-new-user-and-database">
+<h2>Testing new User and Database<a class="headerlink" href="#testing-new-user-and-database" title="Permalink to this heading">#</a></h2>
+<p>In order to test the new user and database, we can use the <a class="reference external" href="https://www.postgresql.org/docs/current/app-psql.html">psql</a> command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">psql</span> <span class="o">--</span><span class="n">username</span><span class="o">=</span><span class="n">bob</span> <span class="o">--</span><span class="n">db</span><span class="o">=</span><span class="n">bobDBpsql</span> <span class="o">--</span><span class="n">username</span><span class="o">=</span><span class="n">bob</span> <span class="o">--</span><span class="n">db</span><span class="o">=</span><span class="n">bobDB</span>
+<span class="n">psql</span> <span class="p">(</span><span class="mf">12.9</span><span class="p">)</span>
+<span class="n">Type</span> <span class="s2">&quot;help&quot;</span> <span class="k">for</span> <span class="n">help</span><span class="o">.</span>
+
+<span class="n">bobDB</span><span class="o">=</span><span class="c1"># </span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>You can run commands in Jupyter Book cells by prepending them with <code class="docutils literal notranslate"><span class="pre">!</span></code>. If you do it from the Jupyter Lab terminal, make sure you activate the conda virtual environment: <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">db-lab</span></code>.</p>
+</div></blockquote>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Bob<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

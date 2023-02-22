@@ -337,8 +337,13 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#restoring-a-database">
-   Restoring a Database
+  <a class="reference internal nav-link" href="#create-a-database">
+   Create a Database
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#restore-data">
+   Restore data
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -366,8 +371,13 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#restoring-a-database">
-   Restoring a Database
+  <a class="reference internal nav-link" href="#create-a-database">
+   Create a Database
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#restore-data">
+   Restore data
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -391,59 +401,44 @@ title="Print to PDF"
 <blockquote>
 <div><p>You should find the <code class="docutils literal notranslate"><span class="pre">dvdrental.tar</span></code> file in the repository files.</p>
 </div></blockquote>
-<p>First thing we have to do is to create a connection to Postgres:</p>
+<section id="create-a-database">
+<h2>Create a Database<a class="headerlink" href="#create-a-database" title="Permalink to this heading">#</a></h2>
+<p>First thing we have to do is to create a database named <code class="docutils literal notranslate"><span class="pre">dvdrental</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">createdb</span> <span class="o">-</span><span class="n">h</span> <span class="n">localhost</span> <span class="o">-</span><span class="n">p</span> <span class="mi">5432</span> <span class="o">-</span><span class="n">U</span> <span class="n">bob</span> <span class="n">dvdrental</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>You’ll be <strong>interactively</strong> prompted for a password, so run the command above in a <strong>terminal</strong>.</p>
+</div></blockquote>
+</section>
+<section id="restore-data">
+<h2>Restore data<a class="headerlink" href="#restore-data" title="Permalink to this heading">#</a></h2>
+<p>Once the database has been created, we can <strong>restore</strong> the data from the <code class="docutils literal notranslate"><span class="pre">dvdrental.tar</span></code> file. We’ll be using the <code class="docutils literal notranslate"><span class="pre">pg_restore</span></code> command, with several options:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-c</span></code> (short for <code class="docutils literal notranslate"><span class="pre">--clean</span></code>) is for dropping database objects before recreating them.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-d</span></code> (short for <code class="docutils literal notranslate"><span class="pre">--dbname</span></code>) is for restoring the data directly into the database used as argument (the <code class="docutils literal notranslate"><span class="pre">dvdrental</span></code> we created before).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--no-owner</span></code>, because I was getting an error related to the user <code class="docutils literal notranslate"><span class="pre">postgres</span></code> (maybe the data dump was created with this user).</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pg_restore</span> <span class="o">-</span><span class="n">h</span> <span class="n">localhost</span> <span class="o">-</span><span class="n">U</span> <span class="n">bob</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">owner</span> <span class="o">-</span><span class="n">c</span> <span class="o">-</span><span class="n">d</span> <span class="n">dvdrental</span> <span class="o">./</span><span class="n">dvdrental</span><span class="o">.</span><span class="n">tar</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>The command above will also run interactively, so that we can enter the <strong>password</strong> of <code class="docutils literal notranslate"><span class="pre">bob</span></code>.</p>
+</div></blockquote>
+</section>
+<section id="connecting-to-the-new-database">
+<h2>Connecting to the New Database<a class="headerlink" href="#connecting-to-the-new-database" title="Permalink to this heading">#</a></h2>
+<p>Now let’s create a connection to the <code class="docutils literal notranslate"><span class="pre">dvdrental</span></code> database:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sqlalchemy</span>
 <span class="c1"># Let&#39;s create a connection to the bobDB database for bob.</span>
-<span class="n">engine</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;postgresql://bob:1234@localhost:5432/bobDB&#39;</span><span class="p">)</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;postgresql://bob:1234@localhost:5432/dvdrental&#39;</span><span class="p">)</span>
 <span class="n">engine</span><span class="o">.</span><span class="n">execution_options</span><span class="p">(</span><span class="n">isolation_level</span><span class="o">=</span><span class="s2">&quot;AUTOCOMMIT&quot;</span><span class="p">)</span>
 
 <span class="c1"># While we&#39;re at it, let&#39;s also load the `ipython-sql` extension</span>
 <span class="o">%</span><span class="k">load_ext</span> sql
-</pre></div>
-</div>
-</div>
-</div>
-<section id="restoring-a-database">
-<h2>Restoring a Database<a class="headerlink" href="#restoring-a-database" title="Permalink to this heading">#</a></h2>
-<p>Now we can use <code class="docutils literal notranslate"><span class="pre">pg_restore</span></code> to restore the database from the <code class="docutils literal notranslate"><span class="pre">dvdrental.tar</span></code> file. We’ll be using several options:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">-c</span></code> (short for <code class="docutils literal notranslate"><span class="pre">--clean</span></code>) is for dropping database objects before recreating them.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">-d</span></code> (short for <code class="docutils literal notranslate"><span class="pre">--dbname</span></code>) is for restoring the data directly into the database used as argument (the <code class="docutils literal notranslate"><span class="pre">dvdrental</span></code> we created before).</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pg_restore -U bob -c -d dvdrental ./dvdrental.tar
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="connecting-to-the-new-database">
-<h2>Connecting to the New Database<a class="headerlink" href="#connecting-to-the-new-database" title="Permalink to this heading">#</a></h2>
-<p>One thing I noticed about <code class="docutils literal notranslate"><span class="pre">sqlalchemy</span></code> is that once we create an engine for a database, we can’t use it connect to another database. So if, for example, we wanted to use:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span> <span class="o">%</span><span class="k">sql</span> \connect dvdrental
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Environment variable $DATABASE_URL not set, and no connect string given.
-Connection info needed in SQLAlchemy format, example:
-               postgresql://username:password@hostname/dbname
-               or an existing connection: dict_keys([])
-</pre></div>
-</div>
-</div>
-</div>
-<p>We’d get an <strong>error</strong>. The <strong>solution</strong> is to create an additional engine for this database:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">engine2</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;postgresql://bob:1234@localhost:5432/dvdrental&#39;</span><span class="p">)</span>
-<span class="n">engine2</span><span class="o">.</span><span class="n">execution_options</span><span class="p">(</span><span class="n">isolation_level</span><span class="o">=</span><span class="s2">&quot;AUTOCOMMIT&quot;</span><span class="p">)</span>
-<span class="o">%</span><span class="k">sql</span> $engine2.url
+<span class="o">%</span><span class="k">sql</span> $engine.url
 </pre></div>
 </div>
 </div>
@@ -453,121 +448,9 @@ Connection info needed in SQLAlchemy format, example:
 </div>
 </div>
 </div>
-<p>To test out our connection, let’s list the <strong>tables</strong> in the <code class="docutils literal notranslate"><span class="pre">dvdrental</span></code> database:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">sql</span> \dt
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/dvdrental
-15 rows affected.
-</pre></div>
-</div>
-<div class="output text_html"><table>
-    <thead>
-        <tr>
-            <th>Schema</th>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Owner</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>public</td>
-            <td>actor</td>
-            <td>table</td>
-            <td>postgres</td>
-        </tr>
-        <tr>
-            <td>public</td>
-            <td>address</td>
-            <td>table</td>
-            <td>postgres</td>
-        </tr>
-        <tr>
-            <td>public</td>
-            <td>category</td>
-            <td>table</td>
-            <td>postgres</td>
-        </tr>
-        <tr>
-            <td>public</td>
-            <td>city</td>
-            <td>table</td>
-            <td>postgres</td>
-        </tr>
-        <tr>
-            <td>public</td>
-            <td>country</td>
-            <td>table</td>
-            <td>postgres</td>
-        </tr>
-        <tr>
-            <td>public</td>
-            <td>customer</td>
-            <td>table</td>
-            <td>postgres</td>
-        </tr>
-        <tr>
-            <td>public</td>
-            <td>film</td>
-            <td>table</td>
-            <td>postgres</td>
-        </tr>
-        <tr>
-            <td>public</td>
-            <td>film_actor</td>
-            <td>table</td>
-            <td>postgres</td>
-        </tr>
-        <tr>
-            <td>public</td>
-            <td>film_category</td>
-            <td>table</td>
-            <td>postgres</td>
-        </tr>
-        <tr>
-            <td>public</td>
-            <td>inventory</td>
-            <td>table</td>
-            <td>postgres</td>
-        </tr>
-        <tr>
-            <td>public</td>
-            <td>language</td>
-            <td>table</td>
-            <td>postgres</td>
-        </tr>
-        <tr>
-            <td>public</td>
-            <td>payment</td>
-            <td>table</td>
-            <td>postgres</td>
-        </tr>
-        <tr>
-            <td>public</td>
-            <td>rental</td>
-            <td>table</td>
-            <td>postgres</td>
-        </tr>
-        <tr>
-            <td>public</td>
-            <td>staff</td>
-            <td>table</td>
-            <td>postgres</td>
-        </tr>
-        <tr>
-            <td>public</td>
-            <td>store</td>
-            <td>table</td>
-            <td>postgres</td>
-        </tr>
-    </tbody>
-</table></div></div>
-</div>
+<blockquote>
+<div><p>One thing I noticed about <code class="docutils literal notranslate"><span class="pre">sqlalchemy</span></code> is that once we create an engine for a database, we can’t use it connect to another database. If we wanted to connect to another database, we should create an additional engine for it.</p>
+</div></blockquote>
 </section>
 </section>
 

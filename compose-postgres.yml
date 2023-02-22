@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15.2-bullseye
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: bob
+      POSTGRES_PASSWORD: 1234
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+      # - ./docker/postgres/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    ports:
+      - "5432:5432"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  pgadmin:
+    container_name: pgadmin4_container
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: bob@test.com
+      PGADMIN_DEFAULT_USER: bob
+      PGADMIN_DEFAULT_PASSWORD: 1234
+      GUNICORN_ACCESS_LOGFILE: "/dev/null"
+    ports:
+      - "8080:80"
+
+volumes:
+  pg-data:

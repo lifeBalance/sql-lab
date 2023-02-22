@@ -312,38 +312,6 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#installing-postgresql">
-   Installing PostgreSQL
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#create-a-db-cluster">
-     Create a DB cluster
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#starting-the-service">
-     Starting the Service
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#creating-a-superuser">
-     Creating a Superuser
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#creating-a-database">
-     Creating a Database
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#testing-new-user-and-database">
-     Testing new User and Database
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#installing-jupyter-lab">
    Installing Jupyter Lab
   </a>
@@ -351,6 +319,11 @@ title="Print to PDF"
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#launching-the-lab">
    Launching the Lab
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#launching-postgres-and-pgadmin">
+   Launching Postgres and PgAdmin
   </a>
  </li>
 </ul>
@@ -378,38 +351,6 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#installing-postgresql">
-   Installing PostgreSQL
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#create-a-db-cluster">
-     Create a DB cluster
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#starting-the-service">
-     Starting the Service
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#creating-a-superuser">
-     Creating a Superuser
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#creating-a-database">
-     Creating a Database
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#testing-new-user-and-database">
-     Testing new User and Database
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#installing-jupyter-lab">
    Installing Jupyter Lab
   </a>
@@ -417,6 +358,11 @@ title="Print to PDF"
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#launching-the-lab">
    Launching the Lab
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#launching-postgres-and-pgadmin">
+   Launching Postgres and PgAdmin
   </a>
  </li>
 </ul>
@@ -431,11 +377,14 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="sql-lab">
 <h1>SQL Lab<a class="headerlink" href="#sql-lab" title="Permalink to this heading">#</a></h1>
-<p>This is a setup for learning SQL with the help of Jupyter notebooks. The idea is to be able of executing SQL queries from the notebook against PostgreSQL, all running within a <a class="reference external" href="https://conda.io/projects/conda/en/latest/index.html">Conda</a> virtual environment.</p>
+<p>This is a setup for learning SQL with the help of <a class="reference external" href="https://jupyter.org/">Jupyter</a> notebooks. The idea is to be able of executing SQL queries from the notebook against a <a class="reference external" href="https://www.postgresql.org">PostgreSQL</a> server.</p>
 <blockquote>
-<div><p>The <strong>original idea</strong> was to run the MySQL service from within a Docker container, but couldn’t make it work.</p>
+<div><p>The <strong>original idea</strong> was to run PostgreSQL from within the Conda environment, but couldn’t make it work. Packages installed in such an environment, can’t work as system services, so I could only reach them from within the environment; they weren’t available when trying to reach them from, for example, <a class="reference external" href="https://www.pgadmin.org/">pgadmin</a> running in a Docker container.</p>
 </div></blockquote>
-<p>These notes assume the Conda package is installed in our system.</p>
+<p>In this setup, Jupyter Lab will be running within a <a class="reference external" href="https://conda.io/projects/conda/en/latest/index.html">Conda</a> virtual environment, whereas the <a class="reference external" href="https://jupyter.org/">PostgreSQL</a> and <a class="reference external" href="https://www.postgresql.org">pgadmin</a> will be running in Docker containers.</p>
+<blockquote>
+<div><p>These notes assume the Conda package is installed in our system.</p>
+</div></blockquote>
 <section id="setting-up-the-virtual-environment">
 <h2>Setting up the virtual environment<a class="headerlink" href="#setting-up-the-virtual-environment" title="Permalink to this heading">#</a></h2>
 <p>To create a virtual environment using Anaconda we run:</p>
@@ -447,85 +396,22 @@ title="Print to PDF"
 </pre></div>
 </div>
 </section>
-<section id="installing-postgresql">
-<h2>Installing PostgreSQL<a class="headerlink" href="#installing-postgresql" title="Permalink to this heading">#</a></h2>
-<p>Since we want to install <a class="reference external" href="https://www.postgresql.org">PostgreSQL</a> in the <strong>virtual environment</strong>, first thing we want to do is <strong>enable</strong> it:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">activate</span> <span class="n">sql</span><span class="o">-</span><span class="n">lab</span>
-<span class="n">conda</span> <span class="n">install</span> <span class="n">postgresql</span>
-</pre></div>
-</div>
-<section id="create-a-db-cluster">
-<h3>Create a DB cluster<a class="headerlink" href="#create-a-db-cluster" title="Permalink to this heading">#</a></h3>
-<p>Now we have to <a class="reference external" href="https://www.postgresql.org/docs/15/app-initdb.html">create a database cluster</a>, which will generate a folder containing the data, so let’s do that from within our <code class="docutils literal notranslate"><span class="pre">sql-lab</span></code> folder:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">sql</span><span class="o">-</span><span class="n">lab</span>
-<span class="n">initdb</span> <span class="o">-</span><span class="n">D</span> <span class="n">bob_data</span>
-</pre></div>
-</div>
-<blockquote>
-<div><p>A database cluster is a collection of databases that are managed by a single server instance.</p>
-</div></blockquote>
-</section>
-<section id="starting-the-service">
-<h3>Starting the Service<a class="headerlink" href="#starting-the-service" title="Permalink to this heading">#</a></h3>
-<p>Now we can start the <code class="docutils literal notranslate"><span class="pre">postgres</span></code> service (note that we have to use the <a class="reference external" href="https://www.postgresql.org/docs/15/app-pg-ctl.html">pg_ctl</a> with the <code class="docutils literal notranslate"><span class="pre">-D</span></code> option, passing the location of the cluster):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pg_ctl</span> <span class="o">-</span><span class="n">D</span> <span class="n">bob_data</span> <span class="o">-</span><span class="n">l</span> <span class="n">logfile</span> <span class="n">start</span>
-</pre></div>
-</div>
-<blockquote>
-<div><p>The <code class="docutils literal notranslate"><span class="pre">-l</span> <span class="pre">logfile</span></code> is, as you may have imagined, to log any incidence of the service into the <code class="docutils literal notranslate"><span class="pre">logfile</span></code> file.</p>
-</div></blockquote>
-</section>
-<section id="creating-a-superuser">
-<h3>Creating a Superuser<a class="headerlink" href="#creating-a-superuser" title="Permalink to this heading">#</a></h3>
-<p>To create users we use the <a class="reference external" href="https://www.postgresql.org/docs/15/app-createuser.html">createuser</a> command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">createuser</span> <span class="o">--</span><span class="n">encrypted</span> <span class="o">-</span><span class="n">sP</span> <span class="n">bob</span>
-</pre></div>
-</div>
-<p>In the command above we’re using the options:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">--encrypted</span></code> is obsolete but still accepted for backward compatibility.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">-s</span></code>, short for <code class="docutils literal notranslate"><span class="pre">--superuser</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">-P</span></code>, short for <code class="docutils literal notranslate"><span class="pre">--pwprompt</span></code>, so that we’ll be prompted for a password for the new user.</p></li>
-</ul>
-</section>
-<section id="creating-a-database">
-<h3>Creating a Database<a class="headerlink" href="#creating-a-database" title="Permalink to this heading">#</a></h3>
-<p>To create a database we must use the <a class="reference external" href="https://www.postgresql.org/docs/15/app-createdb.html">createdb</a> command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">createdb</span> <span class="o">--</span><span class="n">owner</span><span class="o">=</span><span class="n">bob</span> <span class="n">bobDB</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>The <code class="docutils literal notranslate"><span class="pre">--owner</span></code> option specifies the database user who will own the new database.</p></li>
-<li><p>Note that we must give the <strong>database name</strong> as the last argument, in this case <code class="docutils literal notranslate"><span class="pre">bobDB</span></code>.</p></li>
-</ul>
-</section>
-<section id="testing-new-user-and-database">
-<h3>Testing new User and Database<a class="headerlink" href="#testing-new-user-and-database" title="Permalink to this heading">#</a></h3>
-<p>In order to test the new user and database, we can use the <a class="reference external" href="https://www.postgresql.org/docs/current/app-psql.html">psql</a> command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">psql</span> <span class="o">--</span><span class="n">username</span><span class="o">=</span><span class="n">bob</span> <span class="o">--</span><span class="n">db</span><span class="o">=</span><span class="n">bobDBpsql</span> <span class="o">--</span><span class="n">username</span><span class="o">=</span><span class="n">bob</span> <span class="o">--</span><span class="n">db</span><span class="o">=</span><span class="n">bobDB</span>
-<span class="n">psql</span> <span class="p">(</span><span class="mf">12.9</span><span class="p">)</span>
-<span class="n">Type</span> <span class="s2">&quot;help&quot;</span> <span class="k">for</span> <span class="n">help</span><span class="o">.</span>
-
-<span class="n">bobDB</span><span class="o">=</span><span class="c1"># </span>
-</pre></div>
-</div>
-<blockquote>
-<div><p>You can run commands in Jupyter Book cells by prepending them with <code class="docutils literal notranslate"><span class="pre">!</span></code>. If you do it from the Jupyter Lab terminal, make sure you activate the conda virtual environment: <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">db-lab</span></code>.</p>
-</div></blockquote>
-</section>
-</section>
 <section id="installing-jupyter-lab">
 <h2>Installing Jupyter Lab<a class="headerlink" href="#installing-jupyter-lab" title="Permalink to this heading">#</a></h2>
-<p>For the Jupyter Lab with PostgreSQL set up, we’ll be needing [Jupyter Lab][<a class="reference external" href="https://jupyter.org/">https://jupyter.org/</a>] itself, and several dependencies. All the packages below should be installed in the Conda virtual environment, so make sure is activated.</p>
+<p>For the Jupyter Lab with PostgreSQL set up, we’ll be needing <a class="reference external" href="https://jupyter.org/">Jupyter Lab</a> itself, and several dependencies. All the packages below should be installed in the Conda virtual environment, so make sure is activated.</p>
 <ul class="simple">
-<li><p>[jupyterlab][<a class="reference external" href="https://anaconda.org/conda-forge/jupyterlab">https://anaconda.org/conda-forge/jupyterlab</a>].</p></li>
-<li><p>[theme-darcula][<a class="reference external" href="https://anaconda.org/conda-forge/theme-darcula">https://anaconda.org/conda-forge/theme-darcula</a>], a cool theme for jupyter lab.</p></li>
-<li><p>[jupyter-book][<a class="reference external" href="https://anaconda.org/conda-forge/jupyter-book">https://anaconda.org/conda-forge/jupyter-book</a>], in case we want to publish our work.</p></li>
-<li><p>[ipython-sql][<a class="reference external" href="https://anaconda.org/conda-forge/ipython-sql">https://anaconda.org/conda-forge/ipython-sql</a>] to get SQL magic functions (<code class="docutils literal notranslate"><span class="pre">%sql</span></code>).</p></li>
-<li><p>[pgspecial][<a class="reference external" href="https://anaconda.org/conda-forge/pgspecial">https://anaconda.org/conda-forge/pgspecial</a>] so we can run Postgres <strong>metacommands</strong> (<code class="docutils literal notranslate"><span class="pre">\dt</span></code>).</p></li>
-<li><p>[sqlalchemy][<a class="reference external" href="https://anaconda.org/conda-forge/sqlalchemy">https://anaconda.org/conda-forge/sqlalchemy</a>] to create the connection to the database.</p></li>
+<li><p><a class="reference external" href="https://anaconda.org/conda-forge/jupyterlab">jupyterlab</a>.</p></li>
+<li><p><a class="reference external" href="https://anaconda.org/conda-forge/theme-darcula">theme-darcula</a>, a cool theme for jupyter lab.</p></li>
+<li><p><a class="reference external" href="https://anaconda.org/conda-forge/ipython-sql">ipython-sql</a> to get SQL magic functions (<code class="docutils literal notranslate"><span class="pre">%sql</span></code>).</p></li>
+<li><p><a class="reference external" href="https://anaconda.org/conda-forge/pgspecial">pgspecial</a> so we can run Postgres <strong>metacommands</strong> (<code class="docutils literal notranslate"><span class="pre">\dt</span></code>).</p></li>
+<li><p><a class="reference external" href="https://anaconda.org/conda-forge/sqlalchemy">sqlalchemy</a> to create the connection to the database.</p></li>
 </ul>
 <p>Just follow the instructions in the links above to install the packages.</p>
+<p>Additionally, I installed:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://anaconda.org/conda-forge/jupyter-book">jupyter-book</a>, to create the book you’re reading.</p></li>
+<li><p><a class="reference external" href="https://anaconda.org/conda-forge/ghp-import">ghp-import</a>, to publish our book to GitHub.</p></li>
+</ul>
 </section>
 <section id="launching-the-lab">
 <h2>Launching the Lab<a class="headerlink" href="#launching-the-lab" title="Permalink to this heading">#</a></h2>
@@ -534,6 +420,13 @@ title="Print to PDF"
 </pre></div>
 </div>
 <p>That will start a local server, where we can reach the Jupyter lab interface. In the next section, we’ll go over how to create a connection to the database.</p>
+</section>
+<section id="launching-postgres-and-pgadmin">
+<h2>Launching Postgres and PgAdmin<a class="headerlink" href="#launching-postgres-and-pgadmin" title="Permalink to this heading">#</a></h2>
+<p>In order to launch Postgres and PgAdmin I wrote a couple targets in a <code class="docutils literal notranslate"><span class="pre">Makefile</span></code>. Check the <code class="docutils literal notranslate"><span class="pre">compose-postgres.yml</span></code> as well, to get familiar with both services.</p>
+<blockquote>
+<div><p>Something <strong>weird</strong> I experienced when creating connections to Postgres, was that I had to use <code class="docutils literal notranslate"><span class="pre">localhost</span></code> and not the name of the Docker service (<code class="docutils literal notranslate"><span class="pre">postgres</span></code>) in order to create connections to the database 🤔.</p>
+</div></blockquote>
 </section>
 <div class="toctree-wrapper compound">
 </div>

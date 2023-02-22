@@ -391,14 +391,14 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sqlalchemy</span>
-<span class="n">engine</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;postgresql://bob:1234@localhost:5432/bobDB&#39;</span><span class="p">)</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;postgresql://bob:1234@localhost:5432/postgres&#39;</span><span class="p">)</span>
 <span class="n">engine</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
 <span class="c1"># engine.execution_options(isolation_level=&quot;AUTOCOMMIT&quot;)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sqlalchemy.engine.base.Connection at 0x7f9f3e7ba140&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sqlalchemy.engine.base.Connection at 0x7fe0651dc190&gt;
 </pre></div>
 </div>
 </div>
@@ -421,7 +421,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Connected: bob@bobDB&#39;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Connected: bob@postgres&#39;
 </pre></div>
 </div>
 </div>
@@ -435,8 +435,8 @@ SELECT * FROM pg_database;
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/bobDB
-5 rows affected.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/postgres
+4 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
@@ -446,49 +446,37 @@ SELECT * FROM pg_database;
             <th>datname</th>
             <th>datdba</th>
             <th>encoding</th>
-            <th>datcollate</th>
-            <th>datctype</th>
+            <th>datlocprovider</th>
             <th>datistemplate</th>
             <th>datallowconn</th>
             <th>datconnlimit</th>
-            <th>datlastsysoid</th>
             <th>datfrozenxid</th>
             <th>datminmxid</th>
             <th>dattablespace</th>
+            <th>datcollate</th>
+            <th>datctype</th>
+            <th>daticulocale</th>
+            <th>datcollversion</th>
             <th>datacl</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>13682</td>
+            <td>5</td>
             <td>postgres</td>
             <td>10</td>
             <td>6</td>
-            <td>en_US.UTF-8</td>
-            <td>en_US.UTF-8</td>
+            <td>c</td>
             <td>False</td>
             <td>True</td>
             <td>-1</td>
-            <td>13681</td>
-            <td>479</td>
+            <td>717</td>
             <td>1</td>
             <td>1663</td>
+            <td>en_US.utf8</td>
+            <td>en_US.utf8</td>
             <td>None</td>
-        </tr>
-        <tr>
-            <td>16385</td>
-            <td>bobDB</td>
-            <td>16384</td>
-            <td>6</td>
-            <td>en_US.UTF-8</td>
-            <td>en_US.UTF-8</td>
-            <td>False</td>
-            <td>True</td>
-            <td>-1</td>
-            <td>13681</td>
-            <td>479</td>
-            <td>1</td>
-            <td>1663</td>
+            <td>None</td>
             <td>None</td>
         </tr>
         <tr>
@@ -496,47 +484,53 @@ SELECT * FROM pg_database;
             <td>template1</td>
             <td>10</td>
             <td>6</td>
-            <td>en_US.UTF-8</td>
-            <td>en_US.UTF-8</td>
+            <td>c</td>
             <td>True</td>
             <td>True</td>
             <td>-1</td>
-            <td>13681</td>
-            <td>479</td>
+            <td>717</td>
             <td>1</td>
             <td>1663</td>
-            <td>{=c/javi,javi=CTc/javi}</td>
+            <td>en_US.utf8</td>
+            <td>en_US.utf8</td>
+            <td>None</td>
+            <td>None</td>
+            <td>{=c/bob,bob=CTc/bob}</td>
         </tr>
         <tr>
-            <td>13681</td>
+            <td>4</td>
             <td>template0</td>
             <td>10</td>
             <td>6</td>
-            <td>en_US.UTF-8</td>
-            <td>en_US.UTF-8</td>
+            <td>c</td>
             <td>True</td>
             <td>False</td>
             <td>-1</td>
-            <td>13681</td>
-            <td>479</td>
+            <td>717</td>
             <td>1</td>
             <td>1663</td>
-            <td>{=c/javi,javi=CTc/javi}</td>
+            <td>en_US.utf8</td>
+            <td>en_US.utf8</td>
+            <td>None</td>
+            <td>None</td>
+            <td>{=c/bob,bob=CTc/bob}</td>
         </tr>
         <tr>
-            <td>16386</td>
+            <td>26467</td>
             <td>dvdrental</td>
-            <td>16384</td>
+            <td>10</td>
             <td>6</td>
-            <td>en_US.UTF-8</td>
-            <td>en_US.UTF-8</td>
+            <td>c</td>
             <td>False</td>
             <td>True</td>
             <td>-1</td>
-            <td>13681</td>
-            <td>479</td>
+            <td>717</td>
             <td>1</td>
             <td>1663</td>
+            <td>en_US.utf8</td>
+            <td>en_US.utf8</td>
+            <td>None</td>
+            <td>2.31</td>
             <td>None</td>
         </tr>
     </tbody>
@@ -553,8 +547,8 @@ SELECT * FROM pg_database;
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/bobDB
-11 rows affected.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/postgres
+13 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
@@ -583,19 +577,31 @@ SELECT * FROM pg_database;
             <td>-1</td>
             <td>None</td>
             <td>[]</td>
-            <td>False</td>
+            <td>True</td>
         </tr>
         <tr>
-            <td>javi</td>
+            <td>pg_checkpoint</td>
+            <td>False</td>
             <td>True</td>
-            <td>True</td>
-            <td>True</td>
-            <td>True</td>
-            <td>True</td>
+            <td>False</td>
+            <td>False</td>
+            <td>False</td>
             <td>-1</td>
             <td>None</td>
             <td>[]</td>
+            <td>False</td>
+        </tr>
+        <tr>
+            <td>pg_database_owner</td>
+            <td>False</td>
             <td>True</td>
+            <td>False</td>
+            <td>False</td>
+            <td>False</td>
+            <td>-1</td>
+            <td>None</td>
+            <td>[]</td>
+            <td>False</td>
         </tr>
         <tr>
             <td>pg_execute_server_program</td>
@@ -619,6 +625,18 @@ SELECT * FROM pg_database;
             <td>-1</td>
             <td>None</td>
             <td>[&#x27;pg_read_all_settings&#x27;, &#x27;pg_read_all_stats&#x27;, &#x27;pg_stat_scan_tables&#x27;]</td>
+            <td>False</td>
+        </tr>
+        <tr>
+            <td>pg_read_all_data</td>
+            <td>False</td>
+            <td>True</td>
+            <td>False</td>
+            <td>False</td>
+            <td>False</td>
+            <td>-1</td>
+            <td>None</td>
+            <td>[]</td>
             <td>False</td>
         </tr>
         <tr>
@@ -682,7 +700,7 @@ SELECT * FROM pg_database;
             <td>False</td>
         </tr>
         <tr>
-            <td>pg_write_server_files</td>
+            <td>pg_write_all_data</td>
             <td>False</td>
             <td>True</td>
             <td>False</td>
@@ -694,12 +712,12 @@ SELECT * FROM pg_database;
             <td>False</td>
         </tr>
         <tr>
-            <td>postgres</td>
+            <td>pg_write_server_files</td>
+            <td>False</td>
             <td>True</td>
-            <td>True</td>
-            <td>True</td>
-            <td>True</td>
-            <td>True</td>
+            <td>False</td>
+            <td>False</td>
+            <td>False</td>
             <td>-1</td>
             <td>None</td>
             <td>[]</td>
@@ -711,24 +729,17 @@ SELECT * FROM pg_database;
 <p>We can also run the <code class="docutils literal notranslate"><span class="pre">psql</span></code> command (or any other shell command) prepending a <code class="docutils literal notranslate"><span class="pre">!</span></code>, but note that we don’t get an <strong>interactive prompt</strong>, just the static output.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>psql --username<span class="o">=</span>bob --db<span class="o">=</span>bobDB
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>psql --username<span class="o">=</span>bob --db<span class="o">=</span>postgres -h localhost
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>psql (12.9)
-Type &quot;help&quot; for help.
-
-?2004hbobDB=# 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>^C?2004l
-
-?2004hbobDB=# 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Password for user bob: 
 </pre></div>
 </div>
 </div>
 </div>
+<p>Since the password prompt is something that comes up quite often, it’s more practical to get used to run these commands on the **J of the times</p>
 </section>
 </section>
 
