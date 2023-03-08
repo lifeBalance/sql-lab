@@ -128,6 +128,21 @@ const thebe_selector_output = ".output, .cell_output"
    Metacommands
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="sql_language.html">
+   About the SQL language
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="pg_admin.html">
+   pgAdmin
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="select-statement.html">
+   The SELECT statement
+  </a>
+ </li>
 </ul>
 
     </div>
@@ -451,7 +466,7 @@ title="Print to PDF"
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">su</span> <span class="n">postgres</span>
 </pre></div>
 </div>
-<p>And use the <a class="reference external" href="https://www.postgresql.org/docs/15/app-createuser.html">createuser</a> command:</p>
+<p>And use the <a class="reference external" href="https://www.postgresql.org/docs/15/app-initdb.html">createuser</a> command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ createuser bob -P
 Enter password for new role: 
 Enter it again:
@@ -487,7 +502,7 @@ Enter it again:
 </section>
 <section id="creating-a-superuser">
 <h2>Creating a Superuser<a class="headerlink" href="#creating-a-superuser" title="Permalink to this heading">#</a></h2>
-<p>To create users we use the <a class="reference external" href="https://www.postgresql.org/docs/15/app-createuser.html">createuser</a> command:</p>
+<p>To create users we use the <a class="reference external" href="https://www.postgresql.org/docs/15/app-initdb.html">createuser</a> command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">createuser</span> <span class="o">--</span><span class="n">encrypted</span> <span class="o">-</span><span class="n">sP</span> <span class="n">bob</span>
 </pre></div>
 </div>
@@ -500,7 +515,7 @@ Enter it again:
 </section>
 <section id="creating-a-database">
 <h2>Creating a Database<a class="headerlink" href="#creating-a-database" title="Permalink to this heading">#</a></h2>
-<p>To create a database we must use the <a class="reference external" href="https://www.postgresql.org/docs/15/app-createdb.html">createdb</a> command:</p>
+<p>To create a database we must use the <a class="reference external" href="https://www.postgresql.org/docs/15/app-pg-ctl.html">createdb</a> command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">createdb</span> <span class="o">--</span><span class="n">owner</span><span class="o">=</span><span class="n">bob</span> <span class="n">bobDB</span>
 </pre></div>
 </div>
@@ -511,7 +526,7 @@ Enter it again:
 </section>
 <section id="testing-new-user-and-database">
 <h2>Testing new User and Database<a class="headerlink" href="#testing-new-user-and-database" title="Permalink to this heading">#</a></h2>
-<p>In order to test the new user and database, we can use the <a class="reference external" href="https://www.postgresql.org/docs/current/app-psql.html">psql</a> command:</p>
+<p>In order to test the new user and database, we can use the <a class="reference external" href="https://www.postgresql.org/docs/15/app-createuser.html">psql</a> command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">psql</span> <span class="o">--</span><span class="n">username</span><span class="o">=</span><span class="n">bob</span> <span class="o">--</span><span class="n">db</span><span class="o">=</span><span class="n">bobDBpsql</span> <span class="o">--</span><span class="n">username</span><span class="o">=</span><span class="n">bob</span> <span class="o">--</span><span class="n">db</span><span class="o">=</span><span class="n">bobDB</span>
 <span class="n">psql</span> <span class="p">(</span><span class="mf">12.9</span><span class="p">)</span>
 <span class="n">Type</span> <span class="s2">&quot;help&quot;</span> <span class="k">for</span> <span class="n">help</span><span class="o">.</span>

@@ -393,12 +393,11 @@ title="Print to PDF"
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sqlalchemy</span>
 <span class="n">engine</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;postgresql://bob:1234@localhost:5432/postgres&#39;</span><span class="p">)</span>
 <span class="n">engine</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
-<span class="c1"># engine.execution_options(isolation_level=&quot;AUTOCOMMIT&quot;)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sqlalchemy.engine.base.Connection at 0x7fe0651dc190&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sqlalchemy.engine.base.Connection at 0x7fb05a52cc70&gt;
 </pre></div>
 </div>
 </div>
@@ -436,7 +435,7 @@ SELECT * FROM pg_database;
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/postgres
-4 rows affected.
+5 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
@@ -476,7 +475,25 @@ SELECT * FROM pg_database;
             <td>en_US.utf8</td>
             <td>en_US.utf8</td>
             <td>None</td>
+            <td>2.31</td>
             <td>None</td>
+        </tr>
+        <tr>
+            <td>16384</td>
+            <td>bob</td>
+            <td>10</td>
+            <td>6</td>
+            <td>c</td>
+            <td>False</td>
+            <td>True</td>
+            <td>-1</td>
+            <td>717</td>
+            <td>1</td>
+            <td>1663</td>
+            <td>en_US.utf8</td>
+            <td>en_US.utf8</td>
+            <td>None</td>
+            <td>2.31</td>
             <td>None</td>
         </tr>
         <tr>
@@ -494,7 +511,7 @@ SELECT * FROM pg_database;
             <td>en_US.utf8</td>
             <td>en_US.utf8</td>
             <td>None</td>
-            <td>None</td>
+            <td>2.31</td>
             <td>{=c/bob,bob=CTc/bob}</td>
         </tr>
         <tr>
@@ -516,7 +533,7 @@ SELECT * FROM pg_database;
             <td>{=c/bob,bob=CTc/bob}</td>
         </tr>
         <tr>
-            <td>26467</td>
+            <td>16389</td>
             <td>dvdrental</td>
             <td>10</td>
             <td>6</td>
@@ -739,7 +756,7 @@ SELECT * FROM pg_database;
 </div>
 </div>
 </div>
-<p>Since the password prompt is something that comes up quite often, it’s more practical to get used to run these commands on the **J of the times</p>
+<p>Since the password prompt is something that comes up quite often, it’s more practical to get used to run these commands on the <strong>Jupyter Lab’s terminal</strong> instead of the cells.</p>
 </section>
 </section>
 

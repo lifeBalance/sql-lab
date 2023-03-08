@@ -5,5 +5,9 @@ format: jb-book
 root: README.md
 chapters:
 - file: setup.ipynb
-- file: loading_dvdrental.ipynb
+- file: loading_dvdrental.md
 - file: meta-commands.ipynb
+- file: sql_language.md
+- file: pg_admin.md
+- file: select-statement.md
+

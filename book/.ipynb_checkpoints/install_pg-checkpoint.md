@@ -116,8 +116,8 @@ bobDB=#
 [3]: https://www.pgadmin.org/
 [4]: https://conda.io/projects/conda/en/latest/index.html
 
-[3]: https://www.postgresql.org/docs/15/app-initdb.html
-[4]: https://www.postgresql.org/docs/15/app-pg-ctl.html
-[5]: https://www.postgresql.org/docs/15/app-createuser.html
-[6]: https://www.postgresql.org/docs/15/app-createdb.html
-[7]: https://www.postgresql.org/docs/current/app-psql.html
+[5]: https://www.postgresql.org/docs/15/app-initdb.html
+[6]: https://www.postgresql.org/docs/15/app-pg-ctl.html
+[7]: https://www.postgresql.org/docs/15/app-createuser.html
+[8]: https://www.postgresql.org/docs/15/app-createdb.html
+[9]: https://www.postgresql.org/docs/current/app-psql.html

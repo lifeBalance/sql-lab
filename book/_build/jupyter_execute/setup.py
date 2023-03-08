@@ -10,7 +10,6 @@
 import sqlalchemy
 engine = sqlalchemy.create_engine('postgresql://bob:1234@localhost:5432/postgres')
 engine.connect()
-# engine.execution_options(isolation_level="AUTOCOMMIT")
 
 
 # ## Magic Commands
@@ -55,4 +54,4 @@ get_ipython().run_line_magic('sql', '\\du')
 get_ipython().system('psql --username=bob --db=postgres -h localhost')
 
 
-# Since the password prompt is something that comes up quite often, it's more practical to get used to run these commands on the **J of the times
+# Since the password prompt is something that comes up quite often, it's more practical to get used to run these commands on the **Jupyter Lab's terminal** instead of the cells.

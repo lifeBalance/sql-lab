@@ -181,35 +181,6 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/loading_dvdrental.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
-  
-
-<span class="headerbtn__icon-container">
-  
-    <img src="_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -277,7 +248,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="_sources/loading_dvdrental.ipynb"
+        <a href="_sources/loading_dvdrental.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -288,7 +259,7 @@ title="Download source file"
 <span class="headerbtn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="headerbtn__text-container">.ipynb</span>
+<span class="headerbtn__text-container">.md</span>
 </a>
 
       </li>
@@ -346,11 +317,6 @@ title="Print to PDF"
    Restore data
   </a>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#connecting-to-the-new-database">
-   Connecting to the New Database
-  </a>
- </li>
 </ul>
 
     </nav>
@@ -378,11 +344,6 @@ title="Print to PDF"
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#restore-data">
    Restore data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#connecting-to-the-new-database">
-   Connecting to the New Database
   </a>
  </li>
 </ul>
@@ -425,32 +386,11 @@ title="Print to PDF"
 <blockquote>
 <div><p>The command above will also run interactively, so that we can enter the <strong>password</strong> of <code class="docutils literal notranslate"><span class="pre">bob</span></code>.</p>
 </div></blockquote>
-</section>
-<section id="connecting-to-the-new-database">
-<h2>Connecting to the New Database<a class="headerlink" href="#connecting-to-the-new-database" title="Permalink to this heading">#</a></h2>
-<p>Now let’s create a connection to the <code class="docutils literal notranslate"><span class="pre">dvdrental</span></code> database:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sqlalchemy</span>
-<span class="c1"># Let&#39;s create a connection to the bobDB database for bob.</span>
-<span class="n">engine</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;postgresql://bob:1234@localhost:5432/dvdrental&#39;</span><span class="p">)</span>
-<span class="n">engine</span><span class="o">.</span><span class="n">execution_options</span><span class="p">(</span><span class="n">isolation_level</span><span class="o">=</span><span class="s2">&quot;AUTOCOMMIT&quot;</span><span class="p">)</span>
-
-<span class="c1"># While we&#39;re at it, let&#39;s also load the `ipython-sql` extension</span>
-<span class="o">%</span><span class="k">load_ext</span> sql
-<span class="o">%</span><span class="k">sql</span> $engine.url
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Connected: bob@dvdrental&#39;
-</pre></div>
-</div>
-</div>
-</div>
+<p>In my case, I had to run the command a second time, in order to get rid of some errors (the 2nd time it run smoothly).</p>
 <blockquote>
 <div><p>One thing I noticed about <code class="docutils literal notranslate"><span class="pre">sqlalchemy</span></code> is that once we create an engine for a database, we can’t use it connect to another database. If we wanted to connect to another database, we should create an additional engine for it.</p>
 </div></blockquote>
+<p>In the next section, we’ll see how to create a connection to the database, to run some commands on it.</p>
 </section>
 </section>
 
