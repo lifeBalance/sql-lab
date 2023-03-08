@@ -1,17 +1,18 @@
 # SQL Lab
-This is a setup for learning SQL with the help of [Jupyter][1] notebooks. The idea is to be able of executing SQL queries from the notebook against a [PostgreSQL][2] server.
+This is a setup for learning SQL with the help of [Jupyter][1] notebooks. The idea is to be able of executing SQL queries from the notebook against a [PostgreSQL][2] server. We need two ingredients to make this happen:
 
-> The **original idea** was to run PostgreSQL from within the Conda environment, but couldn't make it work. Packages installed in such an environment, can't work as system services, so I could only reach them from within the environment; they weren't available when trying to reach them from, for example, [pgadmin][3] running in a Docker container.
+- Jupyter Lab, which will be running within a [Conda][4] virtual environment.
+- A [PostgreSQL][1] server and [pgadmin][2], which will be running in Docker containers.
 
-In this setup, Jupyter Lab will be running within a [Conda][4] virtual environment, whereas the [PostgreSQL][1] and [pgadmin][2] will be running in Docker containers.
-
-> These notes assume the Conda package is installed in our system.
+The **original idea** was to run PostgreSQL from within the Conda environment, but couldn't make it work. Packages installed in such an environment, can't work as system services, so I could only reach them from within the environment; they weren't available when trying to reach them from, for example, [pgadmin][3] running in a Docker container.
 
 ## Setting up the virtual environment
 To create a virtual environment using Anaconda we run:
 ```
 conda create --name sql-lab
 ```
+
+> These notes assume the [Conda][4] package is [installed](https://docs.conda.io/projects/conda/en/stable/user-guide/install/index.html) in our system.
 
 Let's also create a folder to put the files (our database cluster and jupyter notebooks) we'll be using on this environment:
 ```

@@ -1,3 +1,4 @@
 .vscode
 .ipynb_checkpoints
 pg_data
+book/_build
