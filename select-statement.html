@@ -53,6 +53,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Examples I" href="challenges1.html" />
     <link rel="prev" title="pgAdmin" href="pg_admin.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en">
@@ -142,6 +143,21 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    The SELECT statement
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="challenges1.html">
+   Examples I
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="aggregate-functions.html">
+   Aggregate Functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="group-by.html">
+   The GROUP BY clause
   </a>
  </li>
 </ul>
@@ -385,6 +401,23 @@ title="Print to PDF"
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#comparison-operators">
+     Comparison Operators
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#comparison-predicates">
+       Comparison Predicates
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#logical-operators">
+     Logical Operators
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#the-count-function">
      The count function
     </a>
@@ -394,7 +427,17 @@ title="Print to PDF"
      ORDER BY
     </a>
    </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-in-operator">
+     The IN operator
+    </a>
+   </li>
   </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-like-operator">
+   The LIKE operator
+  </a>
  </li>
 </ul>
 
@@ -450,6 +493,23 @@ title="Print to PDF"
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#comparison-operators">
+     Comparison Operators
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#comparison-predicates">
+       Comparison Predicates
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#logical-operators">
+     Logical Operators
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#the-count-function">
      The count function
     </a>
@@ -459,7 +519,17 @@ title="Print to PDF"
      ORDER BY
     </a>
    </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-in-operator">
+     The IN operator
+    </a>
+   </li>
   </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-like-operator">
+   The LIKE operator
+  </a>
  </li>
 </ul>
 
@@ -758,6 +828,8 @@ SELECT DISTINCT rating FROM film;
 <span class="k">WHERE</span><span class="w"> </span><span class="n">condition</span><span class="p">;</span><span class="w"></span>
 </pre></div>
 </div>
+<section id="comparison-operators">
+<h2>Comparison Operators<a class="headerlink" href="#comparison-operators" title="Permalink to this heading">#</a></h2>
 <p>As you can see, the <code class="docutils literal notranslate"><span class="pre">WHERE</span></code> clause appears after the <code class="docutils literal notranslate"><span class="pre">FROM</span></code> clause of the <code class="docutils literal notranslate"><span class="pre">SELECT</span></code> statement. <code class="docutils literal notranslate"><span class="pre">condition</span></code> represents an expression that evaluates to a boolean value. PostgreSQL provides the standard <a class="reference external" href="https://www.postgresql.org/docs/15/functions-comparison.html">comparison operators</a> to construct the conditions.</p>
 <table class="colwidths-auto table">
 <thead>
@@ -826,7 +898,37 @@ WHERE first_name = &#39;Jamie&#39;;
     </tbody>
 </table></div></div>
 </div>
-<p>Apparently, we have two Jamies among our customer base. Let’s say we want to find <strong>Jamie Rice</strong>. PostgreSQL has available the standard <a class="reference external" href="https://www.postgresql.org/docs/15/functions-logical.html">logical operators</a> <code class="docutils literal notranslate"><span class="pre">AND</span></code> and <code class="docutils literal notranslate"><span class="pre">OR</span></code>:</p>
+<p>Apparently, we have two Jamies among our customer base.</p>
+<section id="comparison-predicates">
+<h3>Comparison Predicates<a class="headerlink" href="#comparison-predicates" title="Permalink to this heading">#</a></h3>
+<p>On top of the comparison operator we’ve seen above, we can also use <a class="reference external" href="https://www.postgresql.org/docs/current/functions-comparison.html#FUNCTIONS-COMPARISON-PRED-TABLE">comparison predicates</a> to build our conditions (boolean expressions). In this category, the most useful are the ones in the table below (check documentation for more):</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Predicate</p></th>
+<th class="head"><p>Equivalent</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">val</span> <span class="pre">BETWEEN</span> <span class="pre">low</span> <span class="pre">AND</span> <span class="pre">hi</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">WHERE</span> <span class="pre">val</span> <span class="pre">&gt;=</span> <span class="pre">low</span> <span class="pre">AND</span> <span class="pre">val</span> <span class="pre">&lt;=</span> <span class="pre">hi</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">val</span> <span class="pre">NOT</span> <span class="pre">BETWEEN</span> <span class="pre">low</span> <span class="pre">AND</span> <span class="pre">hi</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">WHERE</span> <span class="pre">val</span> <span class="pre">&lt;</span> <span class="pre">low</span> <span class="pre">OR</span> <span class="pre">val</span> <span class="pre">&gt;</span> <span class="pre">hi</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">valA</span> <span class="pre">IS</span> <span class="pre">DISTINCT</span> <span class="pre">FROM</span> <span class="pre">valb</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">valA</span> <span class="pre">!=</span> <span class="pre">valb</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">valA</span> <span class="pre">IS</span> <span class="pre">NOT</span> <span class="pre">DISTINCT</span> <span class="pre">FROM</span> <span class="pre">valb</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">valA</span> <span class="pre">=</span> <span class="pre">valb</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>If you are wondering why would you use <code class="docutils literal notranslate"><span class="pre">IS</span> <span class="pre">DISTINCT</span> <span class="pre">FROM</span></code> instead of the simple <code class="docutils literal notranslate"><span class="pre">!=</span></code>, that’s because the latter will return <strong>null</strong> (instead of a boolean value) when any of the operands is <code class="docutils literal notranslate"><span class="pre">NULL</span></code>. For example, <code class="docutils literal notranslate"><span class="pre">7</span> <span class="pre">!=</span> <span class="pre">NULL</span></code> evaluates to <code class="docutils literal notranslate"><span class="pre">NULL</span></code> instead of <strong>false</strong>!.</p>
+</section>
+</section>
+<section id="logical-operators">
+<h2>Logical Operators<a class="headerlink" href="#logical-operators" title="Permalink to this heading">#</a></h2>
+<p>Let’s say we want to find <strong>Jamie Rice</strong>. PostgreSQL has available the standard <a class="reference external" href="https://www.postgresql.org/docs/15/functions-logical.html">logical operators</a> <code class="docutils literal notranslate"><span class="pre">AND</span></code> and <code class="docutils literal notranslate"><span class="pre">OR</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
@@ -885,6 +987,7 @@ WHERE first_name = &#39;Nancy&#39;
     </tbody>
 </table></div></div>
 </div>
+</section>
 <section id="the-count-function">
 <h2>The count function<a class="headerlink" href="#the-count-function" title="Permalink to this heading">#</a></h2>
 <p>The <a class="reference external" href="https://www.postgresql.org/docs/8.2/functions-aggregate.html">count function</a> returns the number of rows returned by a <code class="docutils literal notranslate"><span class="pre">SELECT</span></code> statement. The simplest way to use this function would be:</p>
@@ -1192,6 +1295,161 @@ LIMIT 5 OFFSET 325;
 <div><p>In the example above, we’re <em>selecting</em> the <code class="docutils literal notranslate"><span class="pre">first_name</span></code> and <code class="docutils literal notranslate"><span class="pre">last_name</span></code>, but we could also be using the <code class="docutils literal notranslate"><span class="pre">*</span></code> and still be able to sort by any column we wanted to (note that’s a PostgreSQL feature not present in other RDBMS like MySQL).</p>
 </div></blockquote>
 </section>
+<section id="the-in-operator">
+<h2>The IN operator<a class="headerlink" href="#the-in-operator" title="Permalink to this heading">#</a></h2>
+<p>Whenever we want to check if a value is included in a list of values, we use the <a class="reference external" href="https://www.postgresql.org/docs/current/functions-comparisons.html#FUNCTIONS-COMPARISONS-IN-SCALAR">IN</a> operator. The syntax is as follows:</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">value</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="n">value1</span><span class="p">,</span><span class="n">value2</span><span class="p">,...)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Instead of a list of values, we could also use a subquery in the parentheses:</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">value</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">column_1</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>In any case, the whole thing evaluates to a boolean value (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>).</p>
+<p>For example, let’s say we want to see the countries of a few <code class="docutils literal notranslate"><span class="pre">country_id</span></code> values we have:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT country_id, country
+FROM country
+WHERE country_id IN (16, 20, 23);
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/dvdrental
+3 rows affected.
+</pre></div>
+</div>
+<div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>country_id</th>
+            <th>country</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>16</td>
+            <td>Brunei</td>
+        </tr>
+        <tr>
+            <td>20</td>
+            <td>Canada</td>
+        </tr>
+        <tr>
+            <td>23</td>
+            <td>China</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+<p>As you can see, the <code class="docutils literal notranslate"><span class="pre">IN</span></code> statement comes in handy, whenever we have to check for rows that are not in sequential order. Another way of writing the statement above would be:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT country_id, country
+FROM country
+WHERE country_id = 16
+   OR country_id = 20
+   OR country_id = 23;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/dvdrental
+3 rows affected.
+</pre></div>
+</div>
+<div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>country_id</th>
+            <th>country</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>16</td>
+            <td>Brunei</td>
+        </tr>
+        <tr>
+            <td>20</td>
+            <td>Canada</td>
+        </tr>
+        <tr>
+            <td>23</td>
+            <td>China</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+<p>As you can imagine, the longest the list of values to check for, the most useful the <code class="docutils literal notranslate"><span class="pre">IN</span></code> statement becomes. Also, the speed we get when using the <code class="docutils literal notranslate"><span class="pre">IN</span></code> operator is better.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="the-like-operator">
+<h1>The LIKE operator<a class="headerlink" href="#the-like-operator" title="Permalink to this heading">#</a></h1>
+<p>The <a class="reference external" href="https://www.postgresql.org/docs/current/functions-matching.html#FUNCTIONS-LIKE">LIKE</a> operator allows us to match <strong>patterns</strong> in <strong>strings</strong>. Some examples:</p>
+<ul class="simple">
+<li><p>The expression <code class="docutils literal notranslate"><span class="pre">'abc'</span> <span class="pre">LIKE</span> <span class="pre">'abc'</span></code> will evaluate to <code class="docutils literal notranslate"><span class="pre">true</span></code></p></li>
+<li><p>The expression <code class="docutils literal notranslate"><span class="pre">'abc'</span> <span class="pre">LIKE</span> <span class="pre">'a%'</span></code> will evaluate to <code class="docutils literal notranslate"><span class="pre">true</span></code></p></li>
+<li><p>The expression <code class="docutils literal notranslate"><span class="pre">'abc'</span> <span class="pre">LIKE</span> <span class="pre">'_b_'</span></code> will evaluate to <code class="docutils literal notranslate"><span class="pre">true</span></code></p></li>
+<li><p>The expression <code class="docutils literal notranslate"><span class="pre">'abc'</span> <span class="pre">LIKE</span> <span class="pre">'c'</span></code> will evaluate to <code class="docutils literal notranslate"><span class="pre">false</span></code></p></li>
+</ul>
+<p>As you may have deducted from the examples above:</p>
+<ul class="simple">
+<li><p>An <strong>underscore</strong> (<code class="docutils literal notranslate"><span class="pre">_</span></code>) in a pattern matches any <strong>single character</strong>.</p></li>
+<li><p>A <strong>percent sign</strong> (<code class="docutils literal notranslate"><span class="pre">%</span></code>) matches any sequence of <strong>zero or more characters</strong>.</p></li>
+</ul>
+<p>For example, let’s say we want to find a customer by name, but we only remember that her <strong>first name</strong> ended in <em>ley</em>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT first_name, last_name
+FROM customer
+WHERE first_name LIKE &#39;%ley&#39;;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/dvdrental
+5 rows affected.
+</pre></div>
+</div>
+<div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>first_name</th>
+            <th>last_name</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Shirley</td>
+            <td>Allen</td>
+        </tr>
+        <tr>
+            <td>Ashley</td>
+            <td>Richardson</td>
+        </tr>
+        <tr>
+            <td>Stanley</td>
+            <td>Scroggins</td>
+        </tr>
+        <tr>
+            <td>Bradley</td>
+            <td>Motley</td>
+        </tr>
+        <tr>
+            <td>Wesley</td>
+            <td>Bull</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+<blockquote>
+<div><p>The <code class="docutils literal notranslate"><span class="pre">ILIKE</span></code> operator would allow us to match patterns in a case-insensitive way (<code class="docutils literal notranslate"><span class="pre">LIKE</span></code> is case-sensitive).</p>
+</div></blockquote>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1227,6 +1485,13 @@ LIMIT 5 OFFSET 325;
             <p class="prev-next-subtitle">previous</p>
             <p class="prev-next-title">pgAdmin</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="challenges1.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Examples I</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             </footer>
