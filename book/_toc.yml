@@ -10,4 +10,7 @@ chapters:
 - file: sql_language.md
 - file: pg_admin.md
 - file: select-statement.md
+- file: challenges1.ipynb
+- file: aggregate-functions.ipynb
+- file: group-by.ipynb
 
