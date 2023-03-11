@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>The GROUP BY clause &#8212; SQL Lab</title>
+    <title>The HAVING clause &#8212; SQL Lab</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -51,10 +51,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="The HAVING clause" href="having.html" />
-    <link rel="prev" title="Aggregate Functions" href="aggregate-functions.html" />
+    <link rel="prev" title="The GROUP BY clause" href="group-by.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en">
     
@@ -155,13 +156,13 @@ const thebe_selector_output = ".output, .cell_output"
    Aggregate Functions
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="group-by.html">
    The GROUP BY clause
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="having.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    The HAVING clause
   </a>
  </li>
@@ -224,7 +225,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/group-by.ipynb"
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/having.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -284,7 +285,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fgroup-by.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fhaving.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -312,7 +313,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="_sources/group-by.ipynb"
+        <a href="_sources/having.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -371,14 +372,49 @@ title="Print to PDF"
     </div>
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#using-group-by-without-an-aggregate-function">
-   Using GROUP BY without an aggregate function
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   The HAVING clause
   </a>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#more-examples">
-   More examples
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-1">
+   Example 1
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-2">
+   Example 2
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-3">
+   Example 3
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-4">
+   Example 4
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-5">
+   Example 5
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-6">
+   Example 6
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-7">
+   Example 7
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-8">
+   Example 8
   </a>
  </li>
 </ul>
@@ -390,7 +426,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>The GROUP BY clause</h1>
+                <h1>The HAVING clause</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -400,14 +436,49 @@ title="Print to PDF"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#using-group-by-without-an-aggregate-function">
-   Using GROUP BY without an aggregate function
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   The HAVING clause
   </a>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#more-examples">
-   More examples
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-1">
+   Example 1
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-2">
+   Example 2
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-3">
+   Example 3
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-4">
+   Example 4
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-5">
+   Example 5
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-6">
+   Example 6
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-7">
+   Example 7
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-8">
+   Example 8
   </a>
  </li>
 </ul>
@@ -436,253 +507,27 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<section class="tex2jax_ignore mathjax_ignore" id="the-group-by-clause">
-<h1>The GROUP BY clause<a class="headerlink" href="#the-group-by-clause" title="Permalink to this heading">#</a></h1>
-<p>The <a class="reference external" href="https://www.postgresql.org/docs/15/queries-table-expressions.html#QUERIES-GROUP">GROUP BY</a> clause is used to group together the rows in returned by the <code class="docutils literal notranslate"><span class="pre">SELECT</span></code> statement into groups. That’s useful because we can apply to each group an aggregate function, such as calculate the <code class="docutils literal notranslate"><span class="pre">sum</span></code> of items in a group, and <code class="docutils literal notranslate"><span class="pre">count</span></code> the number of items in another group. The basic syntax looks like this:</p>
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">column_1</span><span class="p">,</span><span class="w"> </span><span class="n">aggregate_function</span><span class="p">(</span><span class="n">column_2</span><span class="p">)</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">weather_table</span><span class="w"></span>
-<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">column_1</span><span class="p">;</span><span class="w"></span>
+<section class="tex2jax_ignore mathjax_ignore" id="the-having-clause">
+<h1>The HAVING clause<a class="headerlink" href="#the-having-clause" title="Permalink to this heading">#</a></h1>
+<p>The <a class="reference external" href="https://www.postgresql.org/docs/15/queries-table-expressions.html#QUERIES-GROUP">HAVING</a> clause is used in conjuction with the <code class="docutils literal notranslate"><span class="pre">GROUP</span> <span class="pre">BY</span></code> clause to filter grouped rows that do not satisfy a given condition. The basic syntax looks like this:</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">column_1</span><span class="p">,</span><span class="w"> </span><span class="n">aggregate_fuction</span><span class="p">(</span><span class="n">column_2</span><span class="p">)</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="w"></span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">column_1</span><span class="w"></span>
+<span class="k">HAVING</span><span class="w"> </span><span class="n">condition</span><span class="p">;</span><span class="w"></span>
 </pre></div>
 </div>
-<p>To understand how this works, let’s take a peek into the <code class="docutils literal notranslate"><span class="pre">payment</span></code> table:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
-SELECT *
-FROM payment
-ORDER BY customer_id ASC
-LIMIT 5;
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/dvdrental
-5 rows affected.
-</pre></div>
-</div>
-<div class="output text_html"><table>
-    <thead>
-        <tr>
-            <th>payment_id</th>
-            <th>customer_id</th>
-            <th>staff_id</th>
-            <th>rental_id</th>
-            <th>amount</th>
-            <th>payment_date</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>18495</td>
-            <td>1</td>
-            <td>1</td>
-            <td>1185</td>
-            <td>5.99</td>
-            <td>2007-02-14 23:22:38.996577</td>
-        </tr>
-        <tr>
-            <td>18496</td>
-            <td>1</td>
-            <td>2</td>
-            <td>1422</td>
-            <td>0.99</td>
-            <td>2007-02-15 16:31:19.996577</td>
-        </tr>
-        <tr>
-            <td>18497</td>
-            <td>1</td>
-            <td>2</td>
-            <td>1476</td>
-            <td>9.99</td>
-            <td>2007-02-15 19:37:12.996577</td>
-        </tr>
-        <tr>
-            <td>18498</td>
-            <td>1</td>
-            <td>1</td>
-            <td>1725</td>
-            <td>4.99</td>
-            <td>2007-02-16 13:47:23.996577</td>
-        </tr>
-        <tr>
-            <td>18499</td>
-            <td>1</td>
-            <td>1</td>
-            <td>2308</td>
-            <td>4.99</td>
-            <td>2007-02-18 07:10:14.996577</td>
-        </tr>
-    </tbody>
-</table></div></div>
-</div>
-<p>As you can see, the customer with id <code class="docutils literal notranslate"><span class="pre">1</span></code> has made several payments of different amount. What if we wanted to find out the average amount paid by the first 10 customers:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
-SELECT customer_id, avg(amount) AS average_amount
-FROM payment
-GROUP BY customer_id
-LIMIT 10;
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/dvdrental
-10 rows affected.
-</pre></div>
-</div>
-<div class="output text_html"><table>
-    <thead>
-        <tr>
-            <th>customer_id</th>
-            <th>average_amount</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>1</td>
-            <td>3.8233333333333333</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>4.7592307692307692</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>5.4483333333333333</td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>3.7172727272727273</td>
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>3.8471428571428571</td>
-        </tr>
-        <tr>
-            <td>6</td>
-            <td>3.3900000000000000</td>
-        </tr>
-        <tr>
-            <td>7</td>
-            <td>4.6685714285714286</td>
-        </tr>
-        <tr>
-            <td>8</td>
-            <td>3.7291304347826087</td>
-        </tr>
-        <tr>
-            <td>9</td>
-            <td>3.9400000000000000</td>
-        </tr>
-        <tr>
-            <td>10</td>
-            <td>3.9483333333333333</td>
-        </tr>
-    </tbody>
-</table></div></div>
-</div>
-<p>As you can see, we’ve use the <code class="docutils literal notranslate"><span class="pre">AS</span></code> clause to set up a <strong>column alias</strong> for the value return by the aggregate function.</p>
-<section id="using-group-by-without-an-aggregate-function">
-<h2>Using GROUP BY without an aggregate function<a class="headerlink" href="#using-group-by-without-an-aggregate-function" title="Permalink to this heading">#</a></h2>
-<p>Even though most of the times we’ll be using GROUP BY with an aggregate function, let’s take a look at how to use it without one, to better understand what it does. As we saw before, each customer has several payments associated with her id. For example, let’s count the amount of rows in the <code class="docutils literal notranslate"><span class="pre">payment</span></code> table:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
-SELECT count(customer_id)
-FROM payment;
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/dvdrental
-1 rows affected.
-</pre></div>
-</div>
-<div class="output text_html"><table>
-    <thead>
-        <tr>
-            <th>count</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>14596</td>
-        </tr>
-    </tbody>
-</table></div></div>
-</div>
-<p>Now, let’s group the payments by <code class="docutils literal notranslate"><span class="pre">customer_id</span></code>:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
-SELECT count(customer_id) AS payments_by_customer
-FROM payment
-GROUP BY customer_id
-LIMIT 10;
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/dvdrental
-10 rows affected.
-</pre></div>
-</div>
-<div class="output text_html"><table>
-    <thead>
-        <tr>
-            <th>payments_by_customer</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>30</td>
-        </tr>
-        <tr>
-            <td>26</td>
-        </tr>
-        <tr>
-            <td>24</td>
-        </tr>
-        <tr>
-            <td>22</td>
-        </tr>
-        <tr>
-            <td>35</td>
-        </tr>
-        <tr>
-            <td>25</td>
-        </tr>
-        <tr>
-            <td>28</td>
-        </tr>
-        <tr>
-            <td>23</td>
-        </tr>
-        <tr>
-            <td>20</td>
-        </tr>
-        <tr>
-            <td>24</td>
-        </tr>
-    </tbody>
-</table></div></div>
-</div>
-<p>We had to limit the amount of rows to 10, but basically what the query above is doing, it’s grouping all the payments by customer id. Without using the <code class="docutils literal notranslate"><span class="pre">LIMIT</span></code> we’d get <strong>599</strong> rows (compare that number with the <strong>14596</strong> that we got at the beginning), with represent the amount of customers (the number represents how many payments each customer has done).</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">HAVING</span></code> clause set the condition for the grouped rows created once the <code class="docutils literal notranslate"><span class="pre">GROUP</span> <span class="pre">BY</span></code> clause has been applied, whereas the <code class="docutils literal notranslate"><span class="pre">WHERE</span></code> clause sets the condition to filter the rows before the <code class="docutils literal notranslate"><span class="pre">GROUP</span> <span class="pre">BY</span></code> statement has been applied.</p>
 </section>
-<section id="more-examples">
-<h2>More examples<a class="headerlink" href="#more-examples" title="Permalink to this heading">#</a></h2>
-<p>The best way to understand how <code class="docutils literal notranslate"><span class="pre">GROUP</span> <span class="pre">BY</span></code> works, it’s by practicing with examples.</p>
-<ol class="simple">
-<li><p>Let’s say we want to find out our <strong>10 best customers</strong>, meaning the ones that have spent the most:</p></li>
-</ol>
+<section class="tex2jax_ignore mathjax_ignore" id="example-1">
+<h1>Example 1<a class="headerlink" href="#example-1" title="Permalink to this heading">#</a></h1>
+<p>Let’s say we have a query to find the 10 best customers:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
 SELECT customer_id, sum(amount) AS moneys
 FROM payment
 GROUP BY customer_id
-ORDER BY sum(amount) DESC 
+ORDER BY moneys DESC
 LIMIT 10;
 </pre></div>
 </div>
@@ -743,195 +588,20 @@ LIMIT 10;
     </tbody>
 </table></div></div>
 </div>
-<ol class="simple">
-<li><p>Now let’s say we want to find out who’s our <strong>best employee</strong>, meaning the one who’s processed the most amount of orders:</p></li>
-</ol>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
-SELECT staff_id, count(*)
-FROM payment
-GROUP BY staff_id;
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/dvdrental
-2 rows affected.
-</pre></div>
-</div>
-<div class="output text_html"><table>
-    <thead>
-        <tr>
-            <th>staff_id</th>
-            <th>count</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>1</td>
-            <td>7292</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>7304</td>
-        </tr>
-    </tbody>
-</table></div></div>
-</div>
-<ol class="simple">
-<li><p>What if we’re curious about how many movies of each rating exists in the <code class="docutils literal notranslate"><span class="pre">film</span></code>  table:</p></li>
-</ol>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
-SELECT rating, count(*) AS amount_of_films
-FROM film
-GROUP BY rating;
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/dvdrental
-5 rows affected.
-</pre></div>
-</div>
-<div class="output text_html"><table>
-    <thead>
-        <tr>
-            <th>rating</th>
-            <th>amount_of_films</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>G</td>
-            <td>178</td>
-        </tr>
-        <tr>
-            <td>PG</td>
-            <td>194</td>
-        </tr>
-        <tr>
-            <td>PG-13</td>
-            <td>223</td>
-        </tr>
-        <tr>
-            <td>R</td>
-            <td>195</td>
-        </tr>
-        <tr>
-            <td>NC-17</td>
-            <td>210</td>
-        </tr>
-    </tbody>
-</table></div></div>
-</div>
-<ol class="simple">
-<li><p>How many payments did each employee handle, and how much was the total amount processed by each of them?</p></li>
-</ol>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
-SELECT staff_id, count(*) AS payments, sum(amount) AS total
-FROM payment
-GROUP BY staff_id
-ORDER BY total DESC;
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/dvdrental
-2 rows affected.
-</pre></div>
-</div>
-<div class="output text_html"><table>
-    <thead>
-        <tr>
-            <th>staff_id</th>
-            <th>payments</th>
-            <th>total</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>2</td>
-            <td>7304</td>
-            <td>31059.92</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>7292</td>
-            <td>30252.12</td>
-        </tr>
-    </tbody>
-</table></div></div>
-</div>
-<ol class="simple">
-<li><p>Find out the average replacement cost of movies by rating. For example, <strong>R</strong> rated movies have an average replacement cost of $20.23.</p></li>
-</ol>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
-SELECT rating, round(avg(replacement_cost), 2) AS avg_replacement_cost
-FROM film
-GROUP BY rating;
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/dvdrental
-5 rows affected.
-</pre></div>
-</div>
-<div class="output text_html"><table>
-    <thead>
-        <tr>
-            <th>rating</th>
-            <th>avg_replacement_cost</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>G</td>
-            <td>20.12</td>
-        </tr>
-        <tr>
-            <td>PG</td>
-            <td>18.96</td>
-        </tr>
-        <tr>
-            <td>PG-13</td>
-            <td>20.40</td>
-        </tr>
-        <tr>
-            <td>R</td>
-            <td>20.23</td>
-        </tr>
-        <tr>
-            <td>NC-17</td>
-            <td>20.14</td>
-        </tr>
-    </tbody>
-</table></div></div>
-</div>
-<ol class="simple">
-<li><p>Find the top 5 customers, meaning the ones that have spent more moneys in our shop.</p></li>
-</ol>
+<p>But now, we want to find out the customers who have spent a total within a given range, let’s say between <span class="math notranslate nohighlight">\(170 and \)</span>200:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
 SELECT customer_id, sum(amount) AS moneys
 FROM payment
 GROUP BY customer_id
-ORDER BY moneys DESC
-LIMIT 5;
+HAVING sum(amount) BETWEEN 170 AND 200;
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/dvdrental
-5 rows affected.
+4 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
@@ -943,29 +613,366 @@ LIMIT 5;
     </thead>
     <tbody>
         <tr>
-            <td>148</td>
-            <td>211.55</td>
-        </tr>
-        <tr>
-            <td>526</td>
-            <td>208.58</td>
+            <td>144</td>
+            <td>189.60</td>
         </tr>
         <tr>
             <td>178</td>
             <td>194.61</td>
         </tr>
         <tr>
-            <td>137</td>
-            <td>191.62</td>
+            <td>459</td>
+            <td>183.63</td>
         </tr>
         <tr>
-            <td>144</td>
-            <td>189.60</td>
+            <td>137</td>
+            <td>191.62</td>
         </tr>
     </tbody>
 </table></div></div>
 </div>
 </section>
+<section class="tex2jax_ignore mathjax_ignore" id="example-2">
+<h1>Example 2<a class="headerlink" href="#example-2" title="Permalink to this heading">#</a></h1>
+<p>Let’s say we have a query to find out the amount of customers if all of our store locations:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT store_id, count(*) AS customers
+FROM customer
+GROUP BY store_id;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/dvdrental
+2 rows affected.
+</pre></div>
+</div>
+<div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>store_id</th>
+            <th>customers</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>326</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>273</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+<p>In this case we have only two stores but let’s imagine we have a lot of them, and we want to see only the stores that have 300 customers or more:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT store_id, count(*) AS customers
+FROM customer
+GROUP BY store_id
+HAVING count(*) &gt; 300;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/dvdrental
+1 rows affected.
+</pre></div>
+</div>
+<div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>store_id</th>
+            <th>customers</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>326</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="example-3">
+<h1>Example 3<a class="headerlink" href="#example-3" title="Permalink to this heading">#</a></h1>
+<p>Let’s say we want to see what’s the average rental rate of only a few movie ratings:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT rating, round(avg(rental_rate), 2) AS avg_rate
+FROM film
+WHERE rating IN (&#39;R&#39;, &#39;G&#39;, &#39;PG&#39;)
+GROUP BY rating;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/dvdrental
+3 rows affected.
+</pre></div>
+</div>
+<div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>rating</th>
+            <th>avg_rate</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>G</td>
+            <td>2.89</td>
+        </tr>
+        <tr>
+            <td>PG</td>
+            <td>3.05</td>
+        </tr>
+        <tr>
+            <td>R</td>
+            <td>2.94</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+<p>But we want to see only the ratings with average rental rate below 3 bucks:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT rating, round(avg(rental_rate), 2) AS avg_rate
+FROM film
+WHERE rating IN (&#39;R&#39;, &#39;G&#39;, &#39;PG&#39;)
+GROUP BY rating
+HAVING round(avg(rental_rate), 2) &lt; 3;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/dvdrental
+2 rows affected.
+</pre></div>
+</div>
+<div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>rating</th>
+            <th>avg_rate</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>G</td>
+            <td>2.89</td>
+        </tr>
+        <tr>
+            <td>R</td>
+            <td>2.94</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="example-4">
+<h1>Example 4<a class="headerlink" href="#example-4" title="Permalink to this heading">#</a></h1>
+<p>We want to get a list of customer ids of those customers who have made at least a total of 40 transactions (we may want to offer them our platinum membership).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT customer_id, count(payment_id) AS total_transations
+FROM payment
+GROUP BY customer_id
+HAVING count(payment_id) &gt;= 40;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/dvdrental
+3 rows affected.
+</pre></div>
+</div>
+<div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>customer_id</th>
+            <th>total_transations</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>144</td>
+            <td>40</td>
+        </tr>
+        <tr>
+            <td>526</td>
+            <td>42</td>
+        </tr>
+        <tr>
+            <td>148</td>
+            <td>45</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="example-5">
+<h1>Example 5<a class="headerlink" href="#example-5" title="Permalink to this heading">#</a></h1>
+<p>When grouped by <code class="docutils literal notranslate"><span class="pre">rating</span></code>, what movie ratings have an average rental duration of more than 5 days?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT rating, round(avg(rental_duration), 2) AS avg_rental_duration
+FROM film
+GROUP BY rating
+HAVING avg(rental_duration) &gt; 5;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/dvdrental
+3 rows affected.
+</pre></div>
+</div>
+<div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>rating</th>
+            <th>avg_rental_duration</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>PG</td>
+            <td>5.08</td>
+        </tr>
+        <tr>
+            <td>PG-13</td>
+            <td>5.05</td>
+        </tr>
+        <tr>
+            <td>NC-17</td>
+            <td>5.14</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="example-6">
+<h1>Example 6<a class="headerlink" href="#example-6" title="Permalink to this heading">#</a></h1>
+<p>Return the customer IDs of customers who have spent at least $110 with the staff member who has an ID of 2.
+Answer: 187 and 148.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT customer_id, sum(amount) AS moneys
+FROM payment
+WHERE staff_id = 2
+GROUP BY customer_id
+HAVING sum(amount) &gt;= 110;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/dvdrental
+2 rows affected.
+</pre></div>
+</div>
+<div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>customer_id</th>
+            <th>moneys</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>187</td>
+            <td>110.81</td>
+        </tr>
+        <tr>
+            <td>148</td>
+            <td>110.78</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="example-7">
+<h1>Example 7<a class="headerlink" href="#example-7" title="Permalink to this heading">#</a></h1>
+<p>How many films begin with the letter <strong>J</strong>?
+Answer: 20.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT count(*) AS start_with_J
+FROM film
+WHERE title LIKE &#39;J%&#39;;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/dvdrental
+1 rows affected.
+</pre></div>
+</div>
+<div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>start_with_j</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>20</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="example-8">
+<h1>Example 8<a class="headerlink" href="#example-8" title="Permalink to this heading">#</a></h1>
+<p>What customer has the highest customer ID whose name starts with <strong>E</strong> and has an address ID lower than 500?
+Answer: Eddie Tomlin.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT customer_id, first_name, last_name, address_id
+FROM customer
+WHERE first_name LIKE &#39;E%&#39; AND address_id &lt; 500
+ORDER BY customer_id DESC
+LIMIT 1;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/dvdrental
+1 rows affected.
+</pre></div>
+</div>
+<div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>customer_id</th>
+            <th>first_name</th>
+            <th>last_name</th>
+            <th>address_id</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>434</td>
+            <td>Eddie</td>
+            <td>Tomlin</td>
+            <td>439</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -995,19 +1002,12 @@ LIMIT 5;
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="aggregate-functions.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="group-by.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Aggregate Functions</p>
+            <p class="prev-next-title">The GROUP BY clause</p>
         </div>
-    </a>
-    <a class='right-next' id="next-link" href="having.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">The HAVING clause</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             </footer>
