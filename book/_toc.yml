@@ -13,4 +13,5 @@ chapters:
 - file: challenges1.ipynb
 - file: aggregate-functions.ipynb
 - file: group-by.ipynb
+- file: having.ipynb
 
