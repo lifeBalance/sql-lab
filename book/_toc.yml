@@ -16,4 +16,6 @@ chapters:
 - file: having.ipynb
 - file: inner_joins.ipynb
 - file: joins_overview.ipynb
+- file: create_databases_tables.ipynb
+
 
