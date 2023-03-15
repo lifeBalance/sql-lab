@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>The HAVING clause &#8212; SQL Lab</title>
+    <title>Joins Overview &#8212; SQL Lab</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -51,12 +51,10 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="The JOIN clause (Inner Joins)" href="inner_joins.html" />
-    <link rel="prev" title="The GROUP BY clause" href="group-by.html" />
+    <link rel="next" title="Create Databases and Tables" href="create_databases_tables.html" />
+    <link rel="prev" title="The JOIN clause (Inner Joins)" href="inner_joins.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en">
     
@@ -162,8 +160,8 @@ const thebe_selector_output = ".output, .cell_output"
    The GROUP BY clause
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="having.html">
    The HAVING clause
   </a>
  </li>
@@ -172,8 +170,8 @@ const thebe_selector_output = ".output, .cell_output"
    The JOIN clause (Inner Joins)
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="joins_overview.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Joins Overview
   </a>
  </li>
@@ -241,7 +239,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/having.ipynb"
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/joins_overview.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -301,7 +299,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fhaving.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fjoins_overview.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -329,7 +327,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="_sources/having.ipynb"
+        <a href="_sources/joins_overview.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -388,50 +386,44 @@ title="Print to PDF"
     </div>
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   The HAVING clause
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-a-test-database">
+   Create a Test database
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#example-1">
-   Example 1
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-tables">
+   Create Tables
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#example-2">
-   Example 2
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#inner-join">
+   INNER JOIN
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#example-3">
-   Example 3
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#full-outer-join">
+   FULL OUTER JOIN
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#excluding-all-rows-with-common-values">
+     Excluding all rows with common values
+    </a>
+   </li>
+  </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#example-4">
-   Example 4
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#left-outer-join">
+   LEFT OUTER JOIN
   </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#example-5">
-   Example 5
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#example-6">
-   Example 6
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#example-7">
-   Example 7
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#example-8">
-   Example 8
-  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#excluding-all-rows-from-the-left">
+     Excluding all rows from the left
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -442,7 +434,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>The HAVING clause</h1>
+                <h1>Joins Overview</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -452,50 +444,44 @@ title="Print to PDF"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   The HAVING clause
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-a-test-database">
+   Create a Test database
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#example-1">
-   Example 1
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-tables">
+   Create Tables
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#example-2">
-   Example 2
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#inner-join">
+   INNER JOIN
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#example-3">
-   Example 3
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#full-outer-join">
+   FULL OUTER JOIN
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#excluding-all-rows-with-common-values">
+     Excluding all rows with common values
+    </a>
+   </li>
+  </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#example-4">
-   Example 4
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#left-outer-join">
+   LEFT OUTER JOIN
   </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#example-5">
-   Example 5
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#example-6">
-   Example 6
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#example-7">
-   Example 7
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#example-8">
-   Example 8
-  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#excluding-all-rows-from-the-left">
+     Excluding all rows from the left
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -507,10 +493,20 @@ title="Print to PDF"
                 
               <div>
                 
-  <div class="cell docutils container">
+  <section class="tex2jax_ignore mathjax_ignore" id="joins-overview">
+<h1>Joins Overview<a class="headerlink" href="#joins-overview" title="Permalink to this heading">#</a></h1>
+<p>So far, we’ve been using <code class="docutils literal notranslate"><span class="pre">INNER</span> <span class="pre">JOIN</span></code>, which it’s the most common used one, but there are more. We’ll be using the old <a class="reference external" href="https://blog.codinghorror.com/a-visual-explanation-of-sql-joins/">Jeff Atwood’s post</a> about SQL <a class="reference external" href="https://www.postgresql.org/docs/15/queries-table-expressions.html">joins</a> as a base for our explanation.</p>
+<section id="create-a-test-database">
+<h2>Create a Test database<a class="headerlink" href="#create-a-test-database" title="Permalink to this heading">#</a></h2>
+<p>Let’s create a database named <code class="docutils literal notranslate"><span class="pre">test_joins</span></code> so we can add a couple of tables to explain a few more SQL joins. Open the terminal and run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">createdb</span> <span class="o">-</span><span class="n">h</span> <span class="n">localhost</span> <span class="o">-</span><span class="n">p</span> <span class="mi">5432</span> <span class="o">-</span><span class="n">U</span> <span class="n">bob</span> <span class="n">test_joins</span>
+</pre></div>
+</div>
+<p>Now let’s create a connection to this new database:</p>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sqlalchemy</span>
-<span class="n">engine</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;postgresql://bob:1234@localhost:5432/dvdrental&#39;</span><span class="p">)</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;postgresql://bob:1234@localhost:5432/test_joins&#39;</span><span class="p">)</span>
 <span class="n">engine</span><span class="o">.</span><span class="n">execution_options</span><span class="p">(</span><span class="n">isolation_level</span><span class="o">=</span><span class="s2">&quot;AUTOCOMMIT&quot;</span><span class="p">)</span>
 <span class="o">%</span><span class="k">load_ext</span> sql
 <span class="o">%</span><span class="k">sql</span> $engine.url
@@ -518,477 +514,470 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Connected: bob@dvdrental&#39;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Connected: bob@test_joins&#39;
 </pre></div>
 </div>
 </div>
 </div>
-<section class="tex2jax_ignore mathjax_ignore" id="the-having-clause">
-<h1>The HAVING clause<a class="headerlink" href="#the-having-clause" title="Permalink to this heading">#</a></h1>
-<p>The <a class="reference external" href="https://www.postgresql.org/docs/15/queries-table-expressions.html#QUERIES-GROUP">HAVING</a> clause is used in conjuction with the <code class="docutils literal notranslate"><span class="pre">GROUP</span> <span class="pre">BY</span></code> clause to filter grouped rows that do not satisfy a given condition. The basic syntax looks like this:</p>
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">column_1</span><span class="p">,</span><span class="w"> </span><span class="n">aggregate_fuction</span><span class="p">(</span><span class="n">column_2</span><span class="p">)</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="w"></span>
-<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">column_1</span><span class="w"></span>
-<span class="k">HAVING</span><span class="w"> </span><span class="n">condition</span><span class="p">;</span><span class="w"></span>
-</pre></div>
-</div>
-<p>The <code class="docutils literal notranslate"><span class="pre">HAVING</span></code> clause set the condition for the grouped rows created once the <code class="docutils literal notranslate"><span class="pre">GROUP</span> <span class="pre">BY</span></code> clause has been applied, whereas the <code class="docutils literal notranslate"><span class="pre">WHERE</span></code> clause sets the condition to filter the rows before the <code class="docutils literal notranslate"><span class="pre">GROUP</span> <span class="pre">BY</span></code> statement has been applied.</p>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="example-1">
-<h1>Example 1<a class="headerlink" href="#example-1" title="Permalink to this heading">#</a></h1>
-<p>Let’s say we have a query to find the 10 best customers:</p>
+<section id="create-tables">
+<h2>Create Tables<a class="headerlink" href="#create-tables" title="Permalink to this heading">#</a></h2>
+<p>Now let’s add a couple of tables to <code class="docutils literal notranslate"><span class="pre">test_joins</span></code>. The first:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
-SELECT customer_id, sum(amount) AS moneys
-FROM payment
-GROUP BY customer_id
-ORDER BY moneys DESC
-LIMIT 10;
+CREATE TABLE &quot;TableA&quot; (
+    id serial PRIMARY KEY,
+	name VARCHAR ( 50 ) UNIQUE NOT NULL
+);
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/dvdrental
-10 rows affected.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/test_joins
+Done.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s check that <code class="docutils literal notranslate"><span class="pre">TableA</span></code> has been created:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT * FROM &quot;TableA&quot; WHERE false;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/test_joins
+0 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
     <thead>
         <tr>
-            <th>customer_id</th>
-            <th>moneys</th>
+            <th>id</th>
+            <th>name</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>148</td>
-            <td>211.55</td>
-        </tr>
-        <tr>
-            <td>526</td>
-            <td>208.58</td>
-        </tr>
-        <tr>
-            <td>178</td>
-            <td>194.61</td>
-        </tr>
-        <tr>
-            <td>137</td>
-            <td>191.62</td>
-        </tr>
-        <tr>
-            <td>144</td>
-            <td>189.60</td>
-        </tr>
-        <tr>
-            <td>459</td>
-            <td>183.63</td>
-        </tr>
-        <tr>
-            <td>181</td>
-            <td>167.67</td>
-        </tr>
-        <tr>
-            <td>410</td>
-            <td>167.62</td>
-        </tr>
-        <tr>
-            <td>236</td>
-            <td>166.61</td>
-        </tr>
-        <tr>
-            <td>403</td>
-            <td>162.67</td>
-        </tr>
     </tbody>
 </table></div></div>
 </div>
-<p>But now, we want to find out the customers who have spent a total within a given range, let’s say between <span class="math notranslate nohighlight">\(170 and \)</span>200:</p>
+<p>Now let’s insert some data into <code class="docutils literal notranslate"><span class="pre">TableA</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
-SELECT customer_id, sum(amount) AS moneys
-FROM payment
-GROUP BY customer_id
-HAVING sum(amount) BETWEEN 170 AND 200;
+INSERT INTO
+    &quot;TableA&quot; (name)
+VALUES
+    (&#39;Pirate&#39;),
+    (&#39;Monkey&#39;),
+    (&#39;Ninja&#39;),
+    (&#39;Spaguetti&#39;);
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/dvdrental
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/test_joins
+4 rows affected.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s check the data has been properly inserted:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT * FROM &quot;TableA&quot;;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/test_joins
 4 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
     <thead>
         <tr>
-            <th>customer_id</th>
-            <th>moneys</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>144</td>
-            <td>189.60</td>
-        </tr>
-        <tr>
-            <td>178</td>
-            <td>194.61</td>
-        </tr>
-        <tr>
-            <td>459</td>
-            <td>183.63</td>
-        </tr>
-        <tr>
-            <td>137</td>
-            <td>191.62</td>
-        </tr>
-    </tbody>
-</table></div></div>
-</div>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="example-2">
-<h1>Example 2<a class="headerlink" href="#example-2" title="Permalink to this heading">#</a></h1>
-<p>Let’s say we have a query to find out the amount of customers if all of our store locations:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
-SELECT store_id, count(*) AS customers
-FROM customer
-GROUP BY store_id;
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/dvdrental
-2 rows affected.
-</pre></div>
-</div>
-<div class="output text_html"><table>
-    <thead>
-        <tr>
-            <th>store_id</th>
-            <th>customers</th>
+            <th>id</th>
+            <th>name</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>1</td>
-            <td>326</td>
+            <td>Pirate</td>
         </tr>
         <tr>
             <td>2</td>
-            <td>273</td>
+            <td>Monkey</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Ninja</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Spaguetti</td>
         </tr>
     </tbody>
 </table></div></div>
 </div>
-<p>In this case we have only two stores but let’s imagine we have a lot of them, and we want to see only the stores that have 300 customers or more:</p>
+<p>Great, let’s do something similar for <code class="docutils literal notranslate"><span class="pre">TableB</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
-SELECT store_id, count(*) AS customers
-FROM customer
-GROUP BY store_id
-HAVING count(*) &gt; 300;
+CREATE TABLE &quot;TableB&quot; (
+    id serial PRIMARY KEY,
+	name VARCHAR ( 50 ) UNIQUE NOT NULL
+);
+
+INSERT INTO
+    &quot;TableB&quot; (name)
+VALUES
+    (&#39;Rutabaga&#39;),
+    (&#39;Pirate&#39;),
+    (&#39;Darth Vader&#39;),
+    (&#39;Ninja&#39;)
+RETURNING *;
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/dvdrental
-1 rows affected.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/test_joins
+Done.
+4 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
     <thead>
         <tr>
-            <th>store_id</th>
-            <th>customers</th>
+            <th>id</th>
+            <th>name</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>1</td>
-            <td>326</td>
+            <td>Rutabaga</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Pirate</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Darth Vader</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Ninja</td>
         </tr>
     </tbody>
 </table></div></div>
 </div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="example-3">
-<h1>Example 3<a class="headerlink" href="#example-3" title="Permalink to this heading">#</a></h1>
-<p>Let’s say we want to see what’s the average rental rate of only a few movie ratings:</p>
+<section id="inner-join">
+<h2>INNER JOIN<a class="headerlink" href="#inner-join" title="Permalink to this heading">#</a></h2>
+<p>Let’s refresh our knowledge doing an <a class="reference external" href="https://www.postgresql.org/docs/15/queries-table-expressions.html">INNER JOIN</a> on the <code class="docutils literal notranslate"><span class="pre">name</span></code> column:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
-SELECT rating, round(avg(rental_rate), 2) AS avg_rate
-FROM film
-WHERE rating IN (&#39;R&#39;, &#39;G&#39;, &#39;PG&#39;)
-GROUP BY rating;
+SELECT * FROM &quot;TableA&quot;
+INNER JOIN &quot;TableB&quot;
+ON &quot;TableA&quot;.name = &quot;TableB&quot;.name;
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/dvdrental
-3 rows affected.
-</pre></div>
-</div>
-<div class="output text_html"><table>
-    <thead>
-        <tr>
-            <th>rating</th>
-            <th>avg_rate</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>G</td>
-            <td>2.89</td>
-        </tr>
-        <tr>
-            <td>PG</td>
-            <td>3.05</td>
-        </tr>
-        <tr>
-            <td>R</td>
-            <td>2.94</td>
-        </tr>
-    </tbody>
-</table></div></div>
-</div>
-<p>But we want to see only the ratings with average rental rate below 3 bucks:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
-SELECT rating, round(avg(rental_rate), 2) AS avg_rate
-FROM film
-WHERE rating IN (&#39;R&#39;, &#39;G&#39;, &#39;PG&#39;)
-GROUP BY rating
-HAVING round(avg(rental_rate), 2) &lt; 3;
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/dvdrental
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/test_joins
 2 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
     <thead>
         <tr>
-            <th>rating</th>
-            <th>avg_rate</th>
+            <th>id</th>
+            <th>name</th>
+            <th>id_1</th>
+            <th>name_1</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>G</td>
-            <td>2.89</td>
+            <td>1</td>
+            <td>Pirate</td>
+            <td>2</td>
+            <td>Pirate</td>
         </tr>
         <tr>
-            <td>R</td>
-            <td>2.94</td>
+            <td>3</td>
+            <td>Ninja</td>
+            <td>4</td>
+            <td>Ninja</td>
         </tr>
     </tbody>
 </table></div></div>
 </div>
+<p>As you can see, <code class="docutils literal notranslate"><span class="pre">INNER</span> <span class="pre">JOIN</span></code> produces only the set of records that match in both <code class="docutils literal notranslate"><span class="pre">TableA</span></code> and <code class="docutils literal notranslate"><span class="pre">TableB</span></code>, meaning those rows where the column <code class="docutils literal notranslate"><span class="pre">name</span></code> have the same value.</p>
+<blockquote>
+<div><p>By the way, since the <code class="docutils literal notranslate"><span class="pre">INNER</span> <span class="pre">JOIN</span></code> statement is the default type of join, sometimes you’ll see it written just as <code class="docutils literal notranslate"><span class="pre">JOIN</span></code>.</p>
+</div></blockquote>
+<p>Quite often, <span class="xref myst">Venn diagrams</span> are used to explain SQL joins. The following one is supposed to describe the inner join:</p>
+<p><img alt="inner join" src="_images/inner_join.png" /></p>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="example-4">
-<h1>Example 4<a class="headerlink" href="#example-4" title="Permalink to this heading">#</a></h1>
-<p>We want to get a list of customer ids of those customers who have made at least a total of 40 transactions (we may want to offer them our platinum membership).</p>
+<section id="full-outer-join">
+<h2>FULL OUTER JOIN<a class="headerlink" href="#full-outer-join" title="Permalink to this heading">#</a></h2>
+<p>A <a class="reference external" href="https://www.postgresql.org/docs/15/queries-table-expressions.html">FULL OUTER JOIN</a> produces the set of <strong>all rows</strong> from both <code class="docutils literal notranslate"><span class="pre">TableA</span></code> and <code class="docutils literal notranslate"><span class="pre">Table</span> <span class="pre">B</span></code> where:</p>
+<ul class="simple">
+<li><p>Rows with matching values are paired on the column we’re using for the join.</p></li>
+<li><p>Null for those rows where the column used for the join has no match in the joined table.</p></li>
+</ul>
+<p>Let’s see an example:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
-SELECT customer_id, count(payment_id) AS total_transations
-FROM payment
-GROUP BY customer_id
-HAVING count(payment_id) &gt;= 40;
+SELECT * FROM &quot;TableA&quot;
+FULL OUTER JOIN &quot;TableB&quot;
+ON &quot;TableA&quot;.name = &quot;TableB&quot;.name;
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/dvdrental
-3 rows affected.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/test_joins
+6 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
     <thead>
         <tr>
-            <th>customer_id</th>
-            <th>total_transations</th>
+            <th>id</th>
+            <th>name</th>
+            <th>id_1</th>
+            <th>name_1</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>144</td>
-            <td>40</td>
+            <td>1</td>
+            <td>Pirate</td>
+            <td>2</td>
+            <td>Pirate</td>
         </tr>
         <tr>
-            <td>526</td>
-            <td>42</td>
+            <td>2</td>
+            <td>Monkey</td>
+            <td>None</td>
+            <td>None</td>
         </tr>
         <tr>
-            <td>148</td>
-            <td>45</td>
+            <td>3</td>
+            <td>Ninja</td>
+            <td>4</td>
+            <td>Ninja</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Spaguetti</td>
+            <td>None</td>
+            <td>None</td>
+        </tr>
+        <tr>
+            <td>None</td>
+            <td>None</td>
+            <td>3</td>
+            <td>Darth Vader</td>
+        </tr>
+        <tr>
+            <td>None</td>
+            <td>None</td>
+            <td>1</td>
+            <td>Rutabaga</td>
         </tr>
     </tbody>
 </table></div></div>
 </div>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="example-5">
-<h1>Example 5<a class="headerlink" href="#example-5" title="Permalink to this heading">#</a></h1>
-<p>When grouped by <code class="docutils literal notranslate"><span class="pre">rating</span></code>, what movie ratings have an average rental duration of more than 5 days?</p>
+<blockquote>
+<div><p>Note that we’re getting <a class="reference external" href="https://docs.python.org/3/library/constants.html?highlight=none#None">None</a> instead of <code class="docutils literal notranslate"><span class="pre">null</span></code>, because we’re using <a class="reference external" href="https://www.sqlalchemy.org/">Alchemy</a> to connect to the database.</p>
+</div></blockquote>
+<p>For this type of join, the following diagram is used:</p>
+<p><img alt="full outer join" src="_images/full_outer_joins.png" /></p>
+<section id="excluding-all-rows-with-common-values">
+<h3>Excluding all rows with common values<a class="headerlink" href="#excluding-all-rows-with-common-values" title="Permalink to this heading">#</a></h3>
+<p>What if we’re interested in those rows which have no corresponding values on the column we’re using to do the join? Check this out:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
-SELECT rating, round(avg(rental_duration), 2) AS avg_rental_duration
-FROM film
-GROUP BY rating
-HAVING avg(rental_duration) &gt; 5;
+SELECT * FROM &quot;TableA&quot;
+FULL OUTER JOIN &quot;TableB&quot;
+ON &quot;TableA&quot;.name = &quot;TableB&quot;.name
+WHERE &quot;TableA&quot;.id IS null
+OR &quot;TableB&quot;.id IS null;
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/dvdrental
-3 rows affected.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/test_joins
+4 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
     <thead>
         <tr>
-            <th>rating</th>
-            <th>avg_rental_duration</th>
+            <th>id</th>
+            <th>name</th>
+            <th>id_1</th>
+            <th>name_1</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>PG</td>
-            <td>5.08</td>
+            <td>2</td>
+            <td>Monkey</td>
+            <td>None</td>
+            <td>None</td>
         </tr>
         <tr>
-            <td>PG-13</td>
-            <td>5.05</td>
+            <td>4</td>
+            <td>Spaguetti</td>
+            <td>None</td>
+            <td>None</td>
         </tr>
         <tr>
-            <td>NC-17</td>
-            <td>5.14</td>
+            <td>None</td>
+            <td>None</td>
+            <td>3</td>
+            <td>Darth Vader</td>
+        </tr>
+        <tr>
+            <td>None</td>
+            <td>None</td>
+            <td>1</td>
+            <td>Rutabaga</td>
         </tr>
     </tbody>
 </table></div></div>
 </div>
+<p>As you can see, we’re excluding all rows with matching values on <code class="docutils literal notranslate"><span class="pre">name</span></code>. For this type of join, the following diagram is used:</p>
+<p><img alt="full outer_where join" src="_images/full_outer_where_joins.png" /></p>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="example-6">
-<h1>Example 6<a class="headerlink" href="#example-6" title="Permalink to this heading">#</a></h1>
-<p>Return the customer IDs of customers who have spent at least $110 with the staff member who has an ID of 2.
-Answer: 187 and 148.</p>
+</section>
+<section id="left-outer-join">
+<h2>LEFT OUTER JOIN<a class="headerlink" href="#left-outer-join" title="Permalink to this heading">#</a></h2>
+<p>In a <span class="xref myst">LEFT OUTER JOIN</span> <strong>all rows</strong> from <code class="docutils literal notranslate"><span class="pre">TableA</span></code> are retrieved, and only the rows  of <code class="docutils literal notranslate"><span class="pre">Table</span> <span class="pre">B</span></code> with matching values on the column we’re using for the join. All the rows of <code class="docutils literal notranslate"><span class="pre">TableA</span></code> which have no match will be paired with a <code class="docutils literal notranslate"><span class="pre">null</span></code> on the right. For example:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
-SELECT customer_id, sum(amount) AS moneys
-FROM payment
-WHERE staff_id = 2
-GROUP BY customer_id
-HAVING sum(amount) &gt;= 110;
+SELECT * FROM &quot;TableA&quot;
+LEFT OUTER JOIN &quot;TableB&quot;
+ON &quot;TableA&quot;.name = &quot;TableB&quot;.name;
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/dvdrental
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/test_joins
+4 rows affected.
+</pre></div>
+</div>
+<div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>id_1</th>
+            <th>name_1</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>Pirate</td>
+            <td>2</td>
+            <td>Pirate</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Monkey</td>
+            <td>None</td>
+            <td>None</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Ninja</td>
+            <td>4</td>
+            <td>Ninja</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Spaguetti</td>
+            <td>None</td>
+            <td>None</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+<p>For this type of join, the following diagram is used:</p>
+<p><img alt="left outer join" src="_images/left_outer_joins.png" /></p>
+<section id="excluding-all-rows-from-the-left">
+<h3>Excluding all rows from the left<a class="headerlink" href="#excluding-all-rows-from-the-left" title="Permalink to this heading">#</a></h3>
+<p>What if we’re interested in those records from <code class="docutils literal notranslate"><span class="pre">TableA</span></code> that have no corresponding record in <code class="docutils literal notranslate"><span class="pre">TableB</span></code>? Check this out:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT * FROM &quot;TableA&quot;
+LEFT OUTER JOIN &quot;TableB&quot;
+ON &quot;TableA&quot;.name = &quot;TableB&quot;.name
+WHERE &quot;TableB&quot;.name IS null;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/test_joins
 2 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
     <thead>
         <tr>
-            <th>customer_id</th>
-            <th>moneys</th>
+            <th>id</th>
+            <th>name</th>
+            <th>id_1</th>
+            <th>name_1</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>187</td>
-            <td>110.81</td>
+            <td>2</td>
+            <td>Monkey</td>
+            <td>None</td>
+            <td>None</td>
         </tr>
         <tr>
-            <td>148</td>
-            <td>110.78</td>
+            <td>4</td>
+            <td>Spaguetti</td>
+            <td>None</td>
+            <td>None</td>
         </tr>
     </tbody>
 </table></div></div>
 </div>
+<p>As you can see, thanks to the use of the <code class="docutils literal notranslate"><span class="pre">WHERE</span></code> clause, we’ve achieved two things:</p>
+<ul class="simple">
+<li><p>Get the rows of <code class="docutils literal notranslate"><span class="pre">TableA</span></code> with no match in <code class="docutils literal notranslate"><span class="pre">TableB</span></code>.</p></li>
+<li><p>Exclude all results from the table to the right (in this case <code class="docutils literal notranslate"><span class="pre">TableB</span></code>).</p></li>
+</ul>
+<p>For this type of join, the following diagram is used:</p>
+<p><img alt="left outer_where join" src="_images/left_outer_where_joins.png" /></p>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="example-7">
-<h1>Example 7<a class="headerlink" href="#example-7" title="Permalink to this heading">#</a></h1>
-<p>How many films begin with the letter <strong>J</strong>?
-Answer: 20.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
-SELECT count(*) AS start_with_J
-FROM film
-WHERE title LIKE &#39;J%&#39;;
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/dvdrental
-1 rows affected.
-</pre></div>
-</div>
-<div class="output text_html"><table>
-    <thead>
-        <tr>
-            <th>start_with_j</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>20</td>
-        </tr>
-    </tbody>
-</table></div></div>
-</div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="example-8">
-<h1>Example 8<a class="headerlink" href="#example-8" title="Permalink to this heading">#</a></h1>
-<p>What customer has the highest customer ID whose name starts with <strong>E</strong> and has an address ID lower than 500?
-Answer: Eddie Tomlin.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
-SELECT customer_id, first_name, last_name, address_id
-FROM customer
-WHERE first_name LIKE &#39;E%&#39; AND address_id &lt; 500
-ORDER BY customer_id DESC
-LIMIT 1;
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/dvdrental
-1 rows affected.
-</pre></div>
-</div>
-<div class="output text_html"><table>
-    <thead>
-        <tr>
-            <th>customer_id</th>
-            <th>first_name</th>
-            <th>last_name</th>
-            <th>address_id</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>434</td>
-            <td>Eddie</td>
-            <td>Tomlin</td>
-            <td>439</td>
-        </tr>
-    </tbody>
-</table></div></div>
-</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1018,17 +1007,17 @@ LIMIT 1;
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="group-by.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="inner_joins.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">The GROUP BY clause</p>
+            <p class="prev-next-title">The JOIN clause (Inner Joins)</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="inner_joins.html" title="next page">
+    <a class='right-next' id="next-link" href="create_databases_tables.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">The JOIN clause (Inner Joins)</p>
+        <p class="prev-next-title">Create Databases and Tables</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

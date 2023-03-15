@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Loading a sample Database &#8212; SQL Lab</title>
+    <title>Create Databases and Tables &#8212; SQL Lab</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -53,8 +53,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Metacommands" href="meta-commands.html" />
-    <link rel="prev" title="Setting up the Postgres Connection" href="setup.html" />
+    <link rel="prev" title="Joins Overview" href="joins_overview.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en">
     
@@ -120,8 +119,8 @@ const thebe_selector_output = ".output, .cell_output"
    Setting up the Postgres Connection
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="loading_dvdrental.html">
    Loading a sample Database
   </a>
  </li>
@@ -175,8 +174,8 @@ const thebe_selector_output = ".output, .cell_output"
    Joins Overview
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="create_databases_tables.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Create Databases and Tables
   </a>
  </li>
@@ -231,6 +230,35 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/create_databases_tables.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -270,7 +298,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Floading_dvdrental.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcreate_databases_tables.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -298,7 +326,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="_sources/loading_dvdrental.md"
+        <a href="_sources/create_databases_tables.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -309,7 +337,7 @@ title="Download source file"
 <span class="headerbtn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="headerbtn__text-container">.md</span>
+<span class="headerbtn__text-container">.ipynb</span>
 </a>
 
       </li>
@@ -358,13 +386,13 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#create-a-database">
-   Create a Database
+  <a class="reference internal nav-link" href="#create-a-test-database">
+   Create a Test database
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#restore-data">
-   Restore data
+  <a class="reference internal nav-link" href="#create-tables">
+   Create Tables
   </a>
  </li>
 </ul>
@@ -376,7 +404,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Loading a sample Database</h1>
+                <h1>Create Databases and Tables</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -387,13 +415,13 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#create-a-database">
-   Create a Database
+  <a class="reference internal nav-link" href="#create-a-test-database">
+   Create a Test database
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#restore-data">
-   Restore data
+  <a class="reference internal nav-link" href="#create-tables">
+   Create Tables
   </a>
  </li>
 </ul>
@@ -406,41 +434,24 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="loading-a-sample-database">
-<h1>Loading a sample Database<a class="headerlink" href="#loading-a-sample-database" title="Permalink to this heading">#</a></h1>
-<p>To practice our SQL-fu, we’ll be using a sample database named <code class="docutils literal notranslate"><span class="pre">dvdrental</span></code> downloaded from <a class="reference external" href="https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/">here</a>. This database can be found online in several places, usually as a <a class="reference external" href="https://en.wikipedia.org/wiki/ZIP_(file_format)">zip file</a> which we have to extract. The result is a <a class="reference external" href="https://en.wikipedia.org/wiki/Tar_(computing)">tar file</a> that we’ll be loading into our database using <a class="reference external" href="https://www.postgresql.org/docs/current/app-pgrestore.html">pg_restore</a>.</p>
-<blockquote>
-<div><p>You should find the <code class="docutils literal notranslate"><span class="pre">dvdrental.tar</span></code> file in the repository files.</p>
-</div></blockquote>
-<section id="create-a-database">
-<h2>Create a Database<a class="headerlink" href="#create-a-database" title="Permalink to this heading">#</a></h2>
-<p>First thing we have to do is to create a database named <code class="docutils literal notranslate"><span class="pre">dvdrental</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">createdb</span> <span class="o">-</span><span class="n">h</span> <span class="n">localhost</span> <span class="o">-</span><span class="n">p</span> <span class="mi">5432</span> <span class="o">-</span><span class="n">U</span> <span class="n">bob</span> <span class="n">dvdrental</span>
-</pre></div>
-</div>
-<blockquote>
-<div><p>You’ll be <strong>interactively</strong> prompted for a password, so run the command above in a <strong>terminal</strong>.</p>
-</div></blockquote>
-</section>
-<section id="restore-data">
-<h2>Restore data<a class="headerlink" href="#restore-data" title="Permalink to this heading">#</a></h2>
-<p>Once the database has been created, we can <strong>restore</strong> the data from the <code class="docutils literal notranslate"><span class="pre">dvdrental.tar</span></code> file. We’ll be using the <code class="docutils literal notranslate"><span class="pre">pg_restore</span></code> command, with several options:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="create-databases-and-tables">
+<h1>Create Databases and Tables<a class="headerlink" href="#create-databases-and-tables" title="Permalink to this heading">#</a></h1>
+<p>In this section we’ll go over creating databases and tables. We’ll also cover the types of data that we can store in these tables:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">-c</span></code> (short for <code class="docutils literal notranslate"><span class="pre">--clean</span></code>) is for dropping database objects before recreating them.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">-d</span></code> (short for <code class="docutils literal notranslate"><span class="pre">--dbname</span></code>) is for restoring the data directly into the database used as argument (the <code class="docutils literal notranslate"><span class="pre">dvdrental</span></code> we created before).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--no-owner</span></code>, because I was getting an error related to the user <code class="docutils literal notranslate"><span class="pre">postgres</span></code> (maybe the data dump was created with this user).</p></li>
+<li><p><span class="xref myst">Boolean</span></p></li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pg_restore</span> <span class="o">-</span><span class="n">h</span> <span class="n">localhost</span> <span class="o">-</span><span class="n">U</span> <span class="n">bob</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">owner</span> <span class="o">-</span><span class="n">c</span> <span class="o">-</span><span class="n">d</span> <span class="n">dvdrental</span> <span class="o">./</span><span class="n">dvdrental</span><span class="o">.</span><span class="n">tar</span>
+<p>So far, we’ve been using <code class="docutils literal notranslate"><span class="pre">INNER</span> <span class="pre">JOIN</span></code>, which it’s the most common used one, but there are more. We’ll be using the old <a class="reference external" href="https://blog.codinghorror.com/a-visual-explanation-of-sql-joins/">Jeff Atwood’s post</a> about SQL joins (a classic), as a base for our explanation.</p>
+<section id="create-a-test-database">
+<h2>Create a Test database<a class="headerlink" href="#create-a-test-database" title="Permalink to this heading">#</a></h2>
+<p>Let’s create a database named <code class="docutils literal notranslate"><span class="pre">test</span></code> so we can add a couple of tables to explain a few more SQL joins. Open the terminal and run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">createdb</span> <span class="o">-</span><span class="n">h</span> <span class="n">localhost</span> <span class="o">-</span><span class="n">p</span> <span class="mi">5432</span> <span class="o">-</span><span class="n">U</span> <span class="n">bob</span> <span class="n">test_joins</span>
 </pre></div>
 </div>
-<blockquote>
-<div><p>The command above will also run interactively, so that we can enter the <strong>password</strong> of <code class="docutils literal notranslate"><span class="pre">bob</span></code>.</p>
-</div></blockquote>
-<p>In my case, I had to run the command a second time, in order to get rid of some errors (the 2nd time it run smoothly).</p>
-<blockquote>
-<div><p>One thing I noticed about <code class="docutils literal notranslate"><span class="pre">sqlalchemy</span></code> is that once we create an engine for a database, we can’t use it connect to another database. If we wanted to connect to another database, we should create an additional engine for it.</p>
-</div></blockquote>
-<p>In the next section, we’ll see how to create a connection to the database, to run some commands on it.</p>
+<p>Now let’s create a connection to this new database:</p>
+</section>
+<section id="create-tables">
+<h2>Create Tables<a class="headerlink" href="#create-tables" title="Permalink to this heading">#</a></h2>
+<p>Now let’s add a couple of tables to <code class="docutils literal notranslate"><span class="pre">test_joins</span></code>. The first:</p>
 </section>
 </section>
 
@@ -471,19 +482,12 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="setup.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="joins_overview.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Setting up the Postgres Connection</p>
+            <p class="prev-next-title">Joins Overview</p>
         </div>
-    </a>
-    <a class='right-next' id="next-link" href="meta-commands.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Metacommands</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             </footer>
