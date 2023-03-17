@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>SQL Lab &#8212; SQL Lab</title>
+    <title>Mathematical functions &#8212; SQL Lab</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -53,7 +53,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Setting up the Postgres Connection" href="setup.html" />
+    <link rel="prev" title="Time/Date functions: Extract" href="date_time_functions.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en">
     
@@ -107,13 +107,13 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="bd-toc-item active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1 current active">
-                <a class="reference internal" href="#">
+            <li class="toctree-l1">
+                <a class="reference internal" href="README.html">
                     SQL Lab
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="setup.html">
    Setting up the Postgres Connection
@@ -175,11 +175,6 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="left_outer_joins.html">
-   LEFT OUTER JOIN
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="unions.html">
    Unions
   </a>
@@ -194,8 +189,8 @@ const thebe_selector_output = ".output, .cell_output"
    Time/Date functions: Extract
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="math_functions.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Mathematical functions
   </a>
  </li>
@@ -250,6 +245,35 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/math_functions.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -289,7 +313,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FREADME.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fmath_functions.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -317,7 +341,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="_sources/README.md"
+        <a href="_sources/math_functions.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -328,7 +352,7 @@ title="Download source file"
 <span class="headerbtn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="headerbtn__text-container">.md</span>
+<span class="headerbtn__text-container">.ipynb</span>
 </a>
 
       </li>
@@ -354,90 +378,23 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#setting-up-the-virtual-environment">
-   Setting up the virtual environment
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#installing-jupyter-lab">
-   Installing Jupyter Lab
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#launching-the-lab">
-   Launching the Lab
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#launching-postgres-and-pgadmin">
-   Launching Postgres and PgAdmin
-  </a>
- </li>
-</ul>
-
-    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>SQL Lab</h1>
+                <h1>Mathematical functions</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#setting-up-the-virtual-environment">
-   Setting up the virtual environment
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#installing-jupyter-lab">
-   Installing Jupyter Lab
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#launching-the-lab">
-   Launching the Lab
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#launching-postgres-and-pgadmin">
-   Launching Postgres and PgAdmin
-  </a>
- </li>
-</ul>
-
-                        </nav>
                     </div>
                 </div>
             </div>
@@ -445,61 +402,91 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="sql-lab">
-<h1>SQL Lab<a class="headerlink" href="#sql-lab" title="Permalink to this heading">#</a></h1>
-<p>This is a setup for learning SQL with the help of <a class="reference external" href="https://jupyter.org/">Jupyter</a> notebooks. The idea is to be able of executing SQL queries from the notebook against a <a class="reference external" href="https://www.postgresql.org">PostgreSQL</a> server. We need two ingredients to make this happen:</p>
-<ul class="simple">
-<li><p>Jupyter Lab, which will be running within a <a class="reference external" href="https://conda.io/projects/conda/en/latest/index.html">Conda</a> virtual environment.</p></li>
-<li><p>A <a class="reference external" href="https://jupyter.org/">PostgreSQL</a> server and <a class="reference external" href="https://www.postgresql.org">pgadmin</a>, which will be running in Docker containers.</p></li>
-</ul>
-<p>The <strong>original idea</strong> was to run PostgreSQL from within the Conda environment, but couldn’t make it work. Packages installed in such an environment, can’t work as system services, so I could only reach them from within the environment; they weren’t available when trying to reach them from, for example, <a class="reference external" href="https://www.pgadmin.org/">pgadmin</a> running in a Docker container.</p>
-<section id="setting-up-the-virtual-environment">
-<h2>Setting up the virtual environment<a class="headerlink" href="#setting-up-the-virtual-environment" title="Permalink to this heading">#</a></h2>
-<p>To create a virtual environment using Anaconda we run:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">create</span> <span class="o">--</span><span class="n">name</span> <span class="n">sql</span><span class="o">-</span><span class="n">lab</span>
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sqlalchemy</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;postgresql://bob:1234@localhost:5432/dvdrental&#39;</span><span class="p">)</span>
+<span class="n">engine</span><span class="o">.</span><span class="n">execution_options</span><span class="p">(</span><span class="n">isolation_level</span><span class="o">=</span><span class="s2">&quot;AUTOCOMMIT&quot;</span><span class="p">)</span>
+<span class="o">%</span><span class="k">load_ext</span> sql
+<span class="o">%</span><span class="k">sql</span> $engine.url
 </pre></div>
 </div>
-<blockquote>
-<div><p>These notes assume the <a class="reference external" href="https://conda.io/projects/conda/en/latest/index.html">Conda</a> package is <a class="reference external" href="https://docs.conda.io/projects/conda/en/stable/user-guide/install/index.html">installed</a> in our system.</p>
-</div></blockquote>
-<p>Let’s also create a folder to put the files (our database cluster and jupyter notebooks) we’ll be using on this environment:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">sql</span><span class="o">-</span><span class="n">lab</span>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Connected: bob@dvdrental&#39;
 </pre></div>
 </div>
-</section>
-<section id="installing-jupyter-lab">
-<h2>Installing Jupyter Lab<a class="headerlink" href="#installing-jupyter-lab" title="Permalink to this heading">#</a></h2>
-<p>For the Jupyter Lab with PostgreSQL set up, we’ll be needing <a class="reference external" href="https://jupyter.org/">Jupyter Lab</a> itself, and several dependencies. All the packages below should be installed in the Conda virtual environment, so make sure is activated.</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://anaconda.org/conda-forge/jupyterlab">jupyterlab</a>.</p></li>
-<li><p><a class="reference external" href="https://anaconda.org/conda-forge/theme-darcula">theme-darcula</a>, a cool theme for jupyter lab.</p></li>
-<li><p><a class="reference external" href="https://anaconda.org/conda-forge/ipython-sql">ipython-sql</a> to get SQL magic functions (<code class="docutils literal notranslate"><span class="pre">%sql</span></code>).</p></li>
-<li><p><a class="reference external" href="https://anaconda.org/conda-forge/pgspecial">pgspecial</a> so we can run Postgres <strong>metacommands</strong> (<code class="docutils literal notranslate"><span class="pre">\dt</span></code>).</p></li>
-<li><p><a class="reference external" href="https://anaconda.org/conda-forge/sqlalchemy">sqlalchemy</a> to create the connection to the database.</p></li>
-</ul>
-<p>Just follow the instructions in the links above to install the packages.</p>
-<p>Additionally, I installed:</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://anaconda.org/conda-forge/jupyter-book">jupyter-book</a>, to create the book you’re reading.</p></li>
-<li><p><a class="reference external" href="https://anaconda.org/conda-forge/ghp-import">ghp-import</a>, to publish our book to GitHub.</p></li>
-</ul>
-</section>
-<section id="launching-the-lab">
-<h2>Launching the Lab<a class="headerlink" href="#launching-the-lab" title="Permalink to this heading">#</a></h2>
-<p>Once everything is installed, we can run:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jupyter</span> <span class="n">lab</span>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="mathematical-functions">
+<h1>Mathematical functions<a class="headerlink" href="#mathematical-functions" title="Permalink to this heading">#</a></h1>
+<p>Postgres has support for all of the SQL <a class="reference external" href="https://www.postgresql.org/docs/current/functions-math.html">mathematical functions and operators</a>. Most of them work as you would expect, most of the times it’s about checking the documentation to see what’s available. Let’s see some basic example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT
+    payment_id, customer_id + rental_id AS new_id
+FROM payment
+ORDER BY payment_id
+LIMIT 10;
 </pre></div>
 </div>
-<p>That will start a local server, where we can reach the Jupyter lab interface. In the next section, we’ll go over how to create a connection to the database.</p>
-</section>
-<section id="launching-postgres-and-pgadmin">
-<h2>Launching Postgres and PgAdmin<a class="headerlink" href="#launching-postgres-and-pgadmin" title="Permalink to this heading">#</a></h2>
-<p>In order to launch Postgres and PgAdmin I wrote a couple targets in a <code class="docutils literal notranslate"><span class="pre">Makefile</span></code>. Check the <code class="docutils literal notranslate"><span class="pre">compose-postgres.yml</span></code> as well, to get familiar with both services.</p>
-<blockquote>
-<div><p>Something <strong>weird</strong> I experienced when creating connections to Postgres, was that I had to use <code class="docutils literal notranslate"><span class="pre">localhost</span></code> and not the name of the Docker service (<code class="docutils literal notranslate"><span class="pre">postgres</span></code>) in order to create connections to the database 🤔.</p>
-</div></blockquote>
-</section>
-<div class="toctree-wrapper compound">
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/dvdrental
+10 rows affected.
+</pre></div>
+</div>
+<div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>payment_id</th>
+            <th>new_id</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>17503</td>
+            <td>1861</td>
+        </tr>
+        <tr>
+            <td>17504</td>
+            <td>2119</td>
+        </tr>
+        <tr>
+            <td>17505</td>
+            <td>2190</td>
+        </tr>
+        <tr>
+            <td>17506</td>
+            <td>3170</td>
+        </tr>
+        <tr>
+            <td>17507</td>
+            <td>3471</td>
+        </tr>
+        <tr>
+            <td>17508</td>
+            <td>3723</td>
+        </tr>
+        <tr>
+            <td>17509</td>
+            <td>2532</td>
+        </tr>
+        <tr>
+            <td>17510</td>
+            <td>3256</td>
+        </tr>
+        <tr>
+            <td>17511</td>
+            <td>3423</td>
+        </tr>
+        <tr>
+            <td>17512</td>
+            <td>1890</td>
+        </tr>
+    </tbody>
+</table></div></div>
 </div>
 </section>
 
@@ -530,12 +517,12 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='right-next' id="next-link" href="setup.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Setting up the Postgres Connection</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+    <a class='left-prev' id="prev-link" href="date_time_functions.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Time/Date functions: Extract</p>
+        </div>
     </a>
 </div>
             </footer>

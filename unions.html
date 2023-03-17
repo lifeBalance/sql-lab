@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>SQL Lab &#8212; SQL Lab</title>
+    <title>Unions &#8212; SQL Lab</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -53,7 +53,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Setting up the Postgres Connection" href="setup.html" />
+    <link rel="next" title="Create Databases and Tables" href="create_databases_tables.html" />
+    <link rel="prev" title="The JOIN clause (Inner Joins)" href="inner_joins.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en">
     
@@ -107,13 +108,13 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="bd-toc-item active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1 current active">
-                <a class="reference internal" href="#">
+            <li class="toctree-l1">
+                <a class="reference internal" href="README.html">
                     SQL Lab
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="setup.html">
    Setting up the Postgres Connection
@@ -174,13 +175,8 @@ const thebe_selector_output = ".output, .cell_output"
    The JOIN clause (Inner Joins)
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="left_outer_joins.html">
-   LEFT OUTER JOIN
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="unions.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Unions
   </a>
  </li>
@@ -250,6 +246,35 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/unions.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -289,7 +314,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FREADME.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Funions.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -317,7 +342,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="_sources/README.md"
+        <a href="_sources/unions.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -328,7 +353,7 @@ title="Download source file"
 <span class="headerbtn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="headerbtn__text-container">.md</span>
+<span class="headerbtn__text-container">.ipynb</span>
 </a>
 
       </li>
@@ -377,23 +402,8 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#setting-up-the-virtual-environment">
-   Setting up the virtual environment
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#installing-jupyter-lab">
-   Installing Jupyter Lab
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#launching-the-lab">
-   Launching the Lab
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#launching-postgres-and-pgadmin">
-   Launching Postgres and PgAdmin
+  <a class="reference internal nav-link" href="#ordering-the-results">
+   Ordering the results
   </a>
  </li>
 </ul>
@@ -405,7 +415,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>SQL Lab</h1>
+                <h1>Unions</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -416,23 +426,8 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#setting-up-the-virtual-environment">
-   Setting up the virtual environment
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#installing-jupyter-lab">
-   Installing Jupyter Lab
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#launching-the-lab">
-   Launching the Lab
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#launching-postgres-and-pgadmin">
-   Launching Postgres and PgAdmin
+  <a class="reference internal nav-link" href="#ordering-the-results">
+   Ordering the results
   </a>
  </li>
 </ul>
@@ -445,62 +440,227 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="sql-lab">
-<h1>SQL Lab<a class="headerlink" href="#sql-lab" title="Permalink to this heading">#</a></h1>
-<p>This is a setup for learning SQL with the help of <a class="reference external" href="https://jupyter.org/">Jupyter</a> notebooks. The idea is to be able of executing SQL queries from the notebook against a <a class="reference external" href="https://www.postgresql.org">PostgreSQL</a> server. We need two ingredients to make this happen:</p>
-<ul class="simple">
-<li><p>Jupyter Lab, which will be running within a <a class="reference external" href="https://conda.io/projects/conda/en/latest/index.html">Conda</a> virtual environment.</p></li>
-<li><p>A <a class="reference external" href="https://jupyter.org/">PostgreSQL</a> server and <a class="reference external" href="https://www.postgresql.org">pgadmin</a>, which will be running in Docker containers.</p></li>
-</ul>
-<p>The <strong>original idea</strong> was to run PostgreSQL from within the Conda environment, but couldn’t make it work. Packages installed in such an environment, can’t work as system services, so I could only reach them from within the environment; they weren’t available when trying to reach them from, for example, <a class="reference external" href="https://www.pgadmin.org/">pgadmin</a> running in a Docker container.</p>
-<section id="setting-up-the-virtual-environment">
-<h2>Setting up the virtual environment<a class="headerlink" href="#setting-up-the-virtual-environment" title="Permalink to this heading">#</a></h2>
-<p>To create a virtual environment using Anaconda we run:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">create</span> <span class="o">--</span><span class="n">name</span> <span class="n">sql</span><span class="o">-</span><span class="n">lab</span>
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sqlalchemy</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;postgresql://bob:1234@localhost:5432/test_joins&#39;</span><span class="p">)</span>
+<span class="n">engine</span><span class="o">.</span><span class="n">execution_options</span><span class="p">(</span><span class="n">isolation_level</span><span class="o">=</span><span class="s2">&quot;AUTOCOMMIT&quot;</span><span class="p">)</span>
+<span class="o">%</span><span class="k">load_ext</span> sql
+<span class="o">%</span><span class="k">sql</span> $engine.url
 </pre></div>
 </div>
-<blockquote>
-<div><p>These notes assume the <a class="reference external" href="https://conda.io/projects/conda/en/latest/index.html">Conda</a> package is <a class="reference external" href="https://docs.conda.io/projects/conda/en/stable/user-guide/install/index.html">installed</a> in our system.</p>
-</div></blockquote>
-<p>Let’s also create a folder to put the files (our database cluster and jupyter notebooks) we’ll be using on this environment:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">sql</span><span class="o">-</span><span class="n">lab</span>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Connected: bob@test_joins&#39;
 </pre></div>
 </div>
-</section>
-<section id="installing-jupyter-lab">
-<h2>Installing Jupyter Lab<a class="headerlink" href="#installing-jupyter-lab" title="Permalink to this heading">#</a></h2>
-<p>For the Jupyter Lab with PostgreSQL set up, we’ll be needing <a class="reference external" href="https://jupyter.org/">Jupyter Lab</a> itself, and several dependencies. All the packages below should be installed in the Conda virtual environment, so make sure is activated.</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://anaconda.org/conda-forge/jupyterlab">jupyterlab</a>.</p></li>
-<li><p><a class="reference external" href="https://anaconda.org/conda-forge/theme-darcula">theme-darcula</a>, a cool theme for jupyter lab.</p></li>
-<li><p><a class="reference external" href="https://anaconda.org/conda-forge/ipython-sql">ipython-sql</a> to get SQL magic functions (<code class="docutils literal notranslate"><span class="pre">%sql</span></code>).</p></li>
-<li><p><a class="reference external" href="https://anaconda.org/conda-forge/pgspecial">pgspecial</a> so we can run Postgres <strong>metacommands</strong> (<code class="docutils literal notranslate"><span class="pre">\dt</span></code>).</p></li>
-<li><p><a class="reference external" href="https://anaconda.org/conda-forge/sqlalchemy">sqlalchemy</a> to create the connection to the database.</p></li>
-</ul>
-<p>Just follow the instructions in the links above to install the packages.</p>
-<p>Additionally, I installed:</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://anaconda.org/conda-forge/jupyter-book">jupyter-book</a>, to create the book you’re reading.</p></li>
-<li><p><a class="reference external" href="https://anaconda.org/conda-forge/ghp-import">ghp-import</a>, to publish our book to GitHub.</p></li>
-</ul>
-</section>
-<section id="launching-the-lab">
-<h2>Launching the Lab<a class="headerlink" href="#launching-the-lab" title="Permalink to this heading">#</a></h2>
-<p>Once everything is installed, we can run:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jupyter</span> <span class="n">lab</span>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="unions">
+<h1>Unions<a class="headerlink" href="#unions" title="Permalink to this heading">#</a></h1>
+<p>The <a class="reference external" href="https://www.postgresql.org/docs/current/queries-union.html">UNION</a> operator allows us to combine the results of two or more <span class="xref myst">SELECT</span> statements into a single result set. The general syntax for combining two <code class="docutils literal notranslate"><span class="pre">SELECT</span></code> expressions would be:</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">column_1</span><span class="p">,</span><span class="w"> </span><span class="n">column_2</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">table_1</span><span class="w"></span>
+<span class="k">UNION</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">column_1</span><span class="p">,</span><span class="w"> </span><span class="n">column_2</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">table_2</span><span class="p">;</span><span class="w"></span>
 </pre></div>
 </div>
-<p>That will start a local server, where we can reach the Jupyter lab interface. In the next section, we’ll go over how to create a connection to the database.</p>
-</section>
-<section id="launching-postgres-and-pgadmin">
-<h2>Launching Postgres and PgAdmin<a class="headerlink" href="#launching-postgres-and-pgadmin" title="Permalink to this heading">#</a></h2>
-<p>In order to launch Postgres and PgAdmin I wrote a couple targets in a <code class="docutils literal notranslate"><span class="pre">Makefile</span></code>. Check the <code class="docutils literal notranslate"><span class="pre">compose-postgres.yml</span></code> as well, to get familiar with both services.</p>
-<blockquote>
-<div><p>Something <strong>weird</strong> I experienced when creating connections to Postgres, was that I had to use <code class="docutils literal notranslate"><span class="pre">localhost</span></code> and not the name of the Docker service (<code class="docutils literal notranslate"><span class="pre">postgres</span></code>) in order to create connections to the database 🤔.</p>
-</div></blockquote>
-</section>
-<div class="toctree-wrapper compound">
+<p>There are a couple of restrictions when using unions:</p>
+<ul class="simple">
+<li><p>Both queries must return the same number of columns.</p></li>
+<li><p>The corresponding columns in the queries must have compatible data types.</p></li>
+</ul>
+<p>Let’s see it in action with a couple of examples using the small database we used to explain joins.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT * name FROM &quot;TableA&quot;
+UNION
+SELECT * name FROM &quot;TableB&quot;;
+</pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/test_joins
+(psycopg2.errors.SyntaxError) syntax error at or near &quot;name&quot;
+LINE 1: SELECT * name FROM &quot;TableA&quot;
+                 ^
+
+[SQL: SELECT * name FROM &quot;TableA&quot;
+UNION
+SELECT * name FROM &quot;TableB&quot;;]
+(Background on this error at: https://sqlalche.me/e/14/f405)
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see, since both tables have the same number of columns and the data types in them are equal, we get all the rows in both tables without issue.</p>
+<section id="ordering-the-results">
+<h2>Ordering the results<a class="headerlink" href="#ordering-the-results" title="Permalink to this heading">#</a></h2>
+<p>By the way, the <code class="docutils literal notranslate"><span class="pre">UNION</span></code> operator may place the rows in the first query before, after or between the rows in the result set of the second query. That can easily be remedied using the <code class="docutils literal notranslate"><span class="pre">ORDER</span> <span class="pre">BY</span></code> clause:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT id, name FROM &quot;TableA&quot;
+UNION
+SELECT id, name FROM &quot;TableB&quot;
+ORDER BY id;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/test_joins
+8 rows affected.
+</pre></div>
+</div>
+<div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>Rutabaga</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Pirate</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Pirate</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Monkey</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Ninja</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Darth Vader</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Spaguetti</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Ninja</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>## UNION ALL
+The `UNION` operator removes all duplicate rows from the results, for example:
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  Cell In[4], line 2
+    The `UNION` operator removes all duplicate rows from the results, for example:
+        ^
+SyntaxError: invalid syntax
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT id name FROM &quot;TableA&quot;
+UNION
+SELECT id name FROM &quot;TableB&quot;;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   postgresql://bob:***@localhost:5432/dvdrental
+ * postgresql://bob:***@localhost:5432/test_joins
+4 rows affected.
+</pre></div>
+</div>
+<div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>name</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>4</td>
+        </tr>
+        <tr>
+            <td>1</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+<p>As you can see, we don’t get the rows for the <code class="docutils literal notranslate"><span class="pre">id</span></code> columns repeated. A way around that could be using <code class="docutils literal notranslate"><span class="pre">UNION</span> <span class="pre">ALL</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT id name FROM &quot;TableA&quot;
+UNION ALL
+SELECT id name FROM &quot;TableB&quot;;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   postgresql://bob:***@localhost:5432/dvdrental
+ * postgresql://bob:***@localhost:5432/test_joins
+8 rows affected.
+</pre></div>
+</div>
+<div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>name</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>4</td>
+        </tr>
+        <tr>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>4</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -530,10 +690,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='right-next' id="next-link" href="setup.html" title="next page">
+    <a class='left-prev' id="prev-link" href="inner_joins.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">The JOIN clause (Inner Joins)</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="create_databases_tables.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Setting up the Postgres Connection</p>
+        <p class="prev-next-title">Create Databases and Tables</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
