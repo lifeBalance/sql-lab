@@ -1,0 +1,981 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Subqueries &#8212; SQL Lab</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="String functions" href="../string_functions.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">SQL Lab</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../README.html">
+                    SQL Lab
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../setup.html">
+   Setting up the Postgres Connection
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../loading_dvdrental.html">
+   Loading a sample Database
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../meta-commands.html">
+   Metacommands
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sql_language.html">
+   About the SQL language
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../pg_admin.html">
+   pgAdmin
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../select-statement.html">
+   The SELECT statement
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../challenges1.html">
+   Examples I
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../aggregate-functions.html">
+   Aggregate Functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../group-by.html">
+   The GROUP BY clause
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../having.html">
+   The HAVING clause
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../joins_overview.html">
+   Joins Overview
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../inner_joins.html">
+   The JOIN clause (Inner Joins)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../left_outer_joins.html">
+   LEFT OUTER JOIN
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../unions.html">
+   Unions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../create_databases_tables.html">
+   Create Databases and Tables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../date_time_functions.html">
+   Time/Date functions: Extract
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../math_functions.html">
+   String functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../string_functions.html">
+   String functions
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Subqueries
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/subqueries/subqueries.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fsubqueries/subqueries.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/subqueries/subqueries.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#an-example">
+   An example
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#without-subqueries">
+     Without Subqueries
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#another-example">
+     Another Example
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Subqueries</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#an-example">
+   An example
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#without-subqueries">
+     Without Subqueries
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#another-example">
+     Another Example
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sqlalchemy</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;postgresql://bob:1234@localhost:5432/dvdrental&#39;</span><span class="p">)</span>
+<span class="n">engine</span><span class="o">.</span><span class="n">execution_options</span><span class="p">(</span><span class="n">isolation_level</span><span class="o">=</span><span class="s2">&quot;AUTOCOMMIT&quot;</span><span class="p">)</span>
+<span class="o">%</span><span class="k">load_ext</span> sql
+<span class="o">%</span><span class="k">sql</span> $engine.url
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Connected: bob@dvdrental&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="subqueries">
+<h1>Subqueries<a class="headerlink" href="#subqueries" title="Permalink to this heading">#</a></h1>
+<p>A subquery allows us to use multiple <span class="xref myst">SELECT</span> statements nested within each other. Think of it as having a query within a query. For example, imagine we want to list the names of the hotels with prices below average:</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"></span>
+<span class="w">    </span><span class="n">name</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"></span>
+<span class="w">    </span><span class="n">hotel</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">price</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="k">AVG</span><span class="w"> </span><span class="p">(</span><span class="n">price</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">hotel</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>In the query above, the subquery in parentheses (<code class="docutils literal notranslate"><span class="pre">SELECT</span> <span class="pre">AVG</span> <span class="pre">(price)</span> <span class="pre">FROM</span> <span class="pre">hotel</span></code>) allows us to get the average price of all rows in the <code class="docutils literal notranslate"><span class="pre">hotel</span></code> table. We use that value in the outer query to filter the hotel names whose price is below average.</p>
+<section id="an-example">
+<h2>An example<a class="headerlink" href="#an-example" title="Permalink to this heading">#</a></h2>
+<p>Let’s see an example similar to the one described above, but this time on the <code class="docutils literal notranslate"><span class="pre">dvdrental</span></code> database. Let’s say we want to list all the movies in the <code class="docutils literal notranslate"><span class="pre">film</span></code> database whose price is below average:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT film_id, title, rental_rate
+FROM film
+WHERE rental_rate &lt; (SELECT avg(rental_rate) FROM film)
+LIMIT 10;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/dvdrental
+10 rows affected.
+</pre></div>
+</div>
+<div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>film_id</th>
+            <th>title</th>
+            <th>rental_rate</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>Academy Dinosaur</td>
+            <td>0.99</td>
+        </tr>
+        <tr>
+            <td>11</td>
+            <td>Alamo Videotape</td>
+            <td>0.99</td>
+        </tr>
+        <tr>
+            <td>12</td>
+            <td>Alaska Phantom</td>
+            <td>0.99</td>
+        </tr>
+        <tr>
+            <td>213</td>
+            <td>Date Speed</td>
+            <td>0.99</td>
+        </tr>
+        <tr>
+            <td>14</td>
+            <td>Alice Fantasia</td>
+            <td>0.99</td>
+        </tr>
+        <tr>
+            <td>17</td>
+            <td>Alone Trip</td>
+            <td>0.99</td>
+        </tr>
+        <tr>
+            <td>18</td>
+            <td>Alter Victory</td>
+            <td>0.99</td>
+        </tr>
+        <tr>
+            <td>19</td>
+            <td>Amadeus Holy</td>
+            <td>0.99</td>
+        </tr>
+        <tr>
+            <td>23</td>
+            <td>Anaconda Confessions</td>
+            <td>0.99</td>
+        </tr>
+        <tr>
+            <td>26</td>
+            <td>Annie Identity</td>
+            <td>0.99</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+<p>We’ve used the result of the subquery <code class="docutils literal notranslate"><span class="pre">(SELECT</span> <span class="pre">avg(rental_rate)</span> <span class="pre">FROM</span> <span class="pre">film)</span></code> to filter the results of the outer query.</p>
+<section id="without-subqueries">
+<h3>Without Subqueries<a class="headerlink" href="#without-subqueries" title="Permalink to this heading">#</a></h3>
+<p>To better understand the benefit of using subqueries, let’s see how we could achieve the same result in two separate queries:</p>
+<p>As you can see, we get a lot of decimals, which we can <code class="docutils literal notranslate"><span class="pre">round</span></code> by using one of the <a class="reference external" href="https://www.postgresql.org/docs/8.1/functions-math.html">mathematical functions</a> available in PostgreSQL:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT avg(rental_rate) FROM film;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/dvdrental
+1 rows affected.
+</pre></div>
+</div>
+<div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>avg</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>2.9800000000000000</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+<p>Once we’ve found the average price of the movies in the <code class="docutils literal notranslate"><span class="pre">film</span></code> table, we’d use the resulting value in a second query:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT film_id, title, rental_rate
+FROM film
+WHERE rental_rate &lt; 2.98
+LIMIT 10;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/dvdrental
+10 rows affected.
+</pre></div>
+</div>
+<div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>film_id</th>
+            <th>title</th>
+            <th>rental_rate</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>Academy Dinosaur</td>
+            <td>0.99</td>
+        </tr>
+        <tr>
+            <td>11</td>
+            <td>Alamo Videotape</td>
+            <td>0.99</td>
+        </tr>
+        <tr>
+            <td>12</td>
+            <td>Alaska Phantom</td>
+            <td>0.99</td>
+        </tr>
+        <tr>
+            <td>213</td>
+            <td>Date Speed</td>
+            <td>0.99</td>
+        </tr>
+        <tr>
+            <td>14</td>
+            <td>Alice Fantasia</td>
+            <td>0.99</td>
+        </tr>
+        <tr>
+            <td>17</td>
+            <td>Alone Trip</td>
+            <td>0.99</td>
+        </tr>
+        <tr>
+            <td>18</td>
+            <td>Alter Victory</td>
+            <td>0.99</td>
+        </tr>
+        <tr>
+            <td>19</td>
+            <td>Amadeus Holy</td>
+            <td>0.99</td>
+        </tr>
+        <tr>
+            <td>23</td>
+            <td>Anaconda Confessions</td>
+            <td>0.99</td>
+        </tr>
+        <tr>
+            <td>26</td>
+            <td>Annie Identity</td>
+            <td>0.99</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+<p>The result is identical but it requires us to write down the result of the first query (or store it programatically in a variable) and then use it in a second query. That would affect the performance of our application (two trips to the database).</p>
+</section>
+<section id="another-example">
+<h3>Another Example<a class="headerlink" href="#another-example" title="Permalink to this heading">#</a></h3>
+<p>Let’s say we want to obtain the list of films that have returned between May 29th and May 30th. Let’s explore the tables involved:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT * FROM rental
+WHERE false;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/dvdrental
+0 rows affected.
+</pre></div>
+</div>
+<div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>rental_id</th>
+            <th>rental_date</th>
+            <th>inventory_id</th>
+            <th>customer_id</th>
+            <th>return_date</th>
+            <th>staff_id</th>
+            <th>last_update</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT * FROM inventory
+WHERE false;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/dvdrental
+0 rows affected.
+</pre></div>
+</div>
+<div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>inventory_id</th>
+            <th>film_id</th>
+            <th>store_id</th>
+            <th>last_update</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT * FROM film
+WHERE false;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/dvdrental
+0 rows affected.
+</pre></div>
+</div>
+<div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>film_id</th>
+            <th>title</th>
+            <th>description</th>
+            <th>release_year</th>
+            <th>language_id</th>
+            <th>rental_duration</th>
+            <th>rental_rate</th>
+            <th>length</th>
+            <th>replacement_cost</th>
+            <th>rating</th>
+            <th>last_update</th>
+            <th>special_features</th>
+            <th>fulltext</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table></div></div>
+</div>
+<p>We want to join the <code class="docutils literal notranslate"><span class="pre">rental</span></code> and the <code class="docutils literal notranslate"><span class="pre">inventory</span></code> tables on the <code class="docutils literal notranslate"><span class="pre">inventory_id</span></code> column, getting a list of the movies (their <code class="docutils literal notranslate"><span class="pre">film_id</span></code> actually) with the returned date mentioned at the beginning:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT inventory.film_id
+FROM rental
+JOIN inventory ON inventory.inventory_id = rental.inventory_id
+WHERE
+    return_date BETWEEN &#39;2005-05-29&#39; AND &#39;2005-05-30&#39;
+LIMIT 10;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/dvdrental
+10 rows affected.
+</pre></div>
+</div>
+<div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>film_id</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>870</td>
+        </tr>
+        <tr>
+            <td>971</td>
+        </tr>
+        <tr>
+            <td>573</td>
+        </tr>
+        <tr>
+            <td>288</td>
+        </tr>
+        <tr>
+            <td>89</td>
+        </tr>
+        <tr>
+            <td>681</td>
+        </tr>
+        <tr>
+            <td>858</td>
+        </tr>
+        <tr>
+            <td>776</td>
+        </tr>
+        <tr>
+            <td>257</td>
+        </tr>
+        <tr>
+            <td>397</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+<p>Great! We got the list of <code class="docutils literal notranslate"><span class="pre">film_id</span></code> we wanted (limited to 10 rows for practical reasons). But we were interested in the movie names… How about we use the query above as a subquery?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT film_id, title FROM film
+WHERE film_id IN
+    (SELECT inventory.film_id FROM rental
+        INNER JOIN inventory ON inventory.inventory_id = rental.inventory_id
+        WHERE return_date BETWEEN &#39;2005-05-29&#39; AND &#39;2005-05-30&#39;)
+LIMIT 10;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/dvdrental
+10 rows affected.
+</pre></div>
+</div>
+<div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>film_id</th>
+            <th>title</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>307</td>
+            <td>Fellowship Autumn</td>
+        </tr>
+        <tr>
+            <td>255</td>
+            <td>Driving Polish</td>
+        </tr>
+        <tr>
+            <td>388</td>
+            <td>Gunfight Moon</td>
+        </tr>
+        <tr>
+            <td>130</td>
+            <td>Celebrity Horn</td>
+        </tr>
+        <tr>
+            <td>563</td>
+            <td>Massacre Usual</td>
+        </tr>
+        <tr>
+            <td>397</td>
+            <td>Hanky October</td>
+        </tr>
+        <tr>
+            <td>898</td>
+            <td>Tourist Pelican</td>
+        </tr>
+        <tr>
+            <td>228</td>
+            <td>Detective Vision</td>
+        </tr>
+        <tr>
+            <td>347</td>
+            <td>Games Bowfinger</td>
+        </tr>
+        <tr>
+            <td>1000</td>
+            <td>Zorro Ark</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./subqueries"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="../string_functions.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">String functions</p>
+        </div>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Bob<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
