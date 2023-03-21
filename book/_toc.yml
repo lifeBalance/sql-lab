@@ -21,3 +21,7 @@ chapters:
 - file: create_databases_tables.ipynb
 - file: date_time_functions.ipynb
 - file: math_functions.ipynb
+- file: string_functions.ipynb
+- file: subqueries/subqueries.ipynb
+
+
