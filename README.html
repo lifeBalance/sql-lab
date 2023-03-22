@@ -53,7 +53,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Setting up the Postgres Connection" href="setup.html" />
+    <link rel="next" title="Setting up the Postgres Connection" href="setup/setup.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en">
     
@@ -113,97 +113,142 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Set Up
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="setup.html">
+  <a class="reference internal" href="setup/setup.html">
    Setting up the Postgres Connection
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="loading_dvdrental.html">
+  <a class="reference internal" href="setup/loading_dvdrental.html">
    Loading a sample Database
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="meta-commands.html">
-   Metacommands
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="sql_language.html">
-   About the SQL language
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="pg_admin.html">
+  <a class="reference internal" href="setup/pg_admin.html">
    pgAdmin
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="select-statement.html">
+  <a class="reference internal" href="setup/meta-commands.html">
+   Metacommands
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  SQL
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="sql/sql_language.html">
+   About the SQL language
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="sql/select-statement.html">
    The SELECT statement
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="challenges1.html">
+  <a class="reference internal" href="sql/challenges1.html">
    Examples I
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="aggregate-functions.html">
+  <a class="reference internal" href="sql/aggregate-functions.html">
    Aggregate Functions
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="group-by.html">
+  <a class="reference internal" href="sql/group-by.html">
    The GROUP BY clause
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="having.html">
+  <a class="reference internal" href="sql/having.html">
    The HAVING clause
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="joins_overview.html">
+  <a class="reference internal" href="sql/unions.html">
+   Unions
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Joins
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="joins/joins_overview.html">
    Joins Overview
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="inner_joins.html">
+  <a class="reference internal" href="joins/inner_joins.html">
    The JOIN clause (Inner Joins)
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="left_outer_joins.html">
+  <a class="reference internal" href="joins/left_outer_joins.html">
    LEFT OUTER JOIN
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="unions.html">
-   Unions
+  <a class="reference internal" href="joins/self_joins.html">
+   SELF JOIN
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Other stuff
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="create_databases_tables.html">
    Create Databases and Tables
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Functions and Operators
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="date_time_functions.html">
+  <a class="reference internal" href="functions_operators/date_time_functions.html">
    Time/Date functions: Extract
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="math_functions.html">
+  <a class="reference internal" href="functions_operators/math_functions.html">
    String functions
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="string_functions.html">
+  <a class="reference internal" href="functions_operators/string_functions.html">
    String functions
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Subqueries
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="subqueries/subqueries.html">
    Subqueries
@@ -511,6 +556,16 @@ title="Print to PDF"
 </section>
 <div class="toctree-wrapper compound">
 </div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -540,7 +595,7 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='right-next' id="next-link" href="setup.html" title="next page">
+    <a class='right-next' id="next-link" href="setup/setup.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Setting up the Postgres Connection</p>

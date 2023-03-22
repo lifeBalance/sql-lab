@@ -1,0 +1,193 @@
+Traceback (most recent call last):
+  File "/home/javi/.conda/envs/sql-lab/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+    executenb(
+  File "/home/javi/.conda/envs/sql-lab/lib/python3.10/site-packages/nbclient/client.py", line 1204, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/home/javi/.conda/envs/sql-lab/lib/python3.10/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/home/javi/.conda/envs/sql-lab/lib/python3.10/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "/home/javi/.conda/envs/sql-lab/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "/home/javi/.conda/envs/sql-lab/lib/python3.10/site-packages/nbclient/client.py", line 663, in async_execute
+    await self.async_execute_cell(
+  File "/home/javi/.conda/envs/sql-lab/lib/python3.10/site-packages/nbclient/client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/javi/.conda/envs/sql-lab/lib/python3.10/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+%%sql
+INSERT INTO
+    "TableA" (name)
+VALUES
+    ('Pirate'),
+    ('Monkey'),
+    ('Ninja'),
+    ('Spaguetti');
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mUniqueViolation[0m                           Traceback (most recent call last)
+File [0;32m~/.conda/envs/sql-lab/lib/python3.10/site-packages/sqlalchemy/engine/base.py:1900[0m, in [0;36mConnection._execute_context[0;34m(self, dialect, constructor, statement, parameters, execution_options, *args, **kw)[0m
+[1;32m   1899[0m     [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m evt_handled:
+[0;32m-> 1900[0m         [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mdialect[49m[38;5;241;43m.[39;49m[43mdo_execute[49m[43m([49m
+[1;32m   1901[0m [43m            [49m[43mcursor[49m[43m,[49m[43m [49m[43mstatement[49m[43m,[49m[43m [49m[43mparameters[49m[43m,[49m[43m [49m[43mcontext[49m
+[1;32m   1902[0m [43m        [49m[43m)[49m
+[1;32m   1904[0m [38;5;28;01mif[39;00m [38;5;28mself[39m[38;5;241m.[39m_has_events [38;5;129;01mor[39;00m [38;5;28mself[39m[38;5;241m.[39mengine[38;5;241m.[39m_has_events:
+
+File [0;32m~/.conda/envs/sql-lab/lib/python3.10/site-packages/sqlalchemy/engine/default.py:736[0m, in [0;36mDefaultDialect.do_execute[0;34m(self, cursor, statement, parameters, context)[0m
+[1;32m    735[0m [38;5;28;01mdef[39;00m [38;5;21mdo_execute[39m([38;5;28mself[39m, cursor, statement, parameters, context[38;5;241m=[39m[38;5;28;01mNone[39;00m):
+[0;32m--> 736[0m     [43mcursor[49m[38;5;241;43m.[39;49m[43mexecute[49m[43m([49m[43mstatement[49m[43m,[49m[43m [49m[43mparameters[49m[43m)[49m
+
+[0;31mUniqueViolation[0m: duplicate key value violates unique constraint "TableA_name_key"
+DETAIL:  Key (name)=(Pirate) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+[0;31mIntegrityError[0m                            Traceback (most recent call last)
+Cell [0;32mIn[4], line 1[0m
+[0;32m----> 1[0m [43mget_ipython[49m[43m([49m[43m)[49m[38;5;241;43m.[39;49m[43mrun_cell_magic[49m[43m([49m[38;5;124;43m'[39;49m[38;5;124;43msql[39;49m[38;5;124;43m'[39;49m[43m,[49m[43m [49m[38;5;124;43m'[39;49m[38;5;124;43m'[39;49m[43m,[49m[43m [49m[38;5;124;43m'[39;49m[38;5;124;43mINSERT INTO[39;49m[38;5;130;43;01m\n[39;49;00m[38;5;124;43m    [39;49m[38;5;124;43m"[39;49m[38;5;124;43mTableA[39;49m[38;5;124;43m"[39;49m[38;5;124;43m (name)[39;49m[38;5;130;43;01m\n[39;49;00m[38;5;124;43mVALUES[39;49m[38;5;130;43;01m\n[39;49;00m[38;5;124;43m    ([39;49m[38;5;130;43;01m\'[39;49;00m[38;5;124;43mPirate[39;49m[38;5;130;43;01m\'[39;49;00m[38;5;124;43m),[39;49m[38;5;130;43;01m\n[39;49;00m[38;5;124;43m    ([39;49m[38;5;130;43;01m\'[39;49;00m[38;5;124;43mMonkey[39;49m[38;5;130;43;01m\'[39;49;00m[38;5;124;43m),[39;49m[38;5;130;43;01m\n[39;49;00m[38;5;124;43m    ([39;49m[38;5;130;43;01m\'[39;49;00m[38;5;124;43mNinja[39;49m[38;5;130;43;01m\'[39;49;00m[38;5;124;43m),[39;49m[38;5;130;43;01m\n[39;49;00m[38;5;124;43m    ([39;49m[38;5;130;43;01m\'[39;49;00m[38;5;124;43mSpaguetti[39;49m[38;5;130;43;01m\'[39;49;00m[38;5;124;43m);[39;49m[38;5;130;43;01m\n[39;49;00m[38;5;124;43m'[39;49m[43m)[49m
+
+File [0;32m~/.conda/envs/sql-lab/lib/python3.10/site-packages/IPython/core/interactiveshell.py:2430[0m, in [0;36mInteractiveShell.run_cell_magic[0;34m(self, magic_name, line, cell)[0m
+[1;32m   2428[0m [38;5;28;01mwith[39;00m [38;5;28mself[39m[38;5;241m.[39mbuiltin_trap:
+[1;32m   2429[0m     args [38;5;241m=[39m (magic_arg_s, cell)
+[0;32m-> 2430[0m     result [38;5;241m=[39m [43mfn[49m[43m([49m[38;5;241;43m*[39;49m[43margs[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m
+[1;32m   2432[0m [38;5;66;03m# The code below prevents the output from being displayed[39;00m
+[1;32m   2433[0m [38;5;66;03m# when using magics with decodator @output_can_be_silenced[39;00m
+[1;32m   2434[0m [38;5;66;03m# when the last Python token in the expression is a ';'.[39;00m
+[1;32m   2435[0m [38;5;28;01mif[39;00m [38;5;28mgetattr[39m(fn, magic[38;5;241m.[39mMAGIC_OUTPUT_CAN_BE_SILENCED, [38;5;28;01mFalse[39;00m):
+
+File [0;32m~/.conda/envs/sql-lab/lib/python3.10/site-packages/sql/magic.py:95[0m, in [0;36mSqlMagic.execute[0;34m(self, line, cell, local_ns)[0m
+[1;32m     92[0m     [38;5;28;01mreturn[39;00m [38;5;28mself[39m[38;5;241m.[39m_persist_dataframe(parsed[[38;5;124m'[39m[38;5;124msql[39m[38;5;124m'[39m], conn, user_ns)
+[1;32m     94[0m [38;5;28;01mtry[39;00m:
+[0;32m---> 95[0m     result [38;5;241m=[39m [43msql[49m[38;5;241;43m.[39;49m[43mrun[49m[38;5;241;43m.[39;49m[43mrun[49m[43m([49m[43mconn[49m[43m,[49m[43m [49m[43mparsed[49m[43m[[49m[38;5;124;43m'[39;49m[38;5;124;43msql[39;49m[38;5;124;43m'[39;49m[43m][49m[43m,[49m[43m [49m[38;5;28;43mself[39;49m[43m,[49m[43m [49m[43muser_ns[49m[43m)[49m
+[1;32m     97[0m     [38;5;28;01mif[39;00m result [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m [38;5;129;01mand[39;00m [38;5;129;01mnot[39;00m [38;5;28misinstance[39m(result, [38;5;28mstr[39m) [38;5;129;01mand[39;00m [38;5;28mself[39m[38;5;241m.[39mcolumn_local_vars:
+[1;32m     98[0m         [38;5;66;03m#Instead of returning values, set variables directly in the[39;00m
+[1;32m     99[0m         [38;5;66;03m#users namespace. Variable names given by column names[39;00m
+[1;32m    101[0m         [38;5;28;01mif[39;00m [38;5;28mself[39m[38;5;241m.[39mautopandas:
+
+File [0;32m~/.conda/envs/sql-lab/lib/python3.10/site-packages/sql/run.py:340[0m, in [0;36mrun[0;34m(conn, sql, config, user_namespace)[0m
+[1;32m    338[0m [38;5;28;01melse[39;00m:
+[1;32m    339[0m     txt [38;5;241m=[39m sqlalchemy[38;5;241m.[39msql[38;5;241m.[39mtext(statement)
+[0;32m--> 340[0m     result [38;5;241m=[39m [43mconn[49m[38;5;241;43m.[39;49m[43msession[49m[38;5;241;43m.[39;49m[43mexecute[49m[43m([49m[43mtxt[49m[43m,[49m[43m [49m[43muser_namespace[49m[43m)[49m
+[1;32m    341[0m _commit(conn[38;5;241m=[39mconn, config[38;5;241m=[39mconfig)
+[1;32m    342[0m [38;5;28;01mif[39;00m result [38;5;129;01mand[39;00m config[38;5;241m.[39mfeedback:
+
+File [0;32m~/.conda/envs/sql-lab/lib/python3.10/site-packages/sqlalchemy/engine/base.py:1380[0m, in [0;36mConnection.execute[0;34m(self, statement, *multiparams, **params)[0m
+[1;32m   1376[0m     util[38;5;241m.[39mraise_(
+[1;32m   1377[0m         exc[38;5;241m.[39mObjectNotExecutableError(statement), replace_context[38;5;241m=[39merr
+[1;32m   1378[0m     )
+[1;32m   1379[0m [38;5;28;01melse[39;00m:
+[0;32m-> 1380[0m     [38;5;28;01mreturn[39;00m [43mmeth[49m[43m([49m[38;5;28;43mself[39;49m[43m,[49m[43m [49m[43mmultiparams[49m[43m,[49m[43m [49m[43mparams[49m[43m,[49m[43m [49m[43m_EMPTY_EXECUTION_OPTS[49m[43m)[49m
+
+File [0;32m~/.conda/envs/sql-lab/lib/python3.10/site-packages/sqlalchemy/sql/elements.py:334[0m, in [0;36mClauseElement._execute_on_connection[0;34m(self, connection, multiparams, params, execution_options, _force)[0m
+[1;32m    330[0m [38;5;28;01mdef[39;00m [38;5;21m_execute_on_connection[39m(
+[1;32m    331[0m     [38;5;28mself[39m, connection, multiparams, params, execution_options, _force[38;5;241m=[39m[38;5;28;01mFalse[39;00m
+[1;32m    332[0m ):
+[1;32m    333[0m     [38;5;28;01mif[39;00m _force [38;5;129;01mor[39;00m [38;5;28mself[39m[38;5;241m.[39msupports_execution:
+[0;32m--> 334[0m         [38;5;28;01mreturn[39;00m [43mconnection[49m[38;5;241;43m.[39;49m[43m_execute_clauseelement[49m[43m([49m
+[1;32m    335[0m [43m            [49m[38;5;28;43mself[39;49m[43m,[49m[43m [49m[43mmultiparams[49m[43m,[49m[43m [49m[43mparams[49m[43m,[49m[43m [49m[43mexecution_options[49m
+[1;32m    336[0m [43m        [49m[43m)[49m
+[1;32m    337[0m     [38;5;28;01melse[39;00m:
+[1;32m    338[0m         [38;5;28;01mraise[39;00m exc[38;5;241m.[39mObjectNotExecutableError([38;5;28mself[39m)
+
+File [0;32m~/.conda/envs/sql-lab/lib/python3.10/site-packages/sqlalchemy/engine/base.py:1572[0m, in [0;36mConnection._execute_clauseelement[0;34m(self, elem, multiparams, params, execution_options)[0m
+[1;32m   1560[0m compiled_cache [38;5;241m=[39m execution_options[38;5;241m.[39mget(
+[1;32m   1561[0m     [38;5;124m"[39m[38;5;124mcompiled_cache[39m[38;5;124m"[39m, [38;5;28mself[39m[38;5;241m.[39mengine[38;5;241m.[39m_compiled_cache
+[1;32m   1562[0m )
+[1;32m   1564[0m compiled_sql, extracted_params, cache_hit [38;5;241m=[39m elem[38;5;241m.[39m_compile_w_cache(
+[1;32m   1565[0m     dialect[38;5;241m=[39mdialect,
+[1;32m   1566[0m     compiled_cache[38;5;241m=[39mcompiled_cache,
+[0;32m   (...)[0m
+[1;32m   1570[0m     linting[38;5;241m=[39m[38;5;28mself[39m[38;5;241m.[39mdialect[38;5;241m.[39mcompiler_linting [38;5;241m|[39m compiler[38;5;241m.[39mWARN_LINTING,
+[1;32m   1571[0m )
+[0;32m-> 1572[0m ret [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_execute_context[49m[43m([49m
+[1;32m   1573[0m [43m    [49m[43mdialect[49m[43m,[49m
+[1;32m   1574[0m [43m    [49m[43mdialect[49m[38;5;241;43m.[39;49m[43mexecution_ctx_cls[49m[38;5;241;43m.[39;49m[43m_init_compiled[49m[43m,[49m
+[1;32m   1575[0m [43m    [49m[43mcompiled_sql[49m[43m,[49m
+[1;32m   1576[0m [43m    [49m[43mdistilled_params[49m[43m,[49m
+[1;32m   1577[0m [43m    [49m[43mexecution_options[49m[43m,[49m
+[1;32m   1578[0m [43m    [49m[43mcompiled_sql[49m[43m,[49m
+[1;32m   1579[0m [43m    [49m[43mdistilled_params[49m[43m,[49m
+[1;32m   1580[0m [43m    [49m[43melem[49m[43m,[49m
+[1;32m   1581[0m [43m    [49m[43mextracted_params[49m[43m,[49m
+[1;32m   1582[0m [43m    [49m[43mcache_hit[49m[38;5;241;43m=[39;49m[43mcache_hit[49m[43m,[49m
+[1;32m   1583[0m [43m[49m[43m)[49m
+[1;32m   1584[0m [38;5;28;01mif[39;00m has_events:
+[1;32m   1585[0m     [38;5;28mself[39m[38;5;241m.[39mdispatch[38;5;241m.[39mafter_execute(
+[1;32m   1586[0m         [38;5;28mself[39m,
+[1;32m   1587[0m         elem,
+[0;32m   (...)[0m
+[1;32m   1591[0m         ret,
+[1;32m   1592[0m     )
+
+File [0;32m~/.conda/envs/sql-lab/lib/python3.10/site-packages/sqlalchemy/engine/base.py:1943[0m, in [0;36mConnection._execute_context[0;34m(self, dialect, constructor, statement, parameters, execution_options, *args, **kw)[0m
+[1;32m   1940[0m             branched[38;5;241m.[39mclose()
+[1;32m   1942[0m [38;5;28;01mexcept[39;00m [38;5;167;01mBaseException[39;00m [38;5;28;01mas[39;00m e:
+[0;32m-> 1943[0m     [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_handle_dbapi_exception[49m[43m([49m
+[1;32m   1944[0m [43m        [49m[43me[49m[43m,[49m[43m [49m[43mstatement[49m[43m,[49m[43m [49m[43mparameters[49m[43m,[49m[43m [49m[43mcursor[49m[43m,[49m[43m [49m[43mcontext[49m
+[1;32m   1945[0m [43m    [49m[43m)[49m
+[1;32m   1947[0m [38;5;28;01mreturn[39;00m result
+
+File [0;32m~/.conda/envs/sql-lab/lib/python3.10/site-packages/sqlalchemy/engine/base.py:2124[0m, in [0;36mConnection._handle_dbapi_exception[0;34m(self, e, statement, parameters, cursor, context)[0m
+[1;32m   2122[0m     util[38;5;241m.[39mraise_(newraise, with_traceback[38;5;241m=[39mexc_info[[38;5;241m2[39m], from_[38;5;241m=[39me)
+[1;32m   2123[0m [38;5;28;01melif[39;00m should_wrap:
+[0;32m-> 2124[0m     [43mutil[49m[38;5;241;43m.[39;49m[43mraise_[49m[43m([49m
+[1;32m   2125[0m [43m        [49m[43msqlalchemy_exception[49m[43m,[49m[43m [49m[43mwith_traceback[49m[38;5;241;43m=[39;49m[43mexc_info[49m[43m[[49m[38;5;241;43m2[39;49m[43m][49m[43m,[49m[43m [49m[43mfrom_[49m[38;5;241;43m=[39;49m[43me[49m
+[1;32m   2126[0m [43m    [49m[43m)[49m
+[1;32m   2127[0m [38;5;28;01melse[39;00m:
+[1;32m   2128[0m     util[38;5;241m.[39mraise_(exc_info[[38;5;241m1[39m], with_traceback[38;5;241m=[39mexc_info[[38;5;241m2[39m])
+
+File [0;32m~/.conda/envs/sql-lab/lib/python3.10/site-packages/sqlalchemy/util/compat.py:211[0m, in [0;36mraise_[0;34m(***failed resolving arguments***)[0m
+[1;32m    208[0m     exception[38;5;241m.[39m__cause__ [38;5;241m=[39m replace_context
+[1;32m    210[0m [38;5;28;01mtry[39;00m:
+[0;32m--> 211[0m     [38;5;28;01mraise[39;00m exception
+[1;32m    212[0m [38;5;28;01mfinally[39;00m:
+[1;32m    213[0m     [38;5;66;03m# credit to[39;00m
+[1;32m    214[0m     [38;5;66;03m# https://cosmicpercolator.com/2016/01/13/exception-leaks-in-python-2-and-3/[39;00m
+[1;32m    215[0m     [38;5;66;03m# as the __traceback__ object creates a cycle[39;00m
+[1;32m    216[0m     [38;5;28;01mdel[39;00m exception, replace_context, from_, with_traceback
+
+File [0;32m~/.conda/envs/sql-lab/lib/python3.10/site-packages/sqlalchemy/engine/base.py:1900[0m, in [0;36mConnection._execute_context[0;34m(self, dialect, constructor, statement, parameters, execution_options, *args, **kw)[0m
+[1;32m   1898[0m                 [38;5;28;01mbreak[39;00m
+[1;32m   1899[0m     [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m evt_handled:
+[0;32m-> 1900[0m         [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mdialect[49m[38;5;241;43m.[39;49m[43mdo_execute[49m[43m([49m
+[1;32m   1901[0m [43m            [49m[43mcursor[49m[43m,[49m[43m [49m[43mstatement[49m[43m,[49m[43m [49m[43mparameters[49m[43m,[49m[43m [49m[43mcontext[49m
+[1;32m   1902[0m [43m        [49m[43m)[49m
+[1;32m   1904[0m [38;5;28;01mif[39;00m [38;5;28mself[39m[38;5;241m.[39m_has_events [38;5;129;01mor[39;00m [38;5;28mself[39m[38;5;241m.[39mengine[38;5;241m.[39m_has_events:
+[1;32m   1905[0m     [38;5;28mself[39m[38;5;241m.[39mdispatch[38;5;241m.[39mafter_cursor_execute(
+[1;32m   1906[0m         [38;5;28mself[39m,
+[1;32m   1907[0m         cursor,
+[0;32m   (...)[0m
+[1;32m   1911[0m         context[38;5;241m.[39mexecutemany,
+[1;32m   1912[0m     )
+
+File [0;32m~/.conda/envs/sql-lab/lib/python3.10/site-packages/sqlalchemy/engine/default.py:736[0m, in [0;36mDefaultDialect.do_execute[0;34m(self, cursor, statement, parameters, context)[0m
+[1;32m    735[0m [38;5;28;01mdef[39;00m [38;5;21mdo_execute[39m([38;5;28mself[39m, cursor, statement, parameters, context[38;5;241m=[39m[38;5;28;01mNone[39;00m):
+[0;32m--> 736[0m     [43mcursor[49m[38;5;241;43m.[39;49m[43mexecute[49m[43m([49m[43mstatement[49m[43m,[49m[43m [49m[43mparameters[49m[43m)[49m
+
+[0;31mIntegrityError[0m: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "TableA_name_key"
+DETAIL:  Key (name)=(Pirate) already exists.
+
+[SQL: INSERT INTO
+    "TableA" (name)
+VALUES
+    ('Pirate'),
+    ('Monkey'),
+    ('Ninja'),
+    ('Spaguetti');]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)
+IntegrityError: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "TableA_name_key"
+DETAIL:  Key (name)=(Pirate) already exists.
+
+[SQL: INSERT INTO
+    "TableA" (name)
+VALUES
+    ('Pirate'),
+    ('Monkey'),
+    ('Ninja'),
+    ('Spaguetti');]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)
+

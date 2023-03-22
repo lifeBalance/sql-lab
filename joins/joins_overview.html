@@ -1,0 +1,1277 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Joins Overview &#8212; SQL Lab</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="The JOIN clause (Inner Joins)" href="inner_joins.html" />
+    <link rel="prev" title="Unions" href="../sql/unions.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">SQL Lab</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../README.html">
+                    SQL Lab
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Set Up
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../setup/setup.html">
+   Setting up the Postgres Connection
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../setup/loading_dvdrental.html">
+   Loading a sample Database
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../setup/pg_admin.html">
+   pgAdmin
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../setup/meta-commands.html">
+   Metacommands
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  SQL
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sql/sql_language.html">
+   About the SQL language
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sql/select-statement.html">
+   The SELECT statement
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sql/challenges1.html">
+   Examples I
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sql/aggregate-functions.html">
+   Aggregate Functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sql/group-by.html">
+   The GROUP BY clause
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sql/having.html">
+   The HAVING clause
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sql/unions.html">
+   Unions
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Joins
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Joins Overview
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="inner_joins.html">
+   The JOIN clause (Inner Joins)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="left_outer_joins.html">
+   LEFT OUTER JOIN
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="self_joins.html">
+   LEFT OUTER JOIN
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Other stuff
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../create_databases_tables.html">
+   Create Databases and Tables
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Functions and Operators
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../functions_operators/date_time_functions.html">
+   Time/Date functions: Extract
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../functions_operators/math_functions.html">
+   String functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../functions_operators/string_functions.html">
+   String functions
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Subqueries
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../subqueries/subqueries.html">
+   Subqueries
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/joins/joins_overview.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fjoins/joins_overview.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/joins/joins_overview.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-a-test-database">
+   Create a Test database
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-tables">
+   Create Tables
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#inner-join">
+   INNER JOIN
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#full-outer-join">
+   FULL OUTER JOIN
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#excluding-all-rows-with-common-values">
+     Excluding all rows with common values
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#left-outer-join">
+   LEFT OUTER JOIN
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#excluding-all-rows-from-the-left">
+     Excluding all rows from the left
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Joins Overview</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-a-test-database">
+   Create a Test database
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-tables">
+   Create Tables
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#inner-join">
+   INNER JOIN
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#full-outer-join">
+   FULL OUTER JOIN
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#excluding-all-rows-with-common-values">
+     Excluding all rows with common values
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#left-outer-join">
+   LEFT OUTER JOIN
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#excluding-all-rows-from-the-left">
+     Excluding all rows from the left
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="joins-overview">
+<h1>Joins Overview<a class="headerlink" href="#joins-overview" title="Permalink to this heading">#</a></h1>
+<p>So far, we’ve been using <code class="docutils literal notranslate"><span class="pre">INNER</span> <span class="pre">JOIN</span></code>, which it’s the most common used one, but there are more. We’ll be using the old <a class="reference external" href="https://blog.codinghorror.com/a-visual-explanation-of-sql-joins/">Jeff Atwood’s post</a> about SQL <a class="reference external" href="https://www.postgresql.org/docs/15/queries-table-expressions.html">joins</a> as a base for our explanation.</p>
+<section id="create-a-test-database">
+<h2>Create a Test database<a class="headerlink" href="#create-a-test-database" title="Permalink to this heading">#</a></h2>
+<p>Let’s create a database named <code class="docutils literal notranslate"><span class="pre">test_joins</span></code> so we can add a couple of tables to explain a few more SQL joins. Open the terminal and run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">createdb</span> <span class="o">-</span><span class="n">h</span> <span class="n">localhost</span> <span class="o">-</span><span class="n">p</span> <span class="mi">5432</span> <span class="o">-</span><span class="n">U</span> <span class="n">bob</span> <span class="n">test_joins</span>
+</pre></div>
+</div>
+<p>Now let’s create a connection to this new database:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sqlalchemy</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;postgresql://bob:1234@localhost:5432/test_joins&#39;</span><span class="p">)</span>
+<span class="n">engine</span><span class="o">.</span><span class="n">execution_options</span><span class="p">(</span><span class="n">isolation_level</span><span class="o">=</span><span class="s2">&quot;AUTOCOMMIT&quot;</span><span class="p">)</span>
+<span class="o">%</span><span class="k">load_ext</span> sql
+<span class="o">%</span><span class="k">sql</span> $engine.url
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Connected: bob@test_joins&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="create-tables">
+<h2>Create Tables<a class="headerlink" href="#create-tables" title="Permalink to this heading">#</a></h2>
+<p>Now let’s add a couple of tables to <code class="docutils literal notranslate"><span class="pre">test_joins</span></code>. The first:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+CREATE TABLE &quot;TableA&quot; (
+    id serial PRIMARY KEY,
+	name VARCHAR ( 50 ) UNIQUE NOT NULL
+);
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/test_joins
+(psycopg2.errors.DuplicateTable) relation &quot;TableA&quot; already exists
+
+[SQL: CREATE TABLE &quot;TableA&quot; (
+    id serial PRIMARY KEY,
+	name VARCHAR ( 50 ) UNIQUE NOT NULL
+);]
+(Background on this error at: https://sqlalche.me/e/14/f405)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s check that <code class="docutils literal notranslate"><span class="pre">TableA</span></code> has been created:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT * FROM &quot;TableA&quot; WHERE false;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/test_joins
+0 rows affected.
+</pre></div>
+</div>
+<div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table></div></div>
+</div>
+<p>Now let’s insert some data into <code class="docutils literal notranslate"><span class="pre">TableA</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+INSERT INTO
+    &quot;TableA&quot; (name)
+VALUES
+    (&#39;Pirate&#39;),
+    (&#39;Monkey&#39;),
+    (&#39;Ninja&#39;),
+    (&#39;Spaguetti&#39;);
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/test_joins
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">UniqueViolation</span><span class="g g-Whitespace">                           </span>Traceback (most recent call last)
+<span class="nn">File ~/.conda/envs/sql-lab/lib/python3.10/site-packages/sqlalchemy/engine/base.py:1900,</span> in <span class="ni">Connection._execute_context</span><span class="nt">(self, dialect, constructor, statement, parameters, execution_options, *args, **kw)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1899</span>     <span class="k">if</span> <span class="ow">not</span> <span class="n">evt_handled</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1900</span>         <span class="bp">self</span><span class="o">.</span><span class="n">dialect</span><span class="o">.</span><span class="n">do_execute</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1901</span>             <span class="n">cursor</span><span class="p">,</span> <span class="n">statement</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">context</span>
+<span class="g g-Whitespace">   </span><span class="mi">1902</span>         <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1904</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_has_events</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">_has_events</span><span class="p">:</span>
+
+<span class="nn">File ~/.conda/envs/sql-lab/lib/python3.10/site-packages/sqlalchemy/engine/default.py:736,</span> in <span class="ni">DefaultDialect.do_execute</span><span class="nt">(self, cursor, statement, parameters, context)</span>
+<span class="g g-Whitespace">    </span><span class="mi">735</span> <span class="k">def</span> <span class="nf">do_execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cursor</span><span class="p">,</span> <span class="n">statement</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">736</span>     <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">statement</span><span class="p">,</span> <span class="n">parameters</span><span class="p">)</span>
+
+<span class="ne">UniqueViolation</span>: duplicate key value violates unique constraint &quot;TableA_name_key&quot;
+<span class="ne">DETAIL</span>:  Key (name)=(Pirate) already exists.
+
+
+<span class="n">The</span> <span class="n">above</span> <span class="n">exception</span> <span class="n">was</span> <span class="n">the</span> <span class="n">direct</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">exception</span><span class="p">:</span>
+
+<span class="ne">IntegrityError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">run_cell_magic</span><span class="p">(</span><span class="s1">&#39;sql&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;INSERT INTO</span><span class="se">\n</span><span class="s1">    &quot;TableA&quot; (name)</span><span class="se">\n</span><span class="s1">VALUES</span><span class="se">\n</span><span class="s1">    (</span><span class="se">\&#39;</span><span class="s1">Pirate</span><span class="se">\&#39;</span><span class="s1">),</span><span class="se">\n</span><span class="s1">    (</span><span class="se">\&#39;</span><span class="s1">Monkey</span><span class="se">\&#39;</span><span class="s1">),</span><span class="se">\n</span><span class="s1">    (</span><span class="se">\&#39;</span><span class="s1">Ninja</span><span class="se">\&#39;</span><span class="s1">),</span><span class="se">\n</span><span class="s1">    (</span><span class="se">\&#39;</span><span class="s1">Spaguetti</span><span class="se">\&#39;</span><span class="s1">);</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="nn">File ~/.conda/envs/sql-lab/lib/python3.10/site-packages/IPython/core/interactiveshell.py:2430,</span> in <span class="ni">InteractiveShell.run_cell_magic</span><span class="nt">(self, magic_name, line, cell)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2428</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">builtin_trap</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">2429</span>     <span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="n">magic_arg_s</span><span class="p">,</span> <span class="n">cell</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">2430</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2432</span> <span class="c1"># The code below prevents the output from being displayed</span>
+<span class="g g-Whitespace">   </span><span class="mi">2433</span> <span class="c1"># when using magics with decodator @output_can_be_silenced</span>
+<span class="g g-Whitespace">   </span><span class="mi">2434</span> <span class="c1"># when the last Python token in the expression is a &#39;;&#39;.</span>
+<span class="g g-Whitespace">   </span><span class="mi">2435</span> <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">magic</span><span class="o">.</span><span class="n">MAGIC_OUTPUT_CAN_BE_SILENCED</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+
+<span class="nn">File ~/.conda/envs/sql-lab/lib/python3.10/site-packages/sql/magic.py:95,</span> in <span class="ni">SqlMagic.execute</span><span class="nt">(self, line, cell, local_ns)</span>
+<span class="g g-Whitespace">     </span><span class="mi">92</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_persist_dataframe</span><span class="p">(</span><span class="n">parsed</span><span class="p">[</span><span class="s1">&#39;sql&#39;</span><span class="p">],</span> <span class="n">conn</span><span class="p">,</span> <span class="n">user_ns</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">94</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">95</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">sql</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">parsed</span><span class="p">[</span><span class="s1">&#39;sql&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="p">,</span> <span class="n">user_ns</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">97</span>     <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">column_local_vars</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">98</span>         <span class="c1">#Instead of returning values, set variables directly in the</span>
+<span class="g g-Whitespace">     </span><span class="mi">99</span>         <span class="c1">#users namespace. Variable names given by column names</span>
+<span class="g g-Whitespace">    </span><span class="mi">101</span>         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">autopandas</span><span class="p">:</span>
+
+<span class="nn">File ~/.conda/envs/sql-lab/lib/python3.10/site-packages/sql/run.py:340,</span> in <span class="ni">run</span><span class="nt">(conn, sql, config, user_namespace)</span>
+<span class="g g-Whitespace">    </span><span class="mi">338</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">339</span>     <span class="n">txt</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">statement</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">340</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">txt</span><span class="p">,</span> <span class="n">user_namespace</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">341</span> <span class="n">_commit</span><span class="p">(</span><span class="n">conn</span><span class="o">=</span><span class="n">conn</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">342</span> <span class="k">if</span> <span class="n">result</span> <span class="ow">and</span> <span class="n">config</span><span class="o">.</span><span class="n">feedback</span><span class="p">:</span>
+
+<span class="nn">File ~/.conda/envs/sql-lab/lib/python3.10/site-packages/sqlalchemy/engine/base.py:1380,</span> in <span class="ni">Connection.execute</span><span class="nt">(self, statement, *multiparams, **params)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1376</span>     <span class="n">util</span><span class="o">.</span><span class="n">raise_</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1377</span>         <span class="n">exc</span><span class="o">.</span><span class="n">ObjectNotExecutableError</span><span class="p">(</span><span class="n">statement</span><span class="p">),</span> <span class="n">replace_context</span><span class="o">=</span><span class="n">err</span>
+<span class="g g-Whitespace">   </span><span class="mi">1378</span>     <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1379</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1380</span>     <span class="k">return</span> <span class="n">meth</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">multiparams</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">_EMPTY_EXECUTION_OPTS</span><span class="p">)</span>
+
+<span class="nn">File ~/.conda/envs/sql-lab/lib/python3.10/site-packages/sqlalchemy/sql/elements.py:334,</span> in <span class="ni">ClauseElement._execute_on_connection</span><span class="nt">(self, connection, multiparams, params, execution_options, _force)</span>
+<span class="g g-Whitespace">    </span><span class="mi">330</span> <span class="k">def</span> <span class="nf">_execute_on_connection</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">331</span>     <span class="bp">self</span><span class="p">,</span> <span class="n">connection</span><span class="p">,</span> <span class="n">multiparams</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">execution_options</span><span class="p">,</span> <span class="n">_force</span><span class="o">=</span><span class="kc">False</span>
+<span class="g g-Whitespace">    </span><span class="mi">332</span> <span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">333</span>     <span class="k">if</span> <span class="n">_force</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">supports_execution</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">334</span>         <span class="k">return</span> <span class="n">connection</span><span class="o">.</span><span class="n">_execute_clauseelement</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">335</span>             <span class="bp">self</span><span class="p">,</span> <span class="n">multiparams</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">execution_options</span>
+<span class="g g-Whitespace">    </span><span class="mi">336</span>         <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">337</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">338</span>         <span class="k">raise</span> <span class="n">exc</span><span class="o">.</span><span class="n">ObjectNotExecutableError</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+<span class="nn">File ~/.conda/envs/sql-lab/lib/python3.10/site-packages/sqlalchemy/engine/base.py:1572,</span> in <span class="ni">Connection._execute_clauseelement</span><span class="nt">(self, elem, multiparams, params, execution_options)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1560</span> <span class="n">compiled_cache</span> <span class="o">=</span> <span class="n">execution_options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1561</span>     <span class="s2">&quot;compiled_cache&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">_compiled_cache</span>
+<span class="g g-Whitespace">   </span><span class="mi">1562</span> <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1564</span> <span class="n">compiled_sql</span><span class="p">,</span> <span class="n">extracted_params</span><span class="p">,</span> <span class="n">cache_hit</span> <span class="o">=</span> <span class="n">elem</span><span class="o">.</span><span class="n">_compile_w_cache</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1565</span>     <span class="n">dialect</span><span class="o">=</span><span class="n">dialect</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1566</span>     <span class="n">compiled_cache</span><span class="o">=</span><span class="n">compiled_cache</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1570</span>     <span class="n">linting</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dialect</span><span class="o">.</span><span class="n">compiler_linting</span> <span class="o">|</span> <span class="n">compiler</span><span class="o">.</span><span class="n">WARN_LINTING</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1571</span> <span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1572</span> <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_execute_context</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1573</span>     <span class="n">dialect</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1574</span>     <span class="n">dialect</span><span class="o">.</span><span class="n">execution_ctx_cls</span><span class="o">.</span><span class="n">_init_compiled</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1575</span>     <span class="n">compiled_sql</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1576</span>     <span class="n">distilled_params</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1577</span>     <span class="n">execution_options</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1578</span>     <span class="n">compiled_sql</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1579</span>     <span class="n">distilled_params</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1580</span>     <span class="n">elem</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1581</span>     <span class="n">extracted_params</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1582</span>     <span class="n">cache_hit</span><span class="o">=</span><span class="n">cache_hit</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1583</span> <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1584</span> <span class="k">if</span> <span class="n">has_events</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1585</span>     <span class="bp">self</span><span class="o">.</span><span class="n">dispatch</span><span class="o">.</span><span class="n">after_execute</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1586</span>         <span class="bp">self</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1587</span>         <span class="n">elem</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1591</span>         <span class="n">ret</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1592</span>     <span class="p">)</span>
+
+<span class="nn">File ~/.conda/envs/sql-lab/lib/python3.10/site-packages/sqlalchemy/engine/base.py:1943,</span> in <span class="ni">Connection._execute_context</span><span class="nt">(self, dialect, constructor, statement, parameters, execution_options, *args, **kw)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1940</span>             <span class="n">branched</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="g g-Whitespace">   </span><span class="mi">1942</span> <span class="k">except</span> <span class="ne">BaseException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1943</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_handle_dbapi_exception</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1944</span>         <span class="n">e</span><span class="p">,</span> <span class="n">statement</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">cursor</span><span class="p">,</span> <span class="n">context</span>
+<span class="g g-Whitespace">   </span><span class="mi">1945</span>     <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1947</span> <span class="k">return</span> <span class="n">result</span>
+
+<span class="nn">File ~/.conda/envs/sql-lab/lib/python3.10/site-packages/sqlalchemy/engine/base.py:2124,</span> in <span class="ni">Connection._handle_dbapi_exception</span><span class="nt">(self, e, statement, parameters, cursor, context)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2122</span>     <span class="n">util</span><span class="o">.</span><span class="n">raise_</span><span class="p">(</span><span class="n">newraise</span><span class="p">,</span> <span class="n">with_traceback</span><span class="o">=</span><span class="n">exc_info</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">from_</span><span class="o">=</span><span class="n">e</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2123</span> <span class="k">elif</span> <span class="n">should_wrap</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">2124</span>     <span class="n">util</span><span class="o">.</span><span class="n">raise_</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">2125</span>         <span class="n">sqlalchemy_exception</span><span class="p">,</span> <span class="n">with_traceback</span><span class="o">=</span><span class="n">exc_info</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">from_</span><span class="o">=</span><span class="n">e</span>
+<span class="g g-Whitespace">   </span><span class="mi">2126</span>     <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2127</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">2128</span>     <span class="n">util</span><span class="o">.</span><span class="n">raise_</span><span class="p">(</span><span class="n">exc_info</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">with_traceback</span><span class="o">=</span><span class="n">exc_info</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+<span class="nn">File ~/.conda/envs/sql-lab/lib/python3.10/site-packages/sqlalchemy/util/compat.py:211,</span> in <span class="ni">raise_</span><span class="nt">(***failed resolving arguments***)</span>
+<span class="g g-Whitespace">    </span><span class="mi">208</span>     <span class="n">exception</span><span class="o">.</span><span class="n">__cause__</span> <span class="o">=</span> <span class="n">replace_context</span>
+<span class="g g-Whitespace">    </span><span class="mi">210</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">211</span>     <span class="k">raise</span> <span class="n">exception</span>
+<span class="g g-Whitespace">    </span><span class="mi">212</span> <span class="k">finally</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">213</span>     <span class="c1"># credit to</span>
+<span class="g g-Whitespace">    </span><span class="mi">214</span>     <span class="c1"># https://cosmicpercolator.com/2016/01/13/exception-leaks-in-python-2-and-3/</span>
+<span class="g g-Whitespace">    </span><span class="mi">215</span>     <span class="c1"># as the __traceback__ object creates a cycle</span>
+<span class="g g-Whitespace">    </span><span class="mi">216</span>     <span class="k">del</span> <span class="n">exception</span><span class="p">,</span> <span class="n">replace_context</span><span class="p">,</span> <span class="n">from_</span><span class="p">,</span> <span class="n">with_traceback</span>
+
+<span class="nn">File ~/.conda/envs/sql-lab/lib/python3.10/site-packages/sqlalchemy/engine/base.py:1900,</span> in <span class="ni">Connection._execute_context</span><span class="nt">(self, dialect, constructor, statement, parameters, execution_options, *args, **kw)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1898</span>                 <span class="k">break</span>
+<span class="g g-Whitespace">   </span><span class="mi">1899</span>     <span class="k">if</span> <span class="ow">not</span> <span class="n">evt_handled</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1900</span>         <span class="bp">self</span><span class="o">.</span><span class="n">dialect</span><span class="o">.</span><span class="n">do_execute</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1901</span>             <span class="n">cursor</span><span class="p">,</span> <span class="n">statement</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">context</span>
+<span class="g g-Whitespace">   </span><span class="mi">1902</span>         <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1904</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_has_events</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">_has_events</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1905</span>     <span class="bp">self</span><span class="o">.</span><span class="n">dispatch</span><span class="o">.</span><span class="n">after_cursor_execute</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1906</span>         <span class="bp">self</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1907</span>         <span class="n">cursor</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1911</span>         <span class="n">context</span><span class="o">.</span><span class="n">executemany</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1912</span>     <span class="p">)</span>
+
+<span class="nn">File ~/.conda/envs/sql-lab/lib/python3.10/site-packages/sqlalchemy/engine/default.py:736,</span> in <span class="ni">DefaultDialect.do_execute</span><span class="nt">(self, cursor, statement, parameters, context)</span>
+<span class="g g-Whitespace">    </span><span class="mi">735</span> <span class="k">def</span> <span class="nf">do_execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cursor</span><span class="p">,</span> <span class="n">statement</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">736</span>     <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">statement</span><span class="p">,</span> <span class="n">parameters</span><span class="p">)</span>
+
+<span class="ne">IntegrityError</span>: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint &quot;TableA_name_key&quot;
+<span class="ne">DETAIL</span>:  Key (name)=(Pirate) already exists.
+
+<span class="p">[</span><span class="n">SQL</span><span class="p">:</span> <span class="n">INSERT</span> <span class="n">INTO</span>
+    <span class="s2">&quot;TableA&quot;</span> <span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<span class="n">VALUES</span>
+    <span class="p">(</span><span class="s1">&#39;Pirate&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;Monkey&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;Ninja&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;Spaguetti&#39;</span><span class="p">);]</span>
+<span class="p">(</span><span class="n">Background</span> <span class="n">on</span> <span class="n">this</span> <span class="n">error</span> <span class="n">at</span><span class="p">:</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">sqlalche</span><span class="o">.</span><span class="n">me</span><span class="o">/</span><span class="n">e</span><span class="o">/</span><span class="mi">14</span><span class="o">/</span><span class="n">gkpj</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s check the data has been properly inserted:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT * FROM &quot;TableA&quot;;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/test_joins
+4 rows affected.
+</pre></div>
+</div>
+<div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>Pirate</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Monkey</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Ninja</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Spaguetti</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+<p>Great, let’s do something similar for <code class="docutils literal notranslate"><span class="pre">TableB</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+CREATE TABLE &quot;TableB&quot; (
+    id serial PRIMARY KEY,
+	name VARCHAR ( 50 ) UNIQUE NOT NULL
+);
+
+INSERT INTO
+    &quot;TableB&quot; (name)
+VALUES
+    (&#39;Rutabaga&#39;),
+    (&#39;Pirate&#39;),
+    (&#39;Darth Vader&#39;),
+    (&#39;Ninja&#39;)
+RETURNING *;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/test_joins
+Done.
+4 rows affected.
+</pre></div>
+</div>
+<div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>Rutabaga</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Pirate</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Darth Vader</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Ninja</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+</section>
+<section id="inner-join">
+<h2>INNER JOIN<a class="headerlink" href="#inner-join" title="Permalink to this heading">#</a></h2>
+<p>Let’s refresh our knowledge doing an <a class="reference external" href="https://www.postgresql.org/docs/15/queries-table-expressions.html">INNER JOIN</a> on the <code class="docutils literal notranslate"><span class="pre">name</span></code> column:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT * FROM &quot;TableA&quot;
+INNER JOIN &quot;TableB&quot;
+ON &quot;TableA&quot;.name = &quot;TableB&quot;.name;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/test_joins
+2 rows affected.
+</pre></div>
+</div>
+<div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>id_1</th>
+            <th>name_1</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>Pirate</td>
+            <td>2</td>
+            <td>Pirate</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Ninja</td>
+            <td>4</td>
+            <td>Ninja</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+<p>As you can see, <code class="docutils literal notranslate"><span class="pre">INNER</span> <span class="pre">JOIN</span></code> produces only the set of records that match in both <code class="docutils literal notranslate"><span class="pre">TableA</span></code> and <code class="docutils literal notranslate"><span class="pre">TableB</span></code>, meaning those rows where the column <code class="docutils literal notranslate"><span class="pre">name</span></code> have the same value.</p>
+<blockquote>
+<div><p>By the way, since the <code class="docutils literal notranslate"><span class="pre">INNER</span> <span class="pre">JOIN</span></code> statement is the default type of join, sometimes you’ll see it written just as <code class="docutils literal notranslate"><span class="pre">JOIN</span></code>.</p>
+</div></blockquote>
+<p>Quite often, <span class="xref myst">Venn diagrams</span> are used to explain SQL joins. The following one is supposed to describe the inner join:</p>
+<p><img alt="inner join" src="../_images/inner_join.png" /></p>
+</section>
+<section id="full-outer-join">
+<h2>FULL OUTER JOIN<a class="headerlink" href="#full-outer-join" title="Permalink to this heading">#</a></h2>
+<p>A <a class="reference external" href="https://www.postgresql.org/docs/15/queries-table-expressions.html">FULL OUTER JOIN</a> produces the set of <strong>all rows</strong> from both <code class="docutils literal notranslate"><span class="pre">TableA</span></code> and <code class="docutils literal notranslate"><span class="pre">Table</span> <span class="pre">B</span></code> where:</p>
+<ul class="simple">
+<li><p>Rows with matching values are paired on the column we’re using for the join.</p></li>
+<li><p>Null for those rows where the column used for the join has no match in the joined table.</p></li>
+</ul>
+<p>Let’s see an example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT * FROM &quot;TableA&quot;
+FULL OUTER JOIN &quot;TableB&quot;
+ON &quot;TableA&quot;.name = &quot;TableB&quot;.name;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/test_joins
+6 rows affected.
+</pre></div>
+</div>
+<div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>id_1</th>
+            <th>name_1</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>Pirate</td>
+            <td>2</td>
+            <td>Pirate</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Monkey</td>
+            <td>None</td>
+            <td>None</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Ninja</td>
+            <td>4</td>
+            <td>Ninja</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Spaguetti</td>
+            <td>None</td>
+            <td>None</td>
+        </tr>
+        <tr>
+            <td>None</td>
+            <td>None</td>
+            <td>3</td>
+            <td>Darth Vader</td>
+        </tr>
+        <tr>
+            <td>None</td>
+            <td>None</td>
+            <td>1</td>
+            <td>Rutabaga</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+<blockquote>
+<div><p>Note that we’re getting <a class="reference external" href="https://docs.python.org/3/library/constants.html?highlight=none#None">None</a> instead of <code class="docutils literal notranslate"><span class="pre">null</span></code>, because we’re using <a class="reference external" href="https://www.sqlalchemy.org/">Alchemy</a> to connect to the database.</p>
+</div></blockquote>
+<p>For this type of join, the following diagram is used:</p>
+<p><img alt="full outer join" src="../_images/full_outer_joins.png" /></p>
+<section id="excluding-all-rows-with-common-values">
+<h3>Excluding all rows with common values<a class="headerlink" href="#excluding-all-rows-with-common-values" title="Permalink to this heading">#</a></h3>
+<p>What if we’re interested in those rows which have no corresponding values on the column we’re using to do the join? Check this out:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT * FROM &quot;TableA&quot;
+FULL OUTER JOIN &quot;TableB&quot;
+ON &quot;TableA&quot;.name = &quot;TableB&quot;.name
+WHERE &quot;TableA&quot;.id IS null
+OR &quot;TableB&quot;.id IS null;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/test_joins
+4 rows affected.
+</pre></div>
+</div>
+<div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>id_1</th>
+            <th>name_1</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>2</td>
+            <td>Monkey</td>
+            <td>None</td>
+            <td>None</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Spaguetti</td>
+            <td>None</td>
+            <td>None</td>
+        </tr>
+        <tr>
+            <td>None</td>
+            <td>None</td>
+            <td>3</td>
+            <td>Darth Vader</td>
+        </tr>
+        <tr>
+            <td>None</td>
+            <td>None</td>
+            <td>1</td>
+            <td>Rutabaga</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+<p>As you can see, we’re excluding all rows with matching values on <code class="docutils literal notranslate"><span class="pre">name</span></code>. For this type of join, the following diagram is used:</p>
+<p><img alt="full outer_where join" src="../_images/full_outer_where_joins.png" /></p>
+</section>
+</section>
+<section id="left-outer-join">
+<h2>LEFT OUTER JOIN<a class="headerlink" href="#left-outer-join" title="Permalink to this heading">#</a></h2>
+<p>In a <span class="xref myst">LEFT OUTER JOIN</span> <strong>all rows</strong> from <code class="docutils literal notranslate"><span class="pre">TableA</span></code> are retrieved, and only the rows  of <code class="docutils literal notranslate"><span class="pre">Table</span> <span class="pre">B</span></code> with matching values on the column we’re using for the join. All the rows of <code class="docutils literal notranslate"><span class="pre">TableA</span></code> which have no match will be paired with a <code class="docutils literal notranslate"><span class="pre">null</span></code> on the right. For example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT * FROM &quot;TableA&quot;
+LEFT OUTER JOIN &quot;TableB&quot;
+ON &quot;TableA&quot;.name = &quot;TableB&quot;.name;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/test_joins
+4 rows affected.
+</pre></div>
+</div>
+<div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>id_1</th>
+            <th>name_1</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>Pirate</td>
+            <td>2</td>
+            <td>Pirate</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Monkey</td>
+            <td>None</td>
+            <td>None</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Ninja</td>
+            <td>4</td>
+            <td>Ninja</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Spaguetti</td>
+            <td>None</td>
+            <td>None</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+<p>For this type of join, the following diagram is used:</p>
+<p><img alt="left outer join" src="../_images/left_outer_joins.png" /></p>
+<section id="excluding-all-rows-from-the-left">
+<h3>Excluding all rows from the left<a class="headerlink" href="#excluding-all-rows-from-the-left" title="Permalink to this heading">#</a></h3>
+<p>What if we’re interested in those records from <code class="docutils literal notranslate"><span class="pre">TableA</span></code> that have no corresponding record in <code class="docutils literal notranslate"><span class="pre">TableB</span></code>? Check this out:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+SELECT * FROM &quot;TableA&quot;
+LEFT OUTER JOIN &quot;TableB&quot;
+ON &quot;TableA&quot;.name = &quot;TableB&quot;.name
+WHERE &quot;TableB&quot;.name IS null;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://bob:***@localhost:5432/test_joins
+2 rows affected.
+</pre></div>
+</div>
+<div class="output text_html"><table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>id_1</th>
+            <th>name_1</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>2</td>
+            <td>Monkey</td>
+            <td>None</td>
+            <td>None</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Spaguetti</td>
+            <td>None</td>
+            <td>None</td>
+        </tr>
+    </tbody>
+</table></div></div>
+</div>
+<p>As you can see, thanks to the use of the <code class="docutils literal notranslate"><span class="pre">WHERE</span></code> clause, we’ve achieved two things:</p>
+<ul class="simple">
+<li><p>Get the rows of <code class="docutils literal notranslate"><span class="pre">TableA</span></code> with no match in <code class="docutils literal notranslate"><span class="pre">TableB</span></code>.</p></li>
+<li><p>Exclude all results from the table to the right (in this case <code class="docutils literal notranslate"><span class="pre">TableB</span></code>).</p></li>
+</ul>
+<p>For this type of join, the following diagram is used:</p>
+<p><img alt="left outer_where join" src="../_images/left_outer_where_joins.png" /></p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./joins"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="../sql/unions.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Unions</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="inner_joins.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">The JOIN clause (Inner Joins)</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Bob<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
