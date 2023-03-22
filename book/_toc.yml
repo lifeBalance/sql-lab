@@ -3,25 +3,38 @@
 
 format: jb-book
 root: README.md
-chapters:
-- file: setup.ipynb
-- file: loading_dvdrental.md
-- file: meta-commands.ipynb
-- file: sql_language.md
-- file: pg_admin.md
-- file: select-statement.md
-- file: challenges1.ipynb
-- file: aggregate-functions.ipynb
-- file: group-by.ipynb
-- file: having.ipynb
-- file: joins_overview.ipynb
-- file: inner_joins.ipynb
-- file: left_outer_joins.ipynb
-- file: unions.ipynb
-- file: create_databases_tables.ipynb
-- file: date_time_functions.ipynb
-- file: math_functions.ipynb
-- file: string_functions.ipynb
-- file: subqueries/subqueries.ipynb
+parts:
+  - caption: Set Up
+    chapters:
+    - file: setup/setup.ipynb
+    - file: setup/loading_dvdrental.md
+    - file: setup/pg_admin.md
+    - file: setup/meta-commands.ipynb
+  - caption: SQL
+    chapters:
+    - file: sql/sql_language.md
+    - file: sql/select-statement.md
+    - file: sql/challenges1.ipynb
+    - file: sql/aggregate-functions.ipynb
+    - file: sql/group-by.ipynb
+    - file: sql/having.ipynb
+    - file: sql/unions.ipynb
+  - caption: Joins
+    chapters:
+    - file: joins/joins_overview.ipynb
+    - file: joins/inner_joins.ipynb
+    - file: joins/left_outer_joins.ipynb
+    - file: joins/self_joins.ipynb
+  - caption: Other stuff
+    chapters:
+    - file: create_databases_tables.ipynb
+  - caption: Functions and Operators
+    chapters:
+    - file: functions_operators/date_time_functions.ipynb
+    - file: functions_operators/math_functions.ipynb
+    - file: functions_operators/string_functions.ipynb
+  - caption: Subqueries
+    chapters:
+    - file: subqueries/subqueries.ipynb
 
 
